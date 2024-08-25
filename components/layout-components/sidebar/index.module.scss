@@ -1,0 +1,12 @@
+@import '../../../styles/design.scss';
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: $bg-panel;
+  color: white;
+  display: none; /* Hidden by default */
+  padding: 1rem;
+  @media (min-width: 768px) {
+    display: block; /* Show sidebar on larger screens */
+  }
+}

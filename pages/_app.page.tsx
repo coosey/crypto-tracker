@@ -1,5 +1,19 @@
-import 'styles/globals.css';
+import { Layout } from 'components/layout';
+import {
+  HeaderComponent, 
+  SidebarComponent, 
+  MainComponent, 
+  FooterComponent
+} from 'components/layout-components';
+import 'styles/globals.scss';
 
 export default function Page() {
-  return <h1>THIS IS THE HOME PAGE</h1>;
+  return (
+    <Layout>
+      <HeaderComponent />
+      <SidebarComponent />
+      <MainComponent />
+      <FooterComponent />
+    </Layout>
+  );
 }

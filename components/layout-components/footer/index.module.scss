@@ -1,0 +1,10 @@
+  @import '../../../styles/design.scss';
+
+  .footer {
+    grid-area: footer;
+    background-color: $bg-secondary;
+    color: $text-secondary;
+    align-content: flex-end;
+    text-align: center;
+    padding: 1rem;
+  }

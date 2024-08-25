@@ -1,0 +1,104 @@
+@import 'normalize.css';
+@import './design.scss';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: $space_0;
+  padding: $space_0;
+  font-family: $font-secondary;
+  background-color: $bg-primary;
+}
+
+/* Container/Panel Styling */
+.container, .panel {
+  background-color: $bg-panel;
+  border: 1px solid $border-primary;
+  padding: $space_4;
+  border-radius: $space_2;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-primary;
+  color: $text-primary;
+}
+
+h1 {
+  font-size: 2.5rem; /* Larger on desktops */
+  line-height: 1.2;
+}
+
+/* Paragraphs and Secondary Text */
+p {
+  color: $text-secondary;
+  font-size: 1rem; /* Adjust for readability*/
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+a {
+  color: $accent-color1;
+  text-decoration: none;
+}
+
+a:hover {
+  color: $accent-color2;
+  cursor: pointer;
+}
+
+/* Inputs */
+input, textarea {
+  background-color: $bg-secondary;
+  color: $text-primary;
+  border: 1px solid $border-primary;
+  padding: $space_2_5;
+  border-radius: $space_1;
+}
+
+input:focus, textarea:focus {
+  border-color: $accent-color1;
+  outline: none;
+}
+
+/* Buttons */
+button {
+  background-color: $accent-color1;
+  color: $text-primary;
+  border: $border-accent;
+  padding: $space_2_5 $space_0_5;
+  cursor: pointer;
+  border-radius: $space_1;
+  font-family: $font-primary;
+}
+
+button:hover {
+  background-color: $accent-color2;
+}
+
+/* Success, Warning, Error States */
+.success {
+  color: $success-color;
+}
+
+.warning {
+  color: $warning-color;
+}
+
+.error {
+  color: $error-color;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 1.75rem; /* Smaller on mobile */
+  }
+
+  p {
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+}
