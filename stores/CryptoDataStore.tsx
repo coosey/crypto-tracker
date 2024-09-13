@@ -1,4 +1,6 @@
-import { RootStore } from "./RootStore";
+import { observable } from "mobx";
+import { persist } from "mobx-persist";
+import { RootStore } from "./_RootStore";
 
 export class CryptoDataStore {
 /**
@@ -15,4 +17,7 @@ export class CryptoDataStore {
   constructor(rootStore?: RootStore) {
     this.rootStore = rootStore;
   }
+  @observable
+  @persist('list')
+  cryptoData = [];
 };

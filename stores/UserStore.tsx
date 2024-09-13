@@ -1,4 +1,6 @@
-import { RootStore } from "./RootStore";
+import { observable } from "mobx";
+import { persist } from "mobx-persist";
+import { RootStore } from "./_RootStore";
 
 export class UserStore {
 /**
@@ -16,4 +18,8 @@ export class UserStore {
   constructor(rootStore?: RootStore) {
     this.rootStore = rootStore;
   }
+
+  @observable
+  @persist('list')
+  userStorage = [];
 };

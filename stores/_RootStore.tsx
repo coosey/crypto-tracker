@@ -17,13 +17,14 @@ export class RootStore {
   cryptoDataStore: CryptoDataStore = new CryptoDataStore(this);
   portfolioStore: PortfolioStore = new PortfolioStore(this);
   userStore: UserStore = new UserStore(this);
+
   constructor() {
     if (typeof window !== undefined) {
       Promise.all([
         hydrate('cryptoDataStore', this.cryptoDataStore),
         hydrate('portfolioStore', this.portfolioStore),
         hydrate('userStore', this.userStore),
-      ]);
+      ]).then(() => {});
     }
   }
 }

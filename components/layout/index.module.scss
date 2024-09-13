@@ -3,7 +3,7 @@
 .container {
   display: grid;
   grid-template-areas: 
-    "sidebar header"
+    "header header"
     "sidebar main"
     "sidebar main"
     "sidebar footer";
@@ -14,10 +14,10 @@
   @media (min-width: 768px) {
     grid-template-columns: 250px 1fr;
     grid-template-areas: 
-      "sidebar header"
+      "header header"
       "sidebar main"
       "sidebar main"
-      "sidebar footer";
+      "footer footer";
   }
   /* Layout for smaller screens */
   @media (max-width: 768px) {
