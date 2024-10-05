@@ -19,7 +19,7 @@ export class RootStore {
   userStore: UserStore = new UserStore(this);
 
   constructor() {
-    if (typeof window !== undefined) {
+    if (typeof window !== 'undefined') {
       Promise.all([
         hydrate('cryptoDataStore', this.cryptoDataStore),
         hydrate('portfolioStore', this.portfolioStore),

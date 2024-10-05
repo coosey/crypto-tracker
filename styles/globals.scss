@@ -25,6 +25,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-primary;
   color: $text-primary;
+  margin: 0;
 }
 
 h1 {
@@ -75,9 +76,9 @@ button {
   font-family: $font-primary;
 }
 
-button:hover {
-  background-color: $accent-color2;
-}
+// button:hover {
+//   background-color: $accent-color2;
+// }
 
 /* Success, Warning, Error States */
 .success {

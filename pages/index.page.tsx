@@ -1,16 +1,12 @@
 import {Layout} from "components/layout";
 import {observer} from 'mobx-react';
-import axios from 'axios';
-import { useEffect } from "react";
+import {CoinMarketList} from "components/coin-market-list";
 
 const Home = (() => {
-  // useEffect(() => {
-  //   async function fetchCurrentRates() {
-  //     const response = await axios.get('https://rest.coinapi.io', )
-  //   }
-  // },[]);
   return (
-    <Layout></Layout>
+    <Layout>
+      <CoinMarketList />
+    </Layout>
   );
 });
 
