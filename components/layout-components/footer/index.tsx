@@ -7,5 +7,5 @@ export const FooterComponent = () => {
         © 2024 Your Company. All Rights Reserved.
       </footer>
     </>
-  )
-}
+  );
+};

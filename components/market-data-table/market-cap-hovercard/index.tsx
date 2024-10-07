@@ -1,15 +1,12 @@
-import { Group, Text, HoverCard } from "@mantine/core";
-import { IconInfoCircle } from "@tabler/icons-react";
+import { Group, Text, HoverCard } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
 
-interface MarketCapHoverCardProps {
+interface Props {
   groupStyle?: string;
   infoStyle?: string;
 }
 
-export const MarketCapHoverCard = ({
-  groupStyle, 
-  infoStyle
-}: MarketCapHoverCardProps) => {
+export const MarketCapHoverCard = ({ groupStyle, infoStyle }: Props) => {
   return (
     <Group justify="center" className={groupStyle}>
       <HoverCard width={280} shadow="md">
@@ -18,7 +15,8 @@ export const MarketCapHoverCard = ({
         </HoverCard.Target>
         <HoverCard.Dropdown>
           <Text size="xs">
-            The total market value of a cryptocurrency's circulating supply. It is analogous to the free-float capitalization in the stock market.
+            The total market value of a cryptocurrency's circulating supply. It
+            is analogous to the free-float capitalization in the stock market.
           </Text>
           <Text size="xs" mt="md">
             Market Cap = Current Price x Circulating Supply.
@@ -26,5 +24,5 @@ export const MarketCapHoverCard = ({
         </HoverCard.Dropdown>
       </HoverCard>
     </Group>
-  )
+  );
 };

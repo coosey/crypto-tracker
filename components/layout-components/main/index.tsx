@@ -4,7 +4,7 @@ interface MainComponentProps {
   children?: React.ReactNode;
 }
 
-export const MainComponent = ({children}: MainComponentProps) => {
+export const MainComponent = ({ children }: MainComponentProps) => {
   return (
     <>
       <main className={styles['main']}>
@@ -12,5 +12,5 @@ export const MainComponent = ({children}: MainComponentProps) => {
         {children}
       </main>
     </>
-  )
-}
+  );
+};

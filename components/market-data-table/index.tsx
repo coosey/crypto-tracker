@@ -1,25 +1,29 @@
-
 import '@mantine/core/styles/Table.css';
 import styles from './index.module.scss';
 
-import {useState} from 'react';
-import {Table} from '@mantine/core';
-import {TableHeader} from './table-header';
-import {MarketDataTableProps, SortDirection, SortField, SortFieldEnum} from 'libs/types/market-data-table';
-import {DataTableHeaders} from './data-table-headers';
-import {MarketCapHoverCard} from './market-cap-hovercard';
-import {CoinsListResponse} from 'libs/types/coins-list';
-import {DataTableRows} from './data-table-rows';
+import { useState } from 'react';
+import { Table } from '@mantine/core';
+import { TableHeader } from './table-header';
+import {
+  MarketDataTableProps,
+  SortDirection,
+  SortField,
+  SortFieldEnum,
+} from 'libs/types/market-data-table';
+import { DataTableHeaders } from './data-table-headers';
+import { MarketCapHoverCard } from './market-cap-hovercard';
+import { CoinsListResponse } from 'libs/types/coins-list';
+import { DataTableRows } from './data-table-rows';
 
-export const MarketDataTable = ({data}: MarketDataTableProps) => {
-  const [sortDirection, setSortDirection] = useState<SortDirection | null>('ASC');
-  const [sortField, setSortField] = useState<SortField | null>('market_cap_rank');
-
-  const sortedData = handleSortData(
-    data,
-    sortField,
-    sortDirection
+export const MarketDataTable = ({ data }: MarketDataTableProps) => {
+  const [sortDirection, setSortDirection] = useState<SortDirection | null>(
+    'ASC'
   );
+  const [sortField, setSortField] = useState<SortField | null>(
+    'market_cap_rank'
+  );
+
+  const sortedData = handleSortData(data, sortField, sortDirection);
 
   const handleSortChange = (sortType: SortField) => {
     if (sortField !== sortType) {
@@ -27,47 +31,43 @@ export const MarketDataTable = ({data}: MarketDataTableProps) => {
       setSortDirection('ASC');
     } else {
       setSortField(sortType);
-      setSortDirection(
-        sortDirection === 'ASC'
-          ? 'DESC'
-          : 'ASC',
-      );
+      setSortDirection(sortDirection === 'ASC' ? 'DESC' : 'ASC');
     }
     handleSortData(data, sortField, sortDirection);
   };
 
   return (
-    <Table 
-      verticalSpacing="lg"
-      highlightOnHover>
+    <Table verticalSpacing="lg" highlightOnHover>
       <Table.Thead>
         <Table.Tr>
           {DataTableHeaders?.map?.((header) => {
             if (header.fieldEnum === SortFieldEnum.MARKET_CAP) {
               return (
                 <TableHeader
+                  key={header?.fieldEnum}
                   headerText={header?.fieldHeaderText}
                   sorted={sortField === header?.fieldEnum}
                   sortType={sortDirection}
                   sortField={header?.sortField}
                   onSort={() => handleSortChange(header?.fieldEnum)}
                 >
-                  <MarketCapHoverCard 
+                  <MarketCapHoverCard
                     infoStyle={styles?.['table_info-group']}
                     groupStyle={styles?.['table_info-icon']}
                   />
                 </TableHeader>
-              )
+              );
             }
             return (
               <TableHeader
+                key={header?.fieldEnum}
                 headerText={header?.fieldHeaderText}
                 sorted={sortField === header?.fieldEnum}
                 sortType={sortDirection}
                 sortField={header?.sortField}
                 onSort={() => handleSortChange(header?.sortField)}
               />
-            )
+            );
           })}
         </Table.Tr>
       </Table.Thead>
@@ -87,9 +87,7 @@ const handleSortData = (
   switch (field) {
     case 'market_cap_rank': {
       return dataClone?.sort?.((a, b) =>
-        direction === 'ASC'
-          ? a?.[field] - b?.[field]
-          : b?.[field] - a?.[field],
+        direction === 'ASC' ? a?.[field] - b?.[field] : b?.[field] - a?.[field]
       );
     }
     case 'current_price':
@@ -97,19 +95,16 @@ const handleSortData = (
     case 'price_change_percentage_24h_in_currency':
     case 'price_change_percentage_7d_in_currency':
     case 'total_volume':
-    case 'market_cap':
-    {
+    case 'market_cap': {
       return dataClone?.sort?.((a, b) =>
-        direction === 'ASC'
-          ? b?.[field] - a?.[field]
-          : a?.[field] - b?.[field],
+        direction === 'ASC' ? b?.[field] - a?.[field] : a?.[field] - b?.[field]
       );
     }
     case 'name': {
       return dataClone?.sort?.((a, b) =>
         direction === 'ASC'
           ? a?.[field].localeCompare(b?.[field])
-          : b?.[field].localeCompare(a?.[field]),
+          : b?.[field].localeCompare(a?.[field])
       );
     }
   }

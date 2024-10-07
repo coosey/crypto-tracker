@@ -1,4 +1,3 @@
-
 /**
 let config = {
   method: 'get',
@@ -10,8 +9,6 @@ let config = {
 }
  */
 
-const handler = () => {
-
-};
+const handler = () => {};
 
 export default handler;

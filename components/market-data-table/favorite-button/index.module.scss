@@ -1,0 +1,10 @@
+@import '../../../styles/design.scss';
+
+.favorite {
+  display: flex;
+
+  &_btn {
+    width: $space_4;
+    height: $space_4;
+  }
+}

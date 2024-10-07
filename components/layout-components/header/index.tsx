@@ -10,5 +10,5 @@ export const HeaderComponent = () => {
         {/* <div className={styles['hamburger']}>☰</div> */}
       </header>
     </>
-  )
-}
+  );
+};

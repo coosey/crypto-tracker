@@ -42,8 +42,8 @@ export interface ThProps {
 
 export interface DataTableHeadersProps {
   fieldHeaderText: string;
-  fieldEnum: SortFieldEnum;
-  sortField: SortField;
+  fieldEnum?: SortFieldEnum;
+  sortField?: SortField;
 };
 
 export interface MarketDataTableProps {
