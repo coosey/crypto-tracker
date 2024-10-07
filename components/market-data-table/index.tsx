@@ -1,51 +1,40 @@
 
 import '@mantine/core/styles/Table.css';
 import styles from './index.module.scss';
-import { Table } from '@mantine/core';
 
-import { CoinsListResponse } from 'libs/types/coins-list';
-import { IconCaretDownFilled, IconCaretUpFilled } from '@tabler/icons-react';
-import { SortedTableHeader } from './sorted-table-header';
+import {useState} from 'react';
+import {Table} from '@mantine/core';
+import {TableHeader} from './table-header';
+import {MarketDataTableProps, SortDirection, SortField, SortFieldEnum} from 'libs/types/market-data-table';
+import {DataTableHeaders} from './data-table-headers';
+import {MarketCapHoverCard} from './market-cap-hovercard';
+import {CoinsListResponse} from 'libs/types/coins-list';
+import {DataTableRows} from './data-table-rows';
 
-export interface MarketDataTableProps {
-  data: CoinsListResponse[];
-  headers: string[];
-};
+export const MarketDataTable = ({data}: MarketDataTableProps) => {
+  const [sortDirection, setSortDirection] = useState<SortDirection | null>('ASC');
+  const [sortField, setSortField] = useState<SortField | null>('market_cap_rank');
 
-export const MarketDataTable = ({
-  data,
-  headers
-}: MarketDataTableProps) => {
-  const rows = data?.map?.((row) => {
-    const oneHourPrice = row?.price_change_percentage_1h_in_currency;
-    const oneDayPrice = row?.price_change_percentage_24h_in_currency;
-    const sevenDayPrice = row?.price_change_percentage_7d_in_currency;
-    return (
-      <Table.Tr key={row?.name}>
-        <Table.Td>{row?.market_cap_rank}</Table.Td>
-        <Table.Td>
-          <div className={styles?.['coin']}>
-            <img alt={row?.symbol?.toUpperCase()} src={row?.image} loading='lazy' width={24} height={24} />
-            <div className={styles?.['coin_name']}>
-              <h4>{row?.name}</h4>
-              <h3 className={styles?.['coin_symbol']}>{row?.symbol?.toUpperCase()}</h3>
-            </div>
-          </div>
-        </Table.Td>
-        <Table.Td className={styles?.['coin_price']} data-price-target='price'>
-          ${row?.current_price?.toLocaleString()}
-        </Table.Td>
-        {/** 1H */}
-        {DisplayPriceChange(oneHourPrice)}
-        {/** 1D */}
-        {DisplayPriceChange(oneDayPrice)}
-        {/** 7D */}
-        {DisplayPriceChange(sevenDayPrice)}
-        <Table.Td data-price-target='price'>${row?.total_volume?.toLocaleString()}</Table.Td>
-        <Table.Td data-price-target='price'>${row?.market_cap?.toLocaleString()}</Table.Td>
-      </Table.Tr>
-    );
-  });
+  const sortedData = handleSortData(
+    data,
+    sortField,
+    sortDirection
+  );
+
+  const handleSortChange = (sortType: SortField) => {
+    if (sortField !== sortType) {
+      setSortField(sortType);
+      setSortDirection('ASC');
+    } else {
+      setSortField(sortType);
+      setSortDirection(
+        sortDirection === 'ASC'
+          ? 'DESC'
+          : 'ASC',
+      );
+    }
+    handleSortData(data, sortField, sortDirection);
+  };
 
   return (
     <Table 
@@ -53,40 +42,75 @@ export const MarketDataTable = ({
       highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-          {headers?.map?.((header, idx) => (
-            <Table.Th key={idx}>{header}</Table.Th>
-            // <SortedTableHeader key={idx}>{header}</SortedTableHeader>
-          ))}
+          {DataTableHeaders?.map?.((header) => {
+            if (header.fieldEnum === SortFieldEnum.MARKET_CAP) {
+              return (
+                <TableHeader
+                  headerText={header?.fieldHeaderText}
+                  sorted={sortField === header?.fieldEnum}
+                  sortType={sortDirection}
+                  sortField={header?.sortField}
+                  onSort={() => handleSortChange(header?.fieldEnum)}
+                >
+                  <MarketCapHoverCard 
+                    infoStyle={styles?.['table_info-group']}
+                    groupStyle={styles?.['table_info-icon']}
+                  />
+                </TableHeader>
+              )
+            }
+            return (
+              <TableHeader
+                headerText={header?.fieldHeaderText}
+                sorted={sortField === header?.fieldEnum}
+                sortType={sortDirection}
+                sortField={header?.sortField}
+                onSort={() => handleSortChange(header?.sortField)}
+              />
+            )
+          })}
         </Table.Tr>
       </Table.Thead>
-      <Table.Tbody>{rows}</Table.Tbody>
+      <Table.Tbody>
+        <DataTableRows rows={sortedData} />
+      </Table.Tbody>
     </Table>
   );
 };
 
-/**
- * Helper to display current price (1H, 24H, 7D)
- * @param price number
- * @returns chart price at given intervals
- */
-const DisplayPriceChange = (price: number) => {
-  return price > 0 ? (
-    <Table.Td className={styles?.['coin_price_green']} data-price-target='price'>
-      <span className={styles?.['coin_price_change']}>
-        <IconCaretUpFilled stroke={1} />
-        {price ? `${price?.toFixed(2)}%` : '-'}
-      </span>
-    </Table.Td>
-  ) : price < 0 ? (
-    <Table.Td className={styles?.['coin_price_red']} data-price-target='price'>
-      <span className={styles?.['coin_price_change']}>
-        <IconCaretDownFilled stroke={1} />
-        {price ? `${price?.toFixed(2)}%` : '-'}
-      </span>
-    </Table.Td>
-  ) : (
-    <Table.Td className={styles?.['coin_price']} data-price-target='price'>
-      {price ? `${price?.toFixed(2)}%` : '-'}
-    </Table.Td>
-  )
-}
+const handleSortData = (
+  dataList: CoinsListResponse[],
+  field: SortField,
+  direction: SortDirection
+) => {
+  const dataClone = dataList?.slice?.();
+  switch (field) {
+    case 'market_cap_rank': {
+      return dataClone?.sort?.((a, b) =>
+        direction === 'ASC'
+          ? a?.[field] - b?.[field]
+          : b?.[field] - a?.[field],
+      );
+    }
+    case 'current_price':
+    case 'price_change_percentage_1h_in_currency':
+    case 'price_change_percentage_24h_in_currency':
+    case 'price_change_percentage_7d_in_currency':
+    case 'total_volume':
+    case 'market_cap':
+    {
+      return dataClone?.sort?.((a, b) =>
+        direction === 'ASC'
+          ? b?.[field] - a?.[field]
+          : a?.[field] - b?.[field],
+      );
+    }
+    case 'name': {
+      return dataClone?.sort?.((a, b) =>
+        direction === 'ASC'
+          ? a?.[field].localeCompare(b?.[field])
+          : b?.[field].localeCompare(a?.[field]),
+      );
+    }
+  }
+};

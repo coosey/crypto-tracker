@@ -14,13 +14,12 @@ export const CoinMarketList = () => {
       const response = await axios.get('/api/coins-list', {params: {page: currentPage}});
       if (response?.data?.length) {
         setCoinsList(response?.data || []);
-        setPageTotal(response?.data?.length / 2);
+        setPageTotal(response?.data?.length);
       }
     };
     fetchMarketData();
   },[currentPage]);
 
-  // TODO: setup pagination handler
   const handlePageChange = (pageNum: number) => {
     setCurrentPage(pageNum);
     window.scrollTo(0,0);
@@ -28,11 +27,7 @@ export const CoinMarketList = () => {
 
   return (
     <>
-      <MarketDataTable 
-        data={coinsList}
-        headers={['#', 'Name', 'Price', '1h', '24h', '7d', '24h Volume', 'Market Cap']}
-      />
-      {/** TODO: create pagination component */}
+      <MarketDataTable data={coinsList} />
       <div className={styles?.['pagination']}>
         <Pagination total={pageTotal} value={currentPage} onChange={handlePageChange} />
       </div>

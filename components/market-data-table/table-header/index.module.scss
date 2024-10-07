@@ -1,0 +1,11 @@
+.header {
+  width: max-content;
+  &_icon {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  &_text {
+    font-weight: 500;
+  }
+}
