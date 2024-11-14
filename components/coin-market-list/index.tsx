@@ -1,26 +1,13 @@
 import { Pagination } from '@mantine/core';
 import styles from './index.module.scss';
-import axios from 'axios';
 import { MarketDataTable } from 'components/market-data-table';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useGetMarketData } from 'libs/hooks/useGetMarketData';
 
 export const CoinMarketList = () => {
-  const [coinsList, setCoinsList] = useState([]);
-  const [pageTotal, setPageTotal] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
-    async function fetchMarketData() {
-      const response = await axios.get('/api/coins-list', {
-        params: { page: currentPage },
-      });
-      if (response?.data?.length) {
-        setCoinsList(response?.data || []);
-        setPageTotal(response?.data?.length);
-      }
-    }
-    fetchMarketData();
-  }, [currentPage]);
+  const {coinsList, pageTotal} = useGetMarketData(currentPage);
 
   const handlePageChange = (pageNum: number) => {
     setCurrentPage(pageNum);
@@ -29,6 +16,9 @@ export const CoinMarketList = () => {
 
   return (
     <>
+      <div className={styles?.['title']}>
+        <h1>Today's Cryptocurrency Prices</h1>
+      </div>
       <MarketDataTable data={coinsList} />
       <div className={styles?.['pagination']}>
         <Pagination

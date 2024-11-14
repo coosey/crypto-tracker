@@ -1,21 +1,20 @@
 import '@mantine/core/styles/Table.css';
-import styles from './index.module.scss';
 
 import { useState } from 'react';
 import { Table } from '@mantine/core';
-import { TableHeader } from './table-header';
 import {
   MarketDataTableProps,
   SortDirection,
   SortField,
-  SortFieldEnum,
 } from 'libs/types/market-data-table';
 import { DataTableHeaders } from './data-table-headers';
-import { MarketCapHoverCard } from './market-cap-hovercard';
 import { CoinsListResponse } from 'libs/types/coins-list';
 import { DataTableRows } from './data-table-rows';
+import { MarketDataTableHeaders } from '../market-data-table-headers';
 
-export const MarketDataTable = ({ data }: MarketDataTableProps) => {
+export const MarketDataTable = ({ 
+  data,
+}: MarketDataTableProps) => {
   const [sortDirection, setSortDirection] = useState<SortDirection | null>(
     'ASC'
   );
@@ -40,35 +39,12 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
     <Table verticalSpacing="lg" highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-          {DataTableHeaders?.map?.((header) => {
-            if (header.fieldEnum === SortFieldEnum.MARKET_CAP) {
-              return (
-                <TableHeader
-                  key={header?.fieldEnum}
-                  headerText={header?.fieldHeaderText}
-                  sorted={sortField === header?.fieldEnum}
-                  sortType={sortDirection}
-                  sortField={header?.sortField}
-                  onSort={() => handleSortChange(header?.fieldEnum)}
-                >
-                  <MarketCapHoverCard
-                    infoStyle={styles?.['table_info-group']}
-                    groupStyle={styles?.['table_info-icon']}
-                  />
-                </TableHeader>
-              );
-            }
-            return (
-              <TableHeader
-                key={header?.fieldEnum}
-                headerText={header?.fieldHeaderText}
-                sorted={sortField === header?.fieldEnum}
-                sortType={sortDirection}
-                sortField={header?.sortField}
-                onSort={() => handleSortChange(header?.sortField)}
-              />
-            );
-          })}
+         <MarketDataTableHeaders 
+            sortField={sortField} 
+            sortDirection={sortDirection}
+            handleSortChange={handleSortChange}
+            dataTableHeaders={DataTableHeaders}
+          />
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>

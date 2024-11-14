@@ -31,6 +31,7 @@ export interface MARKET_LIST_HEADER_CONFIG {
 };
 
 export interface ThProps {
+  tableKey: SortFieldEnum;
   headerText: string;
   sortField: SortField;
   sorted: boolean;
@@ -40,7 +41,7 @@ export interface ThProps {
   className?: string;
 };
 
-export interface DataTableHeadersProps {
+export interface DataTHProps {
   fieldHeaderText: string;
   fieldEnum?: SortFieldEnum;
   sortField?: SortField;
@@ -48,4 +49,11 @@ export interface DataTableHeadersProps {
 
 export interface MarketDataTableProps {
   data: CoinsListResponse[];
+};
+
+export interface MarketDataTHProps {
+  sortField: SortField;
+  sortDirection: SortDirection;
+  handleSortChange: (sortType: SortField) => void;
+  dataTableHeaders: DataTHProps[];
 };

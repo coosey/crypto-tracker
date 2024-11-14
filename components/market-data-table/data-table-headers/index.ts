@@ -1,10 +1,10 @@
 import {
   SortFieldEnum,
   SortField,
-  DataTableHeadersProps,
+  DataTHProps,
 } from 'libs/types/market-data-table';
 
-export const DataTableHeaders: DataTableHeadersProps[] = [
+export const DataTableHeaders: DataTHProps[] = [
   {
     fieldHeaderText: '',
   },

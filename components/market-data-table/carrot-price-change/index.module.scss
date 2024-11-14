@@ -1,0 +1,23 @@
+@import '../../../styles/design.scss';
+
+.price {
+  font-weight: 600;
+
+  &_green {
+    color: $price-green;
+  }
+
+  &_red {
+    color: $price-red;
+  }
+
+  &_change {
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    svg {
+      width: 1.25em;
+    }
+  }
+}

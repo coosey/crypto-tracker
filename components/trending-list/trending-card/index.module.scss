@@ -1,0 +1,21 @@
+@import '../../../styles/design.scss';
+
+.card-component {
+  background-color: $bg-primary;
+  min-width: 500px;
+
+  h3 {
+    padding-left: 15px;
+  }
+
+  &-anchor {
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+    line-height: 1;
+
+    svg {
+      width: 1.2rem;
+    }
+  }
+}

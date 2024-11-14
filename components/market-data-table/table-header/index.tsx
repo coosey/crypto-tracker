@@ -4,6 +4,7 @@ import { ThProps } from 'libs/types/market-data-table';
 import styles from './index.module.scss';
 
 export const TableHeader = ({
+  tableKey,
   headerText,
   sortField,
   sorted,
@@ -14,10 +15,10 @@ export const TableHeader = ({
 }: ThProps) => {
   const Icon = sortType === 'ASC' ? IconCaretUpFilled : IconCaretDownFilled;
   return (
-    <Table.Th className={className}>
+    <Table.Th className={className} key={tableKey}>
       <UnstyledButton onClick={() => onSort(sortField)}>
         <Group>
-          <Center>
+          <Center className={styles?.['header_group']}>
             {sorted && <Icon className={styles?.['header_icon']} stroke={1} />}
             <Text className={styles?.['header_text']} fz="h5">
               {headerText}

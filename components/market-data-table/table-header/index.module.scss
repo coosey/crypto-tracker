@@ -1,5 +1,10 @@
 .header {
   width: max-content;
+
+  &_group {
+    gap: 5px;
+  }
+  
   &_icon {
     width: 0.75rem;
     height: 0.75rem;

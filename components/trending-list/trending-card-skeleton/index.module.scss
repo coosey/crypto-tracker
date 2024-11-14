@@ -1,0 +1,12 @@
+.loading {
+  display: flex;
+  justify-content: space-between;
+
+  &_avatar {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+  }
+}
