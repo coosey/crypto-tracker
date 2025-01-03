@@ -13,7 +13,6 @@ export const FavoriteButton = () => {
   return (
     <UnstyledButton className={styles?.['favorite']} onClick={handleClick}>
       <IconStar
-        className={styles?.['favorite_btn']}
         stroke={2}
         fill={selected ? 'yellow' : null}
       />

@@ -6,8 +6,8 @@
   justify-content: space-between;
   cursor: pointer;
 
-  padding-top: $space_1;
-  padding-bottom: $space_1;
+  padding-top: $space_4;
+  padding-bottom: $space_4;
 
   &_side {
     display: flex;
@@ -18,7 +18,7 @@
 
   &_image {
     height: 24px;
-    min-width: 24px;
+    width: 24px;
     border-radius: 50%;
   }
 }

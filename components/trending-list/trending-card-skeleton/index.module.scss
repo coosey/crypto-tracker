@@ -1,12 +1,17 @@
+@import '../../../styles/design.scss';
+
 .loading {
   display: flex;
   justify-content: space-between;
 
+  padding-top: $space_4;
+  padding-bottom: $space_4;
+
   &_avatar {
-    padding: 5px;
+    gap: 10px;
+    padding: $space_5;
     display: flex;
     flex-direction: row;
     width: 100%;
-    gap: 10px;
   }
 }

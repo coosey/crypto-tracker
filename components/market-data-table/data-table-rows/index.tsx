@@ -1,14 +1,27 @@
 import { Table } from '@mantine/core';
 import { CoinsListResponse } from 'libs/types/coins-list';
 import styles from './index.module.scss';
-import { FavoriteButton } from '../favorite-button';
-import { CarrotPriceChange } from '../carrot-price-change';
+import { FavoriteButton } from '../../favorite-button';
+import { CarrotPriceChange } from '../../carrot-price-change';
+import { formatNumberWithSubscriptZeros } from 'libs/helpers/format-numbers-with-subscript';
+import { DataTableSkeleton } from '../data-table-skeleton';
+import { FormattedNumber } from 'components/formatted-number';
 
 interface Props {
   rows: CoinsListResponse[];
+  handleRowClick?: (coinId: string) => void;
 }
 
-export const DataTableRows = ({ rows }: Props) => {
+export const DataTableRows = ({ rows, handleRowClick }: Props) => {
+  if (!rows?.length) {
+    return (
+      <>
+        {Array(100).fill(null).map(() => (
+          <DataTableSkeleton />
+        ))}
+      </>
+    )
+  }
   return (
     <>
       {rows?.map?.((row) => {
@@ -17,9 +30,11 @@ export const DataTableRows = ({ rows }: Props) => {
             <Table.Td>
               <FavoriteButton />
             </Table.Td>
-            <Table.Td>{row?.market_cap_rank}</Table.Td>
             <Table.Td>
-              <div className={styles?.['coin']}>
+              {row?.market_cap_rank}
+            </Table.Td>
+            <Table.Td className={styles?.['table']}>
+              <div className={styles?.['coin']} onClick={() => handleRowClick && handleRowClick?.(row?.id)}>
                 <img
                   alt={row?.symbol?.toUpperCase()}
                   src={row?.image}
@@ -39,7 +54,7 @@ export const DataTableRows = ({ rows }: Props) => {
               className={styles?.['coin_price']}
               data-price-target="price"
             >
-              ${row?.current_price?.toLocaleString()}
+              ${formatNumberWithSubscriptZeros(row?.current_price?.toString())}
             </Table.Td>
             {/** 1H */}
             <Table.Td>
@@ -54,10 +69,10 @@ export const DataTableRows = ({ rows }: Props) => {
               <CarrotPriceChange price={row?.price_change_percentage_7d_in_currency} />
             </Table.Td>
             <Table.Td data-price-target="price">
-              ${row?.total_volume?.toLocaleString()}
+              <FormattedNumber value={row?.total_volume} />
             </Table.Td>
             <Table.Td data-price-target="price">
-              ${row?.market_cap?.toLocaleString()}
+              <FormattedNumber value={row?.market_cap} />
             </Table.Td>
           </Table.Tr>
         );

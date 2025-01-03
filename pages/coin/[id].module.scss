@@ -1,0 +1,107 @@
+@import '../../styles/design.scss';
+
+.breadcrumb {
+  margin-bottom: 1.5rem;
+  &_link {
+    color: $text-primary;
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  &_nolink {
+    color: $text-secondary !important;
+    a:hover {
+      color: initial;
+    }
+  }
+}
+
+.coin {
+  &_name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    &_symbol {
+      color: $text-secondary;
+    }
+
+    h1 {
+      font-size: 1.125rem;
+      line-height: 1.75rem;
+    }
+
+    image {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
+
+  &_price {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &_amount {
+      font-size: 2.25rem;
+      line-height: 2.5rem;
+    }
+    &_24h {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  }
+}
+
+.table {
+  &_header {
+    padding-top: 15px;
+  }
+  &_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: auto;
+  }
+}
+
+.pill-container {
+  display: flex;
+  gap: $space_10;
+  flex-grow: 1;
+
+  &-item {
+    margin: $space_0;
+    padding: $space_5;
+  }
+}
+
+.description {
+  a {
+    text-decoration: underline;
+    color: $accent-color2;
+  }
+}
+
+.show-more {
+  &__icon {
+    display: flex;
+    align-items: center;
+  }
+
+  > :hover {
+    cursor: pointer;
+  }
+
+  svg {
+    height: 20px;
+    width: 20px;
+  }
+}

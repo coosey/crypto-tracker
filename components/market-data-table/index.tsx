@@ -11,10 +11,12 @@ import { DataTableHeaders } from './data-table-headers';
 import { CoinsListResponse } from 'libs/types/coins-list';
 import { DataTableRows } from './data-table-rows';
 import { MarketDataTableHeaders } from '../market-data-table-headers';
+import { useRouter } from 'next/router';
 
 export const MarketDataTable = ({ 
   data,
 }: MarketDataTableProps) => {
+  const router = useRouter();
   const [sortDirection, setSortDirection] = useState<SortDirection | null>(
     'ASC'
   );
@@ -35,11 +37,15 @@ export const MarketDataTable = ({
     handleSortData(data, sortField, sortDirection);
   };
 
+  const handleRowClick = (coinId: string) => {
+    router.push(`/coin/${coinId}`)
+  };
+
   return (
     <Table verticalSpacing="lg" highlightOnHover>
       <Table.Thead>
         <Table.Tr>
-         <MarketDataTableHeaders 
+         <MarketDataTableHeaders
             sortField={sortField} 
             sortDirection={sortDirection}
             handleSortChange={handleSortChange}
@@ -48,7 +54,7 @@ export const MarketDataTable = ({
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>
-        <DataTableRows rows={sortedData} />
+        <DataTableRows rows={sortedData} handleRowClick={handleRowClick}/>
       </Table.Tbody>
     </Table>
   );

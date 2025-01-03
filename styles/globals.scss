@@ -56,8 +56,8 @@ input, textarea {
   background-color: $bg-secondary;
   color: $text-primary;
   border: 1px solid $border-primary;
-  padding: $space_2_5;
-  border-radius: $space_1;
+  padding: $space_10;
+  border-radius: $space_4;
 }
 
 input:focus, textarea:focus {
@@ -70,9 +70,9 @@ button {
   background-color: $accent-color1;
   color: $text-primary;
   border: $border-accent;
-  padding: $space_2_5 $space_0_5;
+  padding: $space_10 $space_2;
   cursor: pointer;
-  border-radius: $space_1;
+  border-radius: $space_4;
   font-family: $font-primary;
 }
 
@@ -95,11 +95,11 @@ button {
 
 @media (max-width: 767px) {
   h1 {
-    font-size: 1.75rem; /* Smaller on mobile */
+    font-size: 2.5rem;
   }
 
   p {
-    font-size: 0.875rem;
+    font-size: 1rem;
     margin-bottom: 1rem;
   }
 }

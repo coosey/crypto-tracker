@@ -1,8 +1,10 @@
+@import '../../../styles/design.scss';
+
 .header {
   width: max-content;
 
   &_group {
-    gap: 5px;
+    gap: $space_5;
   }
   
   &_icon {

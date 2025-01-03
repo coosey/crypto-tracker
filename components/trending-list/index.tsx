@@ -1,7 +1,7 @@
 import { Flex } from "@mantine/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { TrendingCoinsResponse, TrendingListResponse } from "libs/types/trending-list";
+import { TrendingCoinsResponse, TrendingListResponse, TrendingListType } from "libs/types/trending-list";
 import { TrendingCard } from "./trending-card";
 
 export const TrendingList = () => {
@@ -12,21 +12,34 @@ export const TrendingList = () => {
     setLoading(true);
     async function getTrendingList() {
       const response = await axios.get('/api/trending-list');
-      const retrievedTrendingCoins = getTopTrendingCoins(response?.data);
+      // set trending coin list
+      const retrievedTrendingCoins = getTopThreeTrendingCoins(response?.data);
       setTrendingCoins(retrievedTrendingCoins);
+      // retrieve trending coin ids
+      // const allTrendingCoins = response?.data?.[TrendingListType?.COINS];
+      // const trendingCoinIds = getTrendingCoinIds(allTrendingCoins);
+      // parse array of ids into a string
+      // const stringIds = trendingCoinIds.join(',')
+      // const trendingCoins = await axios.get('/api/current-rates', {params: { id: stringIds}})
+      // console.log('trendingCoins',trendingCoins)
       setLoading(false);
     };
     getTrendingList();
   },[]);
-
-  const getTopTrendingCoins = (data: TrendingListResponse) => {
-    const trendingCoins = data?.['coins'];
-    return trendingCoins?.slice?.(0,3);
-  };
 
   return (
      <Flex direction="row">
       <TrendingCard trendingCoins={trendingCoins} isLoading={loading} />
     </Flex>
   )
+};
+
+function getTopThreeTrendingCoins(data: TrendingListResponse) {
+  return data?.coins?.slice?.(0,3);
+};
+
+function getTrendingCoinIds(trendingCoins: TrendingCoinsResponse[]) {
+  return trendingCoins.map(
+    (coin) => coin?.item.coin_id
+  );
 };

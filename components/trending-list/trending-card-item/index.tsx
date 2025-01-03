@@ -1,5 +1,5 @@
 import styles from './index.module.scss';
-import { CarrotPriceChange } from 'components/market-data-table/carrot-price-change';
+import { CarrotPriceChange } from 'components/carrot-price-change';
 
 interface Props {
   imgSrc: string;

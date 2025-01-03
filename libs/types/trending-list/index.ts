@@ -1,10 +1,18 @@
+/** ENUMS */
+export enum TrendingListType {
+  CATEGORIES = 'categories',
+  COINS = 'coins',
+  NFTS = 'nfts'
+};
+
+/** INTERFACES */
 export interface PriceChangePercentage {
   btc: number;
   usd: number;
 };
 
 export interface TrendingCoinsResponse {
-  item : {
+  item: {
     id: string;
     coin_id: number;
     name: string;
@@ -69,4 +77,15 @@ export interface TrendingListResponse {
   categories: TrendingCategoriesResponse[];
   coins: TrendingCoinsResponse[];
   nfts: TrendingNftsResponse[];
+};
+
+export interface TrendingCoinsObject {
+  price_change_percentage_1h: number;
+  price_change_percentage_24h: number;
+  price_change_percentage_7d: number;
+  price_change_percentage_30d: number;
+};
+
+export interface AllTrendingCoinsResponse {
+  [ids: string]: TrendingCoinsObject;
 };

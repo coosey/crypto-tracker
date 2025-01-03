@@ -3,11 +3,11 @@
 .table {
   &_market-cap {
     display: flex;
-    gap: $space_1;
+    gap: $space_4;
   }
 
   &_info-group {
-    padding-left: 5px;
+    padding-left: $space_5;
   }
 
   &_info-icon {

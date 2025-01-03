@@ -1,0 +1,21 @@
+@import '../../styles/design.scss';
+
+.table {
+  &-row {
+    font: $font-secondary;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 0.5px solid lightgrey;
+    display: flex;
+    justify-content: space-between;
+    &_name {
+      font-weight: 400;
+      color: $text-secondary;
+      line-height: 1.25rem;
+    }
+  
+    &_price {
+      font-weight: 600;
+    }
+  }
+}
