@@ -7,9 +7,9 @@ import {
   SortDirection,
   SortField,
 } from 'libs/types/market-data-table';
-import { DataTableHeaders } from './data-table-headers';
+import { DataTableHeaders } from './headers';
 import { CoinsListResponse } from 'libs/types/coins-list';
-import { DataTableRows } from './data-table-rows';
+import { DataTableRows } from './rows';
 import { MarketDataTableHeaders } from '../market-data-table-headers';
 import { useRouter } from 'next/router';
 

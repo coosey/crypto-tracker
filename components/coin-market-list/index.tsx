@@ -1,18 +1,13 @@
-import { Pagination } from '@mantine/core';
 import styles from './index.module.scss';
 import { MarketDataTable } from 'components/market-data-table';
 import { useState } from 'react';
 import { useGetMarketData } from 'libs/hooks/useGetMarketData';
+import { PaginateComponent } from 'components/pagination';
 
 export const CoinMarketList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const {coinsList, pageTotal} = useGetMarketData(currentPage);
-
-  const handlePageChange = (pageNum: number) => {
-    setCurrentPage(pageNum);
-    window.scrollTo(0, 0);
-  };
 
   return (
     <>
@@ -20,13 +15,12 @@ export const CoinMarketList = () => {
         <h1>Today's Cryptocurrency Prices</h1>
       </div>
       <MarketDataTable data={coinsList} />
-      <div className={styles?.['pagination']}>
-        <Pagination
-          total={pageTotal}
-          value={currentPage}
-          onChange={handlePageChange}
-        />
-      </div>
+      <PaginateComponent
+        className={styles?.['pagination']}
+        pageTotal={pageTotal}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 };

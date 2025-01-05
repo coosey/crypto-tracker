@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Layout } from "components/layout";
-import { useRouter } from "next/router";
 import styles from './[id].module.scss';
 import { CarrotPriceChange } from "components/carrot-price-change";
 import { Anchor, Breadcrumbs, Pill, Popover } from "@mantine/core";
@@ -8,10 +7,14 @@ import { FormattedDataRow } from "components/formatted-data-row";
 import { parseDomain } from "libs/helpers/parseDomain";
 import { capitalize } from 'lodash';
 import { IconChevronDown } from '@tabler/icons-react';
+import { CoinIdMarket } from "components/coin-id-market";
+import { useState } from "react";
+import { useGetTickerData } from "libs/hooks/useGetTickersData";
+import { PaginateComponent } from "components/pagination";
 
 export default function CoinPage({ data }) {
-  // const router = useRouter();
-  // console.log('data', data)
+  const [currentPage, setCurrentPage] = useState(1);
+
   const breadCrumbItems = [
     { title: 'Crytocurrencies', href: '/' },
     { title: `${data?.name} Price`, href: null },
@@ -30,6 +33,12 @@ export default function CoinPage({ data }) {
       )
     }
   });
+
+  // custom hook to retrieve ticker data by coin id
+  const {tickers, pageTotal} = useGetTickerData(currentPage, data?.id);
+
+  // ticker symbol
+  const symbol = data?.symbol?.toUpperCase?.();
 
   // Parse URL for website
   const parsedUrl = parseDomain(data?.links?.homepage?.[0]);
@@ -51,7 +60,7 @@ export default function CoinPage({ data }) {
           <img src={data?.image?.thumb} />
           <h1>{data?.name}</h1>
           <span className={styles?.['coin_name_symbol']}>{data?.symbol?.toUpperCase?.()} Price</span>
-          <span>#{data?.market_cap_rank}</span>
+          <span className={styles?.['coin_name_rank']}>#{data?.market_cap_rank}</span>
         </div>
         <div>
           <div className={styles?.['coin_price']}>
@@ -66,6 +75,7 @@ export default function CoinPage({ data }) {
       </div>
       {/** Market Data Rows */}
       <div className={styles?.['table']}>
+        <h2 className={styles?.['table_header']}>{data?.name} Statistics</h2>
         <FormattedDataRow rowName="Market Cap" rowPrice={data?.market_data?.market_cap?.usd} />
         <FormattedDataRow rowName="Volume" rowPrice={data?.market_data?.total_volume?.usd} />
         <FormattedDataRow rowName="Fully Diluted Valuation" rowPrice={data?.market_data?.fully_diluted_valuation?.usd} />
@@ -111,7 +121,7 @@ export default function CoinPage({ data }) {
             }
           />
           {/** Source Code */}
-          {data?.links?.repo_url?.github?.[0] && (
+          {data?.links?.repos_url?.github?.[0] && (
             <FormattedDataRow
               rowName="Source Code"
               rowValue={
@@ -122,16 +132,13 @@ export default function CoinPage({ data }) {
             />
           )}
           {/** Categories */}
-          {/** TODO: Update links */}
           {data?.categories && (
             <FormattedDataRow
               rowName="Categories"
               rowValue={
                 <span className={styles?.['pill-container']}>
                   <div>
-                    <Anchor href={`${data?.links?.repo_url?.github?.[0]}`} target="_blank">
-                      <Pill size="sm">{firstCategory}</Pill>
-                    </Anchor>
+                    <Pill size="sm">{firstCategory}</Pill>
                   </div>
                   <div className={styles?.['show-more']}>
                     <Popover width={300} position="bottom" withArrow shadow="md">
@@ -140,7 +147,6 @@ export default function CoinPage({ data }) {
                           <span className={styles?.['show-more__icon']}>
                             Show {restOfCategories?.length}
                             <IconChevronDown stroke={1.5} />
-
                           </span>
                         </Pill>
                       </Popover.Target>
@@ -159,12 +165,41 @@ export default function CoinPage({ data }) {
           )}
         </div>
       </div>
+      {/** Historical price */}
+      <div className={styles?.['table']}>
+        <h2 className={styles?.['table_header']}>{symbol} Historical Price</h2>
+        <div className={styles?.['table']}>
+        {/** 24H range */}
+          <FormattedDataRow rowName="24H Range" priceDiff24Low={data?.market_data?.low_24h?.usd} priceDiff24High={data?.market_data?.high_24h?.usd} />
+        {/** 7D range */}
+          {/* <FormattedDataRow rowName="7D Range" priceDiff7Low={data?.market_data?.low_7h?.usd} priceDiff7High={data?.market_data?.high_7h?.usd} /> */}
+        {/** ATH */}
+          <FormattedDataRow rowName="All-time High" rowPrice={data?.market_data?.ath?.usd} priceChange={data?.market_data?.ath_change_percentage?.usd}/>
+        {/** ATL */}
+          <FormattedDataRow rowName="All-time Low" rowPrice={data?.market_data?.atl?.usd} />
+        </div>
+      </div>
       {/** About */}
       <div>
-        <h3 className={styles?.['table_header']}>About {capitalize(data?.id)} ({data?.symbol?.toUpperCase?.()})</h3>
+        <h3 className={styles?.['table_header']}>About {capitalize(data?.id)} ({symbol})</h3>
         <div>
-          <span className={styles?.['description']} dangerouslySetInnerHTML={{ __html: data?.description?.en }} />
+          <p className={styles?.['description']} dangerouslySetInnerHTML={{ __html: data?.description?.en }} />
         </div>
+      </div>
+      <div className={styles?.['ticker-market']} id="ticker-market">
+        <CoinIdMarket 
+          name={data?.name}
+          symbol={data?.symbol}
+          tickers={tickers} 
+        />
+        <PaginateComponent 
+          pageTotal={pageTotal}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          scrollToDiv
+          scrollId="ticker-market"
+          block="header-top"
+        />
       </div>
     </Layout>
   )
@@ -174,11 +209,12 @@ export default function CoinPage({ data }) {
 export async function getServerSideProps(context) {
   const { id } = context.params;
   try {
+    // get coins data by id
     const response = await axios.get(`https://api.coingecko.com/api/v3/coins/${id}`, {
       headers: {
         accept: 'application/json',
         'x-cg-demo-api-key': process.env.NEXT_PRIVATE_COINGECKO_KEY,
-      },
+      }
     });
     const data = response?.data;
     return {

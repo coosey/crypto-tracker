@@ -13,6 +13,11 @@
       color: $text-secondary;
       line-height: 1.25rem;
     }
+
+    &_price-percent {
+      display: flex;
+      gap: $space_5;
+    }
   
     &_price {
       font-weight: 600;
