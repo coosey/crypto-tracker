@@ -10,9 +10,13 @@ interface Props {
   symbol: string;
 }
 
-export const CoinIdMarket = (props: Props) => {
+export const CoinIdMarket = ({
+  name,
+  tickers,
+  symbol
+}: Props) => {
 
-  const rows = props?.tickers?.map?.((ticker) => {
+  const rows = tickers?.map?.((ticker) => {
     return (
       <Table.Tr>
         <Table.Td>
@@ -30,9 +34,9 @@ export const CoinIdMarket = (props: Props) => {
         </Table.Td>
         <Table.Td>
           <Anchor className={styles?.['trade-url']} href={ticker?.trade_url} target="_blank">
-            {props?.symbol?.toUpperCase() === ticker?.base ? 
+            {symbol?.toUpperCase?.() === ticker?.base ? 
               `${ticker?.base}/${ticker?.target}` :
-              `${props?.symbol?.toUpperCase()}/USDT`
+              `${symbol?.toUpperCase?.()}/USDT`
             }
             <IconExternalLink strokeWidth={2} size={20} />
           </Anchor>
@@ -41,7 +45,7 @@ export const CoinIdMarket = (props: Props) => {
           <FormattedNumber value={ticker?.converted_last?.usd} />
         </Table.Td>
         <Table.Td>
-          {ticker?.bid_ask_spread_percentage?.toFixed(2)}
+          {ticker?.bid_ask_spread_percentage?.toFixed?.(2)}
         </Table.Td>
         <Table.Td>
           <FormattedNumber value={ticker?.converted_volume?.usd} />
@@ -60,8 +64,8 @@ export const CoinIdMarket = (props: Props) => {
 
   return (
     <div className={styles?.['coin-market']}>
-      <h2>{props?.name} Markets</h2>
-      <Table verticalSpacing="lg" highlightOnHover>
+      <h2>{name} Markets</h2>
+      <Table verticalSpacing="sm" highlightOnHover>
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Exchange</Table.Th>

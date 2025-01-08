@@ -2,59 +2,33 @@ import axios from "axios";
 import { Layout } from "components/layout";
 import styles from './[id].module.scss';
 import { CarrotPriceChange } from "components/carrot-price-change";
-import { Anchor, Breadcrumbs, Pill, Popover } from "@mantine/core";
+import { Anchor, Pill, Popover } from "@mantine/core";
 import { FormattedDataRow } from "components/formatted-data-row";
 import { parseDomain } from "libs/helpers/parseDomain";
 import { capitalize } from 'lodash';
 import { IconChevronDown } from '@tabler/icons-react';
-import { CoinIdMarket } from "components/coin-id-market";
 import { useState } from "react";
 import { useGetTickerData } from "libs/hooks/useGetTickersData";
-import { PaginateComponent } from "components/pagination";
+import { TickersList } from "components/coin-id-components/tickers";
+import { BreadCrumbItems } from "components/coin-id-components/breadcrumb-items";
+import { STATISTIC_INFO } from "components/coin-id-components/statistics-info";
 
 export default function CoinPage({ data }) {
   const [currentPage, setCurrentPage] = useState(1);
-
-  const breadCrumbItems = [
-    { title: 'Crytocurrencies', href: '/' },
-    { title: `${data?.name} Price`, href: null },
-  ].map((item, index) => {
-    if (item?.href) {
-      return (
-        <Anchor className={styles?.['breadcrumb_link']} href={item?.href} key={index}>
-          {item?.title}
-        </Anchor>
-      );
-    } else {
-      return (
-        <a className={styles?.['breadcrumb_nolink']} key={index}>
-          {item?.title}
-        </a>
-      )
-    }
-  });
-
   // custom hook to retrieve ticker data by coin id
-  const {tickers, pageTotal} = useGetTickerData(currentPage, data?.id);
-
+  const { tickers, pageTotal } = useGetTickerData(currentPage, data?.id);
   // ticker symbol
   const symbol = data?.symbol?.toUpperCase?.();
-
   // Parse URL for website
   const parsedUrl = parseDomain(data?.links?.homepage?.[0]);
-
   // Retrieve all categories, get 1st item, then parse rest of items
   const categories = data?.categories;
-  const firstCategory = categories[0];
+  const firstCategory = categories?.[0];
   const restOfCategories = categories?.slice?.(1, categories?.length)
 
   return (
     <Layout>
-      <div className={styles?.['breadcrumb']}>
-        <Breadcrumbs separator="→" separatorMargin="md" mt="xs">
-          {breadCrumbItems}
-        </Breadcrumbs>
-      </div>
+      <BreadCrumbItems name={data?.name} />
       <div className={styles?.['coin']}>
         <div className={styles?.['coin_name']}>
           <img src={data?.image?.thumb} />
@@ -76,12 +50,46 @@ export default function CoinPage({ data }) {
       {/** Market Data Rows */}
       <div className={styles?.['table']}>
         <h2 className={styles?.['table_header']}>{data?.name} Statistics</h2>
-        <FormattedDataRow rowName="Market Cap" rowPrice={data?.market_data?.market_cap?.usd} />
-        <FormattedDataRow rowName="Volume" rowPrice={data?.market_data?.total_volume?.usd} />
-        <FormattedDataRow rowName="Fully Diluted Valuation" rowPrice={data?.market_data?.fully_diluted_valuation?.usd} />
-        <FormattedDataRow rowName="Circulating Supply" rowPrice={data?.market_data?.circulating_supply} />
-        <FormattedDataRow rowName="Total Supply" rowPrice={data?.market_data?.total_supply} />
-        <FormattedDataRow rowName="Max Supply" rowValue={'∞'} />
+        <FormattedDataRow
+          rowName="Market Cap"
+          rowPrice={data?.market_data?.market_cap?.usd}
+          hoverCard
+          hoverCardName={STATISTIC_INFO.market_cap_name}
+          hoverCardDescription={STATISTIC_INFO.market_cap_description}
+        />
+        <FormattedDataRow
+          rowName="Volume"
+          rowPrice={data?.market_data?.total_volume?.usd}
+          hoverCard
+          hoverCardName={STATISTIC_INFO.volume}
+        />
+        <FormattedDataRow
+          rowName="Fully Diluted Valuation"
+          rowPrice={data?.market_data?.fully_diluted_valuation?.usd}
+          hoverCard
+          hoverCardName={STATISTIC_INFO.fdv_name}
+          hoverCardDescription={STATISTIC_INFO.fdv_desc}
+        />
+        <FormattedDataRow
+          rowName="Circulating Supply"
+          rowPrice={data?.market_data?.circulating_supply}
+          hoverCard
+          hoverCardName={STATISTIC_INFO.circulating_supply}
+        />
+        <FormattedDataRow
+          rowName="Total Supply"
+          rowPrice={data?.market_data?.total_supply}
+          hoverCard
+          hoverCardName={STATISTIC_INFO.total_supply_desc}
+          hoverCardDescription={STATISTIC_INFO.total_supply_name}
+        />
+        <FormattedDataRow
+          rowName="Max Supply"
+          rowValue={'∞'}
+          hoverCard
+          hoverCardName={STATISTIC_INFO.max_supply_desc}
+          hoverCardDescription={STATISTIC_INFO.max_supply_name}
+        />
       </div>
       <div className={styles?.['table']}>
         <h3 className={styles?.['table_header']}>Info</h3>
@@ -92,7 +100,7 @@ export default function CoinPage({ data }) {
               rowName="Website"
               rowValue={
                 <Anchor href={`${data?.links?.homepage?.[0]}`} target="_blank">
-                  <Pill size="sm">{parsedUrl}</Pill>
+                  <Pill radius="md" size="lg">{parsedUrl}</Pill>
                 </Anchor>
               }
             />
@@ -104,17 +112,17 @@ export default function CoinPage({ data }) {
               <span className={styles?.['pill-container']}>
                 {data?.links?.subreddit_url &&
                   <Anchor href={`${data?.links?.subreddit_url}`} target="_blank">
-                    <Pill size="sm">Reddit</Pill>
+                    <Pill radius="md" size="lg">Reddit</Pill>
                   </Anchor>
                 }
                 {data?.links?.telegram_channel_identifier &&
                   <Anchor href={`https://t.me/${data?.links?.telegram_channel_identifier}`} target="_blank">
-                    <Pill size="sm">Telegram</Pill>
+                    <Pill radius="md" size="lg">Telegram</Pill>
                   </Anchor>
                 }
                 {data?.links?.twitter_screen_name &&
                   <Anchor href={`https://x.com/${data?.links?.twitter_screen_name}`} target="_blank">
-                    <Pill size="sm">Twitter</Pill>
+                    <Pill radius="md" size="lg">Twitter</Pill>
                   </Anchor>
                 }
               </span>
@@ -126,7 +134,7 @@ export default function CoinPage({ data }) {
               rowName="Source Code"
               rowValue={
                 <Anchor href={`${data?.links?.repo_url?.github?.[0]}`} target="_blank">
-                  <Pill size="sm">GitHub</Pill>
+                  <Pill radius="md" size="lg">GitHub</Pill>
                 </Anchor>
               }
             />
@@ -138,12 +146,12 @@ export default function CoinPage({ data }) {
               rowValue={
                 <span className={styles?.['pill-container']}>
                   <div>
-                    <Pill size="sm">{firstCategory}</Pill>
+                    <Pill radius="md" size="lg">{firstCategory}</Pill>
                   </div>
                   <div className={styles?.['show-more']}>
                     <Popover width={300} position="bottom" withArrow shadow="md">
                       <Popover.Target>
-                        <Pill>
+                        <Pill radius="md" size="lg">
                           <span className={styles?.['show-more__icon']}>
                             Show {restOfCategories?.length}
                             <IconChevronDown stroke={1.5} />
@@ -153,7 +161,7 @@ export default function CoinPage({ data }) {
                       <Popover.Dropdown>
                         {restOfCategories?.map?.((category, idx) => (
                           <p className={styles?.['pill-container-item']}>
-                            <Pill size="md" key={idx}>{category}</Pill>
+                            <Pill radius="md" size="lg" key={idx}>{category}</Pill>
                           </p>
                         ))}
                       </Popover.Dropdown>
@@ -169,13 +177,13 @@ export default function CoinPage({ data }) {
       <div className={styles?.['table']}>
         <h2 className={styles?.['table_header']}>{symbol} Historical Price</h2>
         <div className={styles?.['table']}>
-        {/** 24H range */}
+          {/** 24H range */}
           <FormattedDataRow rowName="24H Range" priceDiff24Low={data?.market_data?.low_24h?.usd} priceDiff24High={data?.market_data?.high_24h?.usd} />
-        {/** 7D range */}
+          {/** 7D range */}
           {/* <FormattedDataRow rowName="7D Range" priceDiff7Low={data?.market_data?.low_7h?.usd} priceDiff7High={data?.market_data?.high_7h?.usd} /> */}
-        {/** ATH */}
-          <FormattedDataRow rowName="All-time High" rowPrice={data?.market_data?.ath?.usd} priceChange={data?.market_data?.ath_change_percentage?.usd}/>
-        {/** ATL */}
+          {/** ATH */}
+          <FormattedDataRow rowName="All-time High" rowPrice={data?.market_data?.ath?.usd} priceChange={data?.market_data?.ath_change_percentage?.usd} />
+          {/** ATL */}
           <FormattedDataRow rowName="All-time Low" rowPrice={data?.market_data?.atl?.usd} />
         </div>
       </div>
@@ -186,21 +194,14 @@ export default function CoinPage({ data }) {
           <p className={styles?.['description']} dangerouslySetInnerHTML={{ __html: data?.description?.en }} />
         </div>
       </div>
-      <div className={styles?.['ticker-market']} id="ticker-market">
-        <CoinIdMarket 
-          name={data?.name}
-          symbol={data?.symbol}
-          tickers={tickers} 
-        />
-        <PaginateComponent 
-          pageTotal={pageTotal}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          scrollToDiv
-          scrollId="ticker-market"
-          block="header-top"
-        />
-      </div>
+      <TickersList
+        name={data?.name}
+        symbol={data?.symbol}
+        tickers={tickers}
+        currentPage={currentPage}
+        pageTotal={pageTotal}
+        setCurrentPage={setCurrentPage}
+      />
     </Layout>
   )
 };

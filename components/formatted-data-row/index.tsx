@@ -1,6 +1,8 @@
 import { FormattedNumber } from 'components/formatted-number';
 import styles from './index.module.scss';
 import { CarrotPriceChange } from 'components/carrot-price-change';
+import { HoverCard, Text } from '@mantine/core';
+import { IconInfoCircle } from '@tabler/icons-react';
 
 interface FormattedDataRowProps {
   rowName: string;
@@ -11,6 +13,9 @@ interface FormattedDataRowProps {
   priceDiff24Low?: number;
   priceDiff7High?: number;
   priceDiff7Low?: number;
+  hoverCard?: boolean;
+  hoverCardName?: string;
+  hoverCardDescription?: string;
 };
 
 export const FormattedDataRow = ({
@@ -22,10 +27,30 @@ export const FormattedDataRow = ({
   priceDiff24Low,
   priceDiff7High,
   priceDiff7Low,
+  hoverCard,
+  hoverCardName,
+  hoverCardDescription,
 }: FormattedDataRowProps) => {
   return (
     <div key={rowName} className={styles?.['table-row']}>
-      <span className={styles?.['table-row_name']}>{rowName}</span>
+      <div className={styles?.['table-row_name-icon']}>
+        <span className={styles?.['table-row_name']}>
+          {rowName}
+        </span>
+        {hoverCard && (
+          <span className={styles?.['table-row_hover-card']}>
+            <HoverCard width={360} shadow="md">
+              <HoverCard.Target>
+                <IconInfoCircle stroke={1.5} />
+              </HoverCard.Target>
+              <HoverCard.Dropdown>
+                <Text size="md">{hoverCardName}</Text>
+                {hoverCardDescription && <Text size="md" mt="md">{hoverCardDescription}</Text>}
+              </HoverCard.Dropdown>
+            </HoverCard>
+          </span>
+        )}
+      </div>
       <div className={styles?.['table-row_price-percent']}>
         {rowValue && (
           <span className={styles?.['table-row_price']}>

@@ -2,6 +2,7 @@ import { Pagination } from "@mantine/core";
 import { SetStateAction } from "react";
 import styles from './index.module.scss';
 import { handleScrollToDiv } from "libs/helpers/handleScrollToDiv";
+import classNames from "classnames";
 
 interface Props {
   className?: string;
@@ -17,13 +18,13 @@ interface Props {
 export const PaginateComponent = (props: Props) => {
 
   const handlePageChange = (pageNum: number) => {
-    props?.setCurrentPage(pageNum);
-    props?.scrollTop && window.scrollTo(0, 0);
+    props?.setCurrentPage?.(pageNum);
+    props?.scrollTop && window?.scrollTo(0, 0);
     props?.scrollToDiv && handleScrollToDiv(props?.scrollId, props?.block);
   };
 
   return (
-    <div className={styles?.['pagination']}>
+    <div className={classNames(styles?.['pagination'], props?.className)}>
       <Pagination
           total={props?.pageTotal}
           value={props?.currentPage}

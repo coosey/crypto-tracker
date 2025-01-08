@@ -1,0 +1,18 @@
+@import '../../../styles/design.scss';
+
+.breadcrumb {
+  margin-bottom: 1.5rem;
+  &_link {
+    color: $text-primary;
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  &_nolink {
+    color: $text-secondary !important;
+    a:hover {
+      color: initial;
+    }
+  }
+}

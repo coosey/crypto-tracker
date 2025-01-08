@@ -8,6 +8,20 @@
     border-bottom: 0.5px solid lightgrey;
     display: flex;
     justify-content: space-between;
+
+    &_name-icon {
+      display: flex;
+      gap: $space_5;
+      align-items: center;
+    }
+  
+    &_hover-card {
+      display: flex;
+      svg {
+        width: 20px;
+      }
+    }
+
     &_name {
       font-weight: 400;
       color: $text-secondary;

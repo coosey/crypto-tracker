@@ -1,22 +1,5 @@
 @import '../../styles/design.scss';
 
-.breadcrumb {
-  margin-bottom: 1.5rem;
-  &_link {
-    color: $text-primary;
-    a:hover {
-      text-decoration: none;
-    }
-  }
-
-  &_nolink {
-    color: $text-secondary !important;
-    a:hover {
-      color: initial;
-    }
-  }
-}
-
 .coin {
   &_name {
     display: flex;
@@ -57,6 +40,7 @@
 
     &_amount {
       font-size: 2.25rem;
+      font-weight: 600;
       line-height: 2.5rem;
     }
     &_24h {
@@ -115,8 +99,4 @@
     height: 20px;
     width: 20px;
   }
-}
-
-.ticker-market {
-  margin-top: 1rem;
 }

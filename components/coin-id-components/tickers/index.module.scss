@@ -1,0 +1,28 @@
+@import '../../../styles/design.scss';
+
+.ticker-market {
+  margin-top: 1rem;
+
+  &_footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-top: 1.5rem;
+
+    .paginate {
+      flex-grow: 1;
+      text-align: center;
+    }
+
+    label {
+      padding-right: 15px;
+      color: $text-secondary;
+    }
+
+    .items-per-page {
+      margin-left: auto;
+      width: 100px;
+    }
+  }
+}

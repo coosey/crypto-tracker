@@ -12,8 +12,12 @@ export const useGetTickerData = (currentPage: number, id: string) => {
         params: { page: currentPage, id: id },
       });
       if (response?.data?.tickers?.length) {
-        setTickers(response?.data?.tickers || []);
-        setPageTotal(response?.data?.tickers?.length);
+        // limit table size to 50 tickers
+        const maxTickers = response?.data?.tickers?.slice?.(0,50);
+        // max tickers is 100 per response - if there are 100, add 1 page
+        const pages = response?.data?.tickers?.length > 99 ? currentPage + 2 : currentPage;
+        setTickers(maxTickers)
+        setPageTotal(pages);
       }
     }
     fetchTickersData();
