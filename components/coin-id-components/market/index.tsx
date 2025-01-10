@@ -1,4 +1,4 @@
-import { Anchor, Table } from "@mantine/core";
+import { Anchor, Box, LoadingOverlay, Table } from "@mantine/core";
 import { IconExternalLink } from '@tabler/icons-react';
 import { FormattedNumber } from "components/formatted-number";
 import styles from './index.module.scss';
@@ -8,17 +8,19 @@ interface Props {
   name: string;
   tickers: TickersMarketObject[];
   symbol: string;
+  loading?: boolean;
 }
 
 export const CoinIdMarket = ({
   name,
   tickers,
-  symbol
+  symbol,
+  loading
 }: Props) => {
 
-  const rows = tickers?.map?.((ticker) => {
+  const rows = tickers?.map?.((ticker, idx) => {
     return (
-      <Table.Tr>
+      <Table.Tr key={idx}>
         <Table.Td>
           <div className={styles?.['icon-symbol']}>
             <img 
@@ -65,19 +67,22 @@ export const CoinIdMarket = ({
   return (
     <div className={styles?.['coin-market']}>
       <h2>{name} Markets</h2>
-      <Table verticalSpacing="sm" highlightOnHover>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th>Exchange</Table.Th>
-            <Table.Th>Pair</Table.Th>
-            <Table.Th>Price</Table.Th>
-            <Table.Th>Spread</Table.Th>
-            <Table.Th>24H Volume</Table.Th>
-            <Table.Th>Trust Score</Table.Th>
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody>{rows}</Table.Tbody>
-      </Table>
+      <Box pos="relative">
+        <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
+        <Table verticalSpacing="sm" highlightOnHover className={styles?.['table']}>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th>Exchange</Table.Th>
+              <Table.Th>Pair</Table.Th>
+              <Table.Th>Price</Table.Th>
+              <Table.Th>Spread</Table.Th>
+              <Table.Th>24H Volume</Table.Th>
+              <Table.Th>Trust Score</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>{rows}</Table.Tbody>
+        </Table>
+      </Box>
     </div>
   )
 }

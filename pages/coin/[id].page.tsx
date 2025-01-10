@@ -7,16 +7,11 @@ import { FormattedDataRow } from "components/formatted-data-row";
 import { parseDomain } from "libs/helpers/parseDomain";
 import { capitalize } from 'lodash';
 import { IconChevronDown } from '@tabler/icons-react';
-import { useState } from "react";
-import { useGetTickerData } from "libs/hooks/useGetTickersData";
 import { TickersList } from "components/coin-id-components/tickers";
 import { BreadCrumbItems } from "components/coin-id-components/breadcrumb-items";
 import { STATISTIC_INFO } from "components/coin-id-components/statistics-info";
 
 export default function CoinPage({ data }) {
-  const [currentPage, setCurrentPage] = useState(1);
-  // custom hook to retrieve ticker data by coin id
-  const { tickers, pageTotal } = useGetTickerData(currentPage, data?.id);
   // ticker symbol
   const symbol = data?.symbol?.toUpperCase?.();
   // Parse URL for website
@@ -31,7 +26,7 @@ export default function CoinPage({ data }) {
       <BreadCrumbItems name={data?.name} />
       <div className={styles?.['coin']}>
         <div className={styles?.['coin_name']}>
-          <img src={data?.image?.thumb} />
+          <img src={data?.image?.thumb} alt={data?.symbol} />
           <h1>{data?.name}</h1>
           <span className={styles?.['coin_name_symbol']}>{data?.symbol?.toUpperCase?.()} Price</span>
           <span className={styles?.['coin_name_rank']}>#{data?.market_cap_rank}</span>
@@ -100,7 +95,7 @@ export default function CoinPage({ data }) {
               rowName="Website"
               rowValue={
                 <Anchor href={`${data?.links?.homepage?.[0]}`} target="_blank">
-                  <Pill radius="md" size="lg">{parsedUrl}</Pill>
+                  <Pill radius="md" size="lg" className={styles?.['pill-text']}>{parsedUrl}</Pill>
                 </Anchor>
               }
             />
@@ -112,17 +107,17 @@ export default function CoinPage({ data }) {
               <span className={styles?.['pill-container']}>
                 {data?.links?.subreddit_url &&
                   <Anchor href={`${data?.links?.subreddit_url}`} target="_blank">
-                    <Pill radius="md" size="lg">Reddit</Pill>
+                    <Pill radius="md" size="lg" className={styles?.['pill-text']}>Reddit</Pill>
                   </Anchor>
                 }
                 {data?.links?.telegram_channel_identifier &&
                   <Anchor href={`https://t.me/${data?.links?.telegram_channel_identifier}`} target="_blank">
-                    <Pill radius="md" size="lg">Telegram</Pill>
+                    <Pill radius="md" size="lg" className={styles?.['pill-text']}>Telegram</Pill>
                   </Anchor>
                 }
                 {data?.links?.twitter_screen_name &&
                   <Anchor href={`https://x.com/${data?.links?.twitter_screen_name}`} target="_blank">
-                    <Pill radius="md" size="lg">Twitter</Pill>
+                    <Pill radius="md" size="lg" className={styles?.['pill-text']}>Twitter</Pill>
                   </Anchor>
                 }
               </span>
@@ -134,7 +129,7 @@ export default function CoinPage({ data }) {
               rowName="Source Code"
               rowValue={
                 <Anchor href={`${data?.links?.repo_url?.github?.[0]}`} target="_blank">
-                  <Pill radius="md" size="lg">GitHub</Pill>
+                  <Pill radius="md" size="lg" className={styles?.['pill-text']}>GitHub</Pill>
                 </Anchor>
               }
             />
@@ -151,7 +146,7 @@ export default function CoinPage({ data }) {
                   <div className={styles?.['show-more']}>
                     <Popover width={300} position="bottom" withArrow shadow="md">
                       <Popover.Target>
-                        <Pill radius="md" size="lg">
+                        <Pill radius="md" size="lg" className={styles?.['pill-text']}>
                           <span className={styles?.['show-more__icon']}>
                             Show {restOfCategories?.length}
                             <IconChevronDown stroke={1.5} />
@@ -160,8 +155,8 @@ export default function CoinPage({ data }) {
                       </Popover.Target>
                       <Popover.Dropdown>
                         {restOfCategories?.map?.((category, idx) => (
-                          <p className={styles?.['pill-container-item']}>
-                            <Pill radius="md" size="lg" key={idx}>{category}</Pill>
+                          <p className={styles?.['pill-container-item']} key={idx}>
+                            <Pill radius="md" size="lg" className={styles?.['pill-text']}>{category}</Pill>
                           </p>
                         ))}
                       </Popover.Dropdown>
@@ -197,10 +192,7 @@ export default function CoinPage({ data }) {
       <TickersList
         name={data?.name}
         symbol={data?.symbol}
-        tickers={tickers}
-        currentPage={currentPage}
-        pageTotal={pageTotal}
-        setCurrentPage={setCurrentPage}
+        coinId={data?.id}
       />
     </Layout>
   )

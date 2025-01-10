@@ -20,9 +20,9 @@ export const BreadCrumbItems = ({
       );
     } else {
       return (
-        <a className={styles?.['breadcrumb_nolink']} key={index}>
+        <span className={styles?.['breadcrumb_nolink']} key={index}>
           {item?.title}
-        </a>
+        </span>
       )
     }
   });

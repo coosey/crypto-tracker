@@ -5,9 +5,8 @@ export const handleScrollToDiv = (
   const targetDiv = document?.getElementById(id);
   if (targetDiv) {
     if (block === 'header-top') {
-      const offset = window?.screen?.width >= 760 ? 50 : 160;
       const ele =
-        targetDiv?.getBoundingClientRect?.()?.top + window?.scrollY - offset;
+        targetDiv?.getBoundingClientRect?.()?.top + window?.scrollY;
       if (ele) {
         window?.scrollTo?.({behavior: 'smooth', top: ele});
       }
