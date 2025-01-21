@@ -25,6 +25,8 @@ export const DataTableRows = ({ rows, handleRowClick }: Props) => {
   return (
     <>
       {rows?.map?.((row) => {
+        const numberedCoinPrice = Number(formatNumberWithSubscriptZeros(row?.current_price?.toString?.()))
+        const formattedSubscript = formatNumberWithSubscriptZeros(row?.current_price?.toString?.())
         return (
           <Table.Tr key={row?.name}>
             <Table.Td>
@@ -52,9 +54,12 @@ export const DataTableRows = ({ rows, handleRowClick }: Props) => {
             </Table.Td>
             <Table.Td
               className={styles?.['coin_price']}
-              data-price-target="price"
-            >
-              ${formatNumberWithSubscriptZeros(row?.current_price?.toString())}
+              data-price-target="price">
+                {row?.current_price > 1 ? 
+                  <FormattedNumber value={numberedCoinPrice} />
+                :
+                  '$' + formatNumberWithSubscriptZeros(row?.current_price?.toString?.())
+                }
             </Table.Td>
             {/** 1H */}
             <Table.Td>

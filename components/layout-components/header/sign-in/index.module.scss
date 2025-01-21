@@ -1,0 +1,21 @@
+@import '/styles/design.scss';
+
+.sign-in {
+  padding-top: 0.175rem;
+  padding-bottom: 0.175rem;
+
+  background-color: $bg-secondary;
+  border: 2px solid $bg-panel;
+}
+
+.login {
+  padding-top: 0.475rem;
+  padding-bottom: 0.475rem;
+  padding-left: 0.675rem;
+  padding-right: 0.675rem;
+  border-radius: 0.5rem;
+
+  line-height: 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+}

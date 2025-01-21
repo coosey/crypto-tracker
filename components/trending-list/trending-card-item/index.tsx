@@ -5,16 +5,16 @@ interface Props {
   imgSrc: string;
   imgAlt: string;
   name: string;
-  price: number;
-  percentage: string;
+  marketPrice: number;
+  percentageChange: number;
 };
 
 export const TrendingCardItem = ({
   imgSrc,
   imgAlt,
   name,
-  price,
-  percentage,
+  marketPrice,
+  percentageChange,
 }: Props) => {
   return (
     <div key={imgAlt} className={styles?.["card-item"]}>
@@ -23,8 +23,8 @@ export const TrendingCardItem = ({
         <p>{name}</p>
       </div>
       <div className={styles?.["card-item_side"]}>
-        <div>${percentage}</div>
-        <CarrotPriceChange price={price} />
+        <div>${marketPrice}</div>
+        <CarrotPriceChange price={percentageChange} />
       </div>
     </div>
   )

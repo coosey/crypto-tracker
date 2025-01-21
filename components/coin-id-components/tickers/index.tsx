@@ -4,6 +4,7 @@ import styles from './index.module.scss';
 import { useState } from 'react';
 import { Select } from '@mantine/core';
 import { useGetTickerData } from 'libs/hooks/useGetTickersData';
+import { handleScrollToDiv } from 'libs/helpers/handleScrollToDiv';
 
 interface Props {
   name: string;
@@ -50,7 +51,10 @@ export const TickersList = ({
         <Select
           className={styles?.['items-per-page']}
           data={ITEMS_PER_PAGE}
-          onChange={(val) => setRowItems(val)}
+          onChange={(val) => {
+            setRowItems(val);
+            handleScrollToDiv('ticker-market', 'header-top');
+          }}
           value={rowItems}
           checkIconPosition="right"
           radius="md"

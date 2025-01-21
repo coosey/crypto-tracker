@@ -1,5 +1,4 @@
 import axios from "axios";
-import { handleScrollToDiv } from "libs/helpers/handleScrollToDiv";
 import { TickersMarketObject } from "libs/types/tickers";
 import { useState, useEffect } from "react";
 
@@ -51,7 +50,6 @@ export const useGetTickerData = (currentPage: number, id: string, rowItems: numb
     // limit table size by selected rowItems
     const itemsInTable = tickersData?.tickers?.slice?.(0, rowItems);
     setTickersData({ ...tickersData, tickersBySize: itemsInTable });
-    handleScrollToDiv('ticker-market', 'header-top');
     setLoading(false);
   }, [rowItems]);
 

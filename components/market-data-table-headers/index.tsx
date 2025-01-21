@@ -23,7 +23,6 @@ export const MarketDataTableHeaders = ({
               onSort={() => handleSortChange(header?.fieldEnum)}
             >
               <MarketCapHoverCard
-                infoStyle={styles?.['table_info-group']}
                 groupStyle={styles?.['table_info-icon']}
               />
             </TableHeader>

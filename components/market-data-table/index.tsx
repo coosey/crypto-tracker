@@ -38,7 +38,7 @@ export const MarketDataTable = ({
   };
 
   const handleRowClick = (coinId: string) => {
-    router.push(`/coin/${coinId}`)
+    router.push(`/coin/${coinId}`);
   };
 
   return (

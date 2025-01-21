@@ -12,7 +12,7 @@ export const CoinMarketList = () => {
   return (
     <>
       <div className={styles?.['title']}>
-        <h1>Today's Cryptocurrency Prices</h1>
+        <h1 id="current-prices">Today's Cryptocurrency Prices</h1>
       </div>
       <MarketDataTable data={coinsList} />
       <PaginateComponent
@@ -20,6 +20,8 @@ export const CoinMarketList = () => {
         pageTotal={pageTotal}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        scrollToDiv
+        scrollId="current-prices"
       />
     </>
   );

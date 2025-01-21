@@ -10,8 +10,12 @@ import { IconChevronDown } from '@tabler/icons-react';
 import { TickersList } from "components/coin-id-components/tickers";
 import { BreadCrumbItems } from "components/coin-id-components/breadcrumb-items";
 import { STATISTIC_INFO } from "components/coin-id-components/statistics-info";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function CoinPage({ data }) {
+  const router = useRouter();
+  const { id } = router.query;
   // ticker symbol
   const symbol = data?.symbol?.toUpperCase?.();
   // Parse URL for website
@@ -19,7 +23,21 @@ export default function CoinPage({ data }) {
   // Retrieve all categories, get 1st item, then parse rest of items
   const categories = data?.categories;
   const firstCategory = categories?.[0];
-  const restOfCategories = categories?.slice?.(1, categories?.length)
+  const restOfCategories = categories?.slice?.(1, categories?.length);
+
+  // TODO: WIP for coin ID chart
+  // useEffect(() => {
+  //   async function getCoinPriceChart() {
+  //     try {
+  //       const response = await axios.get('/api/price-chart', { 
+  //         params: {id: data?.id}
+  //       });
+  //     } catch (error) {
+  //       console.log('error fetching price chart: ', error)
+  //     }
+  //   }
+  //   if (id) getCoinPriceChart();
+  // }, [id]);
 
   return (
     <Layout>

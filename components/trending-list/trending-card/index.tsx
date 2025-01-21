@@ -38,8 +38,8 @@ export const TrendingCard = ({trendingCoins, isLoading}: TrendingCardProps) => {
             name={item?.name}
             imgAlt={item?.name}
             imgSrc={item?.thumb}
-            price={item?.data?.price}
-            percentage={formatNumberWithSubscriptZeros(item.data.price.toString())}
+            marketPrice={Number(formatNumberWithSubscriptZeros(item?.data?.price?.toString?.()))}
+            percentageChange={item?.data?.price_change_percentage_24h?.usd}
           />
         )
       })}
