@@ -35,6 +35,7 @@ export const TrendingCard = ({trendingCoins, isLoading}: TrendingCardProps) => {
         const item = coin?.item;
         return (
           <TrendingCardItem
+            key={item?.coin_id}
             name={item?.name}
             imgAlt={item?.name}
             imgSrc={item?.thumb}

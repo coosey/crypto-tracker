@@ -16,8 +16,8 @@ export const DataTableRows = ({ rows, handleRowClick }: Props) => {
   if (!rows?.length) {
     return (
       <>
-        {Array(100).fill(null).map(() => (
-          <DataTableSkeleton />
+        {Array(100).fill(null).map((_, idx) => (
+          <DataTableSkeleton key={idx} />
         ))}
       </>
     )
@@ -58,7 +58,7 @@ export const DataTableRows = ({ rows, handleRowClick }: Props) => {
                 {row?.current_price > 1 ? 
                   <FormattedNumber value={numberedCoinPrice} />
                 :
-                  '$' + formatNumberWithSubscriptZeros(row?.current_price?.toString?.())
+                  `$${formattedSubscript}`
                 }
             </Table.Td>
             {/** 1H */}

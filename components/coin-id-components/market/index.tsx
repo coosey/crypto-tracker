@@ -22,6 +22,9 @@ export const CoinIdMarket = ({
     return (
       <Table.Tr key={idx}>
         <Table.Td>
+          {idx+=1}
+        </Table.Td>
+        <Table.Td>
           <div className={styles?.['icon-symbol']}>
             <img 
               src={ticker?.market?.logo}
@@ -72,6 +75,7 @@ export const CoinIdMarket = ({
         <Table verticalSpacing="sm" highlightOnHover className={styles?.['table']}>
           <Table.Thead>
             <Table.Tr>
+              <Table.Th>#</Table.Th>
               <Table.Th>Exchange</Table.Th>
               <Table.Th>Pair</Table.Th>
               <Table.Th>Price</Table.Th>

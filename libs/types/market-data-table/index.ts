@@ -30,13 +30,13 @@ export interface MARKET_LIST_HEADER_CONFIG {
   sortType: SortDirection,
 };
 
-export interface ThProps {
+export interface ThProps<T = string> {
   tableKey: SortFieldEnum;
   headerText: string;
-  sortField: SortField;
+  sortField: T;
   sorted: boolean;
   sortType?: SortDirection;
-  onSort?: (field: SortField) => void;
+  onSort?: (field: T) => void;
   children?: ReactNode;
   className?: string;
 };

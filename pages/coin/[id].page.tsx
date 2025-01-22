@@ -7,7 +7,7 @@ import { FormattedDataRow } from "components/formatted-data-row";
 import { parseDomain } from "libs/helpers/parseDomain";
 import { capitalize } from 'lodash';
 import { IconChevronDown } from '@tabler/icons-react';
-import { TickersList } from "components/coin-id-components/tickers";
+import { TickersList } from "components/coin-id-components";
 import { BreadCrumbItems } from "components/coin-id-components/breadcrumb-items";
 import { STATISTIC_INFO } from "components/coin-id-components/statistics-info";
 import { useEffect } from "react";

@@ -11,10 +11,10 @@ export const MarketDataTableHeaders = ({
 }: MarketDataTHProps) => {
   return (
     <>
-      {dataTableHeaders?.map?.((header) => {
-        if (header.fieldEnum === SortFieldEnum.MARKET_CAP) {
-          return (
-            <TableHeader
+      {dataTableHeaders?.map?.((header) => 
+        header?.fieldEnum === SortFieldEnum.MARKET_CAP ? (
+          <TableHeader
+              key={header?.fieldEnum}
               tableKey={header?.fieldEnum}
               headerText={header?.fieldHeaderText}
               sorted={sortField === header?.fieldEnum}
@@ -26,19 +26,18 @@ export const MarketDataTableHeaders = ({
                 groupStyle={styles?.['table_info-icon']}
               />
             </TableHeader>
-          );
-        }
-        return (
-          <TableHeader
-            tableKey={header?.fieldEnum}
-            headerText={header?.fieldHeaderText}
-            sorted={sortField === header?.fieldEnum}
-            sortType={sortDirection}
-            sortField={header?.sortField}
-            onSort={() => handleSortChange(header?.sortField)}
-          />
-        );
-      })}
+        ): (
+            <TableHeader
+              key={header?.fieldEnum}
+              tableKey={header?.fieldEnum}
+              headerText={header?.fieldHeaderText}
+              sorted={sortField === header?.fieldEnum}
+              sortType={sortDirection}
+              sortField={header?.sortField}
+              onSort={() => handleSortChange(header?.sortField)}
+            />
+        )
+      )}
     </>
   )
 }

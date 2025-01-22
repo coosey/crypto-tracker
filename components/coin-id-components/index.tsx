@@ -1,5 +1,5 @@
 import { PaginateComponent } from 'components/pagination';
-import { CoinIdMarket } from '../market';
+import { CoinIdMarket } from './market';
 import styles from './index.module.scss';
 import { useState } from 'react';
 import { Select } from '@mantine/core';
