@@ -11,7 +11,7 @@ export const SignInComponent = () => {
       {user && <SignedInUser />}
       {!user && <LoginButton />}
     </div>
-  )
+  );
 };
 
 const LoginButton = () => {
@@ -19,13 +19,19 @@ const LoginButton = () => {
     <div>
       <button className={styles?.['login']}>Login</button>
     </div>
-  )
+  );
 };
 
 const SignedInUser = () => {
   return (
-    <ActionIcon className={styles?.['sign-in']} variant="default" size="lg" radius="md" aria-label="Sign-in">
+    <ActionIcon
+      className={styles?.['sign-in']}
+      variant="default"
+      size="lg"
+      radius="md"
+      aria-label="Sign-in"
+    >
       <IconUser stroke={1} />
     </ActionIcon>
-  )
+  );
 };

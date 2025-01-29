@@ -10,24 +10,20 @@ interface Props {
   name: string;
   symbol: string;
   coinId: string;
-};
+}
 
 const ITEMS_PER_PAGE = ['10', '50', '100'];
 
-export const TickersList = ({
-  name,
-  symbol,
-  coinId
-}: Props) => {
+export const TickersList = ({ name, symbol, coinId }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowItems, setRowItems] = useState(ITEMS_PER_PAGE?.[0]);
 
   // custom hook to retrieve ticker data by coin id
-  const { 
-    tickersData, 
-    pageTotal, 
-    loading 
-  } = useGetTickerData(currentPage, coinId, Number(rowItems));
+  const { tickersData, pageTotal, loading } = useGetTickerData(
+    currentPage,
+    coinId,
+    Number(rowItems)
+  );
 
   return (
     <div className={styles?.['ticker-market']} id="ticker-market">
@@ -58,13 +54,13 @@ export const TickersList = ({
           value={rowItems}
           checkIconPosition="right"
           radius="md"
-          comboboxProps={{ 
-            width: 200, 
-            position: 'bottom-start', 
-            dropdownPadding: 10 
+          comboboxProps={{
+            width: 200,
+            position: 'bottom-start',
+            dropdownPadding: 10,
           }}
         />
       </div>
     </div>
-  )
-}
+  );
+};

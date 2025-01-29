@@ -6,7 +6,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<TrendingCoinsResponse[]>
 ) {
-  const {id} = req.query;
+  const { id } = req.query;
   const URL = `https://www.coingecko.com/coins/price_percentage_change?ids=${id}&vs_currency=usd`;
   try {
     const response = await axios.get(URL, {

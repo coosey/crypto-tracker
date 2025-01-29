@@ -7,7 +7,7 @@ import { PaginateComponent } from 'components/pagination';
 export const CoinMarketList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const {coinsList, pageTotal} = useGetMarketData(currentPage);
+  const { coinsList, pageTotal } = useGetMarketData(currentPage);
 
   return (
     <>

@@ -5,16 +5,18 @@ interface Props {
   name: string;
 }
 
-export const BreadCrumbItems = ({
-  name,
-}: Props) => {
+export const BreadCrumbItems = ({ name }: Props) => {
   const breadCrumbItems = [
     { title: 'Crytocurrencies', href: '/' },
     { title: `${name} Price`, href: null },
   ].map((item, index) => {
     if (item?.href) {
       return (
-        <Anchor className={styles?.['breadcrumb_link']} href={item?.href} key={index}>
+        <Anchor
+          className={styles?.['breadcrumb_link']}
+          href={item?.href}
+          key={index}
+        >
           {item?.title}
         </Anchor>
       );
@@ -23,7 +25,7 @@ export const BreadCrumbItems = ({
         <span className={styles?.['breadcrumb_nolink']} key={index}>
           {item?.title}
         </span>
-      )
+      );
     }
   });
 
@@ -33,5 +35,5 @@ export const BreadCrumbItems = ({
         {breadCrumbItems}
       </Breadcrumbs>
     </div>
-  )
-}
+  );
+};

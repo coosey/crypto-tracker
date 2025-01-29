@@ -1,6 +1,6 @@
-import axios from "axios";
-import { TrendingListResponse } from "libs/types/trending-list";
-import { NextApiRequest, NextApiResponse } from "next";
+import axios from 'axios';
+import { TrendingListResponse } from 'libs/types/trending-list';
+import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,

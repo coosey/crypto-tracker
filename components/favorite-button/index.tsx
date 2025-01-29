@@ -12,10 +12,7 @@ export const FavoriteButton = () => {
 
   return (
     <UnstyledButton className={styles?.['favorite']} onClick={handleClick}>
-      <IconStar
-        stroke={2}
-        fill={selected ? 'yellow' : null}
-      />
+      <IconStar stroke={2} fill={selected ? 'yellow' : null} />
     </UnstyledButton>
   );
 };

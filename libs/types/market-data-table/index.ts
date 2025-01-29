@@ -1,37 +1,9 @@
 import { ReactNode } from "react";
 import { CoinsListResponse } from "../coins-list";
-
-export type SortDirection = 'ASC' | 'DESC';
-
-export enum SortFieldEnum {
-  MARKET_CAP_RANK = 'market_cap_rank',
-  NAME = 'name',
-  CURRENT_PRICE = 'current_price',
-  PRICE_CHANGE_PERCENTAGE_1H_IN_CURRENCY = 'price_change_percentage_1h_in_currency',
-  PRICE_CHANGE_PERCENTAGE_24H_IN_CURRENCY = 'price_change_percentage_24h_in_currency', 
-  PRICE_CHANGE_PERCENTAGE_7D_IN_CURRENCY = 'price_change_percentage_7d_in_currency', 
-  TOTAL_VOLUME = 'total_volume',
-  MARKET_CAP = 'market_cap'
-};
-
-export type SortField =
-  'market_cap_rank' |
-  'name' |
-  'current_price' |
-  'price_change_percentage_1h_in_currency' |
-  'price_change_percentage_24h_in_currency' |
-  'price_change_percentage_7d_in_currency' |
-  'total_volume' |
-  'market_cap';
-
-export interface MARKET_LIST_HEADER_CONFIG {
-  headerText: string,
-  sorted: boolean,
-  sortType: SortDirection,
-};
+import { SortDirection, THSortFieldType, THSortType } from "./types";
 
 export interface ThProps<T = string> {
-  tableKey: SortFieldEnum;
+  tableKey: THSortType;
   headerText: string;
   sortField: T;
   sorted: boolean;
@@ -43,8 +15,8 @@ export interface ThProps<T = string> {
 
 export interface DataTHProps {
   fieldHeaderText: string;
-  fieldEnum?: SortFieldEnum;
-  sortField?: SortField;
+  fieldEnum?: THSortType;
+  sortField?: THSortFieldType;
 };
 
 export interface MarketDataTableProps {
@@ -52,8 +24,14 @@ export interface MarketDataTableProps {
 };
 
 export interface MarketDataTHProps {
-  sortField: SortField;
+  sortField: THSortFieldType;
   sortDirection: SortDirection;
-  handleSortChange: (sortType: SortField) => void;
+  handleSortChange: (sortType: THSortFieldType) => void;
   dataTableHeaders: DataTHProps[];
+};
+
+export interface MARKET_LIST_HEADER_CONFIG {
+  headerText: string,
+  sorted: boolean,
+  sortType: SortDirection,
 };

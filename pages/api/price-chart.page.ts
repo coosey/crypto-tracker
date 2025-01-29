@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 import { PriceChart } from 'libs/types/price-chart';
 import { NextApiRequest, NextApiResponse } from 'next';
