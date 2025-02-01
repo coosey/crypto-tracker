@@ -10,6 +10,9 @@ interface Props {
 }
 
 export const CoinIdTableRows = ({ tickers, symbol }: Props) => {
+
+  const EmptyRow = () => <>{' - '}</>;
+
   return (
     <>
       {tickers?.map?.((ticker, idx) => {
@@ -41,21 +44,16 @@ export const CoinIdTableRows = ({ tickers, symbol }: Props) => {
               </Anchor>
             </Table.Td>
             <Table.Td data-price-target="price">
-              <FormattedNumber value={ticker?.converted_last?.usd} />
+              {ticker?.converted_last?.usd ? <FormattedNumber value={ticker?.converted_last?.usd} /> : <EmptyRow />}
             </Table.Td>
             <Table.Td>
-              {ticker?.bid_ask_spread_percentage?.toFixed?.(2)}
+              {ticker?.bid_ask_spread_percentage ? ticker?.bid_ask_spread_percentage?.toFixed?.(2) : <EmptyRow />}
             </Table.Td>
             <Table.Td data-price-target="price">
-              <FormattedNumber value={ticker?.converted_volume?.usd} />
+              {ticker?.converted_volume?.usd ? <FormattedNumber value={ticker?.converted_volume?.usd} /> : <EmptyRow />}
             </Table.Td>
             <Table.Td className={styles?.['table-body']}>
-              {ticker?.trust_score && (
-                <div className={styles?.['trust-score']} style={{ backgroundColor: `${ticker?.trust_score}` }} />
-              )}
-              {!ticker?.trust_score && (
-                ' - '
-              )}
+              {ticker?.trust_score ? <div className={styles?.['trust-score']} style={{ backgroundColor: `${ticker?.trust_score}` }} /> : <EmptyRow />}
             </Table.Td>
           </Table.Tr>
         )

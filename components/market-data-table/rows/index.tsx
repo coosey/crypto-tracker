@@ -6,13 +6,14 @@ import { CarrotPriceChange } from '../../carrot-price-change';
 import { formatNumberWithSubscriptZeros } from 'libs/helpers/format-numbers-with-subscript';
 import { DataTableSkeleton } from '../skeleton';
 import { FormattedNumber } from 'components/formatted-number';
+import { memo } from 'react';
 
 interface Props {
   rows: CoinsListResponse[];
   handleRowClick?: (coinId: string) => void;
 }
 
-export const DataTableRows = ({ rows, handleRowClick }: Props) => {
+export const DataTableRows = memo(function DataTableRows({ rows, handleRowClick }: Props) {
   if (!rows?.length) {
     return (
       <>
@@ -98,4 +99,4 @@ export const DataTableRows = ({ rows, handleRowClick }: Props) => {
       })}
     </>
   );
-};
+});
