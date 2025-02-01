@@ -13,7 +13,7 @@ export interface PriceChangePercentage {
 
 export interface TrendingCoinsResponse {
   item: {
-    id: string;
+    id: number;
     coin_id: number;
     name: string;
     symbol: string;

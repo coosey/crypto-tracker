@@ -1,13 +1,15 @@
 import axios from 'axios';
-import { TrendingCoinsResponse } from 'libs/types/trending-list';
+import { PriceChart } from 'libs/types/price-chart';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<TrendingCoinsResponse[]>
+  res: NextApiResponse<PriceChart>
 ) {
-  const { id } = req.query;
-  const URL = `https://www.coingecko.com/coins/price_percentage_change?ids=${id}&vs_currency=usd`;
+  const { query } = req;
+  const { id } = query;
+
+  const URL = `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=7`;
   try {
     const response = await axios.get(URL, {
       headers: {

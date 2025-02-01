@@ -9,7 +9,7 @@ export default async function handler(
   const { query } = req;
   const { page = 1, id } = query;
 
-  const URL = `https://api.coingecko.com/api/v3/coins/${id}/tickers?include_exchange_logo=true&page=${page}&order=volume_desc&depth=true`
+  const URL = `https://api.coingecko.com/api/v3/coins/${id}/tickers?include_exchange_logo=true&page=${page}&order=volume_desc&depth=true`;
   try {
     const response = await axios.get(URL, {
       headers: {

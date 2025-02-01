@@ -1,9 +1,8 @@
-import { Table, Skeleton } from "@mantine/core";
-import { FavoriteButton } from "../../favorite-button";
+import { Table, Skeleton } from '@mantine/core';
+import { FavoriteButton } from '../../favorite-button';
 import styles from './index.module.scss';
 
 export const DataTableSkeleton = () => {
-
   return (
     <Table.Tr>
       <Table.Td>
@@ -18,10 +17,7 @@ export const DataTableSkeleton = () => {
           <Skeleton height={20} width="30%" />
         </div>
       </Table.Td>
-      <Table.Td
-        className={styles?.['coin_price']}
-        data-price-target="price"
-      >
+      <Table.Td className={styles?.['coin_price']} data-price-target="price">
         <Skeleton height={15} width="70%" />
       </Table.Td>
       {/** 1H */}
@@ -43,5 +39,5 @@ export const DataTableSkeleton = () => {
         <Skeleton height={15} width="70%" />
       </Table.Td>
     </Table.Tr>
-  )
+  );
 };

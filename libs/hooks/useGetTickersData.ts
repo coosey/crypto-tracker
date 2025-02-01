@@ -1,5 +1,4 @@
 import axios from "axios";
-import { handleScrollToDiv } from "libs/helpers/handleScrollToDiv";
 import { TickersMarketObject } from "libs/types/tickers";
 import { useState, useEffect } from "react";
 
@@ -32,10 +31,12 @@ export const useGetTickerData = (currentPage: number, id: string, rowItems: numb
         if (foundTickers?.length) {
           // max tickers is 100 per response - if there are 100, add 1 page
           const pages = foundTickers?.length > 99 ? currentPage + 1 : currentPage;
+          // map thru foundTickers and add field "market_cap_rank"
+          const mappedData = foundTickers?.map?.((coin, idx) => ({...coin, market_cap_rank: idx+1}));
           setPageTotal(pages);
           setTickersData({
-            tickers: foundTickers,
-            tickersBySize: foundTickers?.slice?.(0, rowItems)
+            tickers: mappedData,
+            tickersBySize: mappedData?.slice?.(0, rowItems)
           });
         }
       } catch (e) {
@@ -48,10 +49,11 @@ export const useGetTickerData = (currentPage: number, id: string, rowItems: numb
 
   useEffect(() => {
     setLoading(true);
+    // map thru foundTickers and add field "market_cap_rank"
+    const mappedData = tickersData?.tickers?.map?.((coin, idx) => ({...coin, market_cap_rank: idx+1}));
     // limit table size by selected rowItems
-    const itemsInTable = tickersData?.tickers?.slice?.(0, rowItems);
+    const itemsInTable = mappedData?.slice?.(0, rowItems);
     setTickersData({ ...tickersData, tickersBySize: itemsInTable });
-    handleScrollToDiv('ticker-market', 'header-top');
     setLoading(false);
   }, [rowItems]);
 

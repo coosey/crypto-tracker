@@ -16,10 +16,10 @@ interface FormattedDataRowProps {
   hoverCard?: boolean;
   hoverCardName?: string;
   hoverCardDescription?: string;
-};
+}
 
 export const FormattedDataRow = ({
-  rowName, 
+  rowName,
   rowPrice,
   rowValue,
   priceChange,
@@ -34,9 +34,7 @@ export const FormattedDataRow = ({
   return (
     <div key={rowName} className={styles?.['table-row']}>
       <div className={styles?.['table-row_name-icon']}>
-        <span className={styles?.['table-row_name']}>
-          {rowName}
-        </span>
+        <span className={styles?.['table-row_name']}>{rowName}</span>
         {hoverCard && (
           <span className={styles?.['table-row_hover-card']}>
             <HoverCard width={360} shadow="md">
@@ -45,7 +43,11 @@ export const FormattedDataRow = ({
               </HoverCard.Target>
               <HoverCard.Dropdown>
                 <Text size="md">{hoverCardName}</Text>
-                {hoverCardDescription && <Text size="md" mt="md">{hoverCardDescription}</Text>}
+                {hoverCardDescription && (
+                  <Text size="md" mt="md">
+                    {hoverCardDescription}
+                  </Text>
+                )}
               </HoverCard.Dropdown>
             </HoverCard>
           </span>
@@ -53,14 +55,12 @@ export const FormattedDataRow = ({
       </div>
       <div className={styles?.['table-row_price-percent']}>
         {rowValue && (
-          <span className={styles?.['table-row_price']}>
-            {rowValue}
-          </span>  
+          <span className={styles?.['table-row_price']}>{rowValue}</span>
         )}
         {rowPrice && (
           <span className={styles?.['table-row_price']}>
             <FormattedNumber value={rowPrice} />
-          </span>  
+          </span>
         )}
         {priceChange && (
           <span className={styles?.['table-row_price']}>

@@ -1,13 +1,9 @@
-@import '../../styles/design.scss';
+@import '/styles/design.scss';
 
 .table {
   &_market-cap {
     display: flex;
     gap: $space_4;
-  }
-
-  &_info-group {
-    padding-left: 5px;
   }
 
   &_info-icon {

@@ -16,25 +16,34 @@ export const DataTableRows = ({ rows, handleRowClick }: Props) => {
   if (!rows?.length) {
     return (
       <>
-        {Array(100).fill(null).map(() => (
-          <DataTableSkeleton />
-        ))}
+        {Array(100)
+          .fill(null)
+          .map((_, idx) => (
+            <DataTableSkeleton key={idx} />
+          ))}
       </>
-    )
+    );
   }
   return (
     <>
       {rows?.map?.((row) => {
+        const numberedCoinPrice = Number(
+          formatNumberWithSubscriptZeros(row?.current_price?.toString?.())
+        );
+        const formattedSubscript = formatNumberWithSubscriptZeros(
+          row?.current_price?.toString?.()
+        );
         return (
           <Table.Tr key={row?.name}>
             <Table.Td>
               <FavoriteButton />
             </Table.Td>
-            <Table.Td>
-              {row?.market_cap_rank}
-            </Table.Td>
+            <Table.Td>{row?.market_cap_rank}</Table.Td>
             <Table.Td className={styles?.['table']}>
-              <div className={styles?.['coin']} onClick={() => handleRowClick && handleRowClick?.(row?.id)}>
+              <div
+                className={styles?.['coin']}
+                onClick={() => handleRowClick && handleRowClick?.(row?.id)}
+              >
                 <img
                   alt={row?.symbol?.toUpperCase()}
                   src={row?.image}
@@ -54,19 +63,29 @@ export const DataTableRows = ({ rows, handleRowClick }: Props) => {
               className={styles?.['coin_price']}
               data-price-target="price"
             >
-              ${formatNumberWithSubscriptZeros(row?.current_price?.toString())}
+              {row?.current_price > 1 ? (
+                <FormattedNumber value={numberedCoinPrice} />
+              ) : (
+                `$${formattedSubscript}`
+              )}
             </Table.Td>
             {/** 1H */}
             <Table.Td>
-              <CarrotPriceChange price={row?.price_change_percentage_1h_in_currency} />
+              <CarrotPriceChange
+                price={row?.price_change_percentage_1h_in_currency}
+              />
             </Table.Td>
             {/** 1D */}
             <Table.Td>
-              <CarrotPriceChange price={row?.price_change_percentage_24h_in_currency} />
+              <CarrotPriceChange
+                price={row?.price_change_percentage_24h_in_currency}
+              />
             </Table.Td>
             {/** 7D */}
             <Table.Td>
-              <CarrotPriceChange price={row?.price_change_percentage_7d_in_currency} />
+              <CarrotPriceChange
+                price={row?.price_change_percentage_7d_in_currency}
+              />
             </Table.Td>
             <Table.Td data-price-target="price">
               <FormattedNumber value={row?.total_volume} />

@@ -1,32 +1,29 @@
 import { PaginateComponent } from 'components/pagination';
-import { CoinIdMarket } from '../market';
+import { CoinIdMarket } from './market';
 import styles from './index.module.scss';
 import { useState } from 'react';
 import { Select } from '@mantine/core';
 import { useGetTickerData } from 'libs/hooks/useGetTickersData';
+import { handleScrollToDiv } from 'libs/helpers/handleScrollToDiv';
 
 interface Props {
   name: string;
   symbol: string;
   coinId: string;
-};
+}
 
 const ITEMS_PER_PAGE = ['10', '50', '100'];
 
-export const TickersList = ({
-  name,
-  symbol,
-  coinId
-}: Props) => {
+export const TickersList = ({ name, symbol, coinId }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowItems, setRowItems] = useState(ITEMS_PER_PAGE?.[0]);
 
   // custom hook to retrieve ticker data by coin id
-  const { 
-    tickersData, 
-    pageTotal, 
-    loading 
-  } = useGetTickerData(currentPage, coinId, Number(rowItems));
+  const { tickersData, pageTotal, loading } = useGetTickerData(
+    currentPage,
+    coinId,
+    Number(rowItems)
+  );
 
   return (
     <div className={styles?.['ticker-market']} id="ticker-market">
@@ -50,17 +47,20 @@ export const TickersList = ({
         <Select
           className={styles?.['items-per-page']}
           data={ITEMS_PER_PAGE}
-          onChange={(val) => setRowItems(val)}
+          onChange={(val) => {
+            setRowItems(val);
+            handleScrollToDiv('ticker-market', 'header-top');
+          }}
           value={rowItems}
           checkIconPosition="right"
           radius="md"
-          comboboxProps={{ 
-            width: 200, 
-            position: 'bottom-start', 
-            dropdownPadding: 10 
+          comboboxProps={{
+            width: 200,
+            position: 'bottom-start',
+            dropdownPadding: 10,
           }}
         />
       </div>
     </div>
-  )
-}
+  );
+};

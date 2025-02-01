@@ -1,19 +1,15 @@
-import { IconCaretUpFilled, IconCaretDownFilled } from "@tabler/icons-react";
+import { IconCaretUpFilled, IconCaretDownFilled } from '@tabler/icons-react';
 import styles from './index.module.scss';
 
 interface Props {
   price: number;
 }
 
-export const CarrotPriceChange = ({price}: Props) => {
-
+export const CarrotPriceChange = ({ price }: Props) => {
   return (
     <>
       {price > 0 && (
-        <div
-          className={styles?.['price_green']}
-          data-price-target="price"
-        >
+        <div className={styles?.['price_green']} data-price-target="price">
           <span className={styles?.['price_change']}>
             <IconCaretUpFilled stroke={1} />
             {price ? `${price?.toFixed(2)}%` : '-'}
@@ -34,5 +30,5 @@ export const CarrotPriceChange = ({price}: Props) => {
         </div>
       )}
     </>
-  )
+  );
 };

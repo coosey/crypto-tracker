@@ -6,6 +6,7 @@ export interface TickersResponse {
 export interface TickersMarketObject {
   base: string;
   target: string;
+  market_cap_rank?: number;
   market: {
     name: string;
     identifier: string;

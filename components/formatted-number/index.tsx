@@ -1,16 +1,16 @@
-import { NumberFormatter } from "@mantine/core";
+import { NumberFormatter } from '@mantine/core';
 
 interface Props {
   value: number;
   noPrefix?: boolean;
 }
 
-export const FormattedNumber = ({value, noPrefix}: Props) => {
+export const FormattedNumber = ({ value, noPrefix }: Props) => {
   return (
-    <NumberFormatter 
+    <NumberFormatter
       value={value}
-      prefix={!noPrefix ? "$" : ""}
-      decimalScale={2} 
+      prefix={!noPrefix ? '$' : ''}
+      decimalScale={2}
       thousandSeparator=","
     />
   );

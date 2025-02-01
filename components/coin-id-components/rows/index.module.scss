@@ -1,0 +1,25 @@
+@import '/styles/design.scss';
+
+.trade-url {
+  color: $text-primary;
+  display: flex;
+  gap: $space_2;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.icon-symbol {
+  display: flex;
+  gap: 1rem;
+}
+
+.table-body {
+  display: flex;
+}
+
+.trust-score {
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+}

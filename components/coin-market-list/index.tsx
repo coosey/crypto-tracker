@@ -7,12 +7,12 @@ import { PaginateComponent } from 'components/pagination';
 export const CoinMarketList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const {coinsList, pageTotal} = useGetMarketData(currentPage);
+  const { coinsList, pageTotal } = useGetMarketData(currentPage);
 
   return (
     <>
       <div className={styles?.['title']}>
-        <h1>Today's Cryptocurrency Prices</h1>
+        <h1 id="current-prices">Today's Cryptocurrency Prices</h1>
       </div>
       <MarketDataTable data={coinsList} />
       <PaginateComponent
@@ -20,6 +20,8 @@ export const CoinMarketList = () => {
         pageTotal={pageTotal}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
+        scrollToDiv
+        scrollId="current-prices"
       />
     </>
   );
