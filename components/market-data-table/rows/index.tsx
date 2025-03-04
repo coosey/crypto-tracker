@@ -3,7 +3,7 @@ import { CoinsListResponse } from 'libs/types/coins-list';
 import styles from './index.module.scss';
 import { FavoriteButton } from '../../favorite-button';
 import { CarrotPriceChange } from '../../carrot-price-change';
-import { formatNumberWithSubscriptZeros } from 'libs/helpers/format-numbers-with-subscript';
+import { formatNumberWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
 import { DataTableSkeleton } from '../skeleton';
 import { FormattedNumber } from 'components/formatted-number';
 import { memo } from 'react';

@@ -10,12 +10,12 @@ import { IconChevronDown } from '@tabler/icons-react';
 import { TickersList } from 'components/coin-id-components';
 import { BreadCrumbItems } from 'components/coin-id-components/breadcrumb-items';
 import { STATISTIC_INFO } from 'components/coin-id-components/statistics-info';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { CoinIdNews } from 'components/coin-id-components/news';
 
 export default function CoinPage({ data }) {
   const router = useRouter();
-  const { id } = router.query;
   // ticker symbol
   const symbol = data?.symbol?.toUpperCase?.();
   // Parse URL for website
@@ -27,16 +27,16 @@ export default function CoinPage({ data }) {
 
   // TODO: WIP for coin ID chart
   // useEffect(() => {
-  //   async function getCoinPriceChart() {
-  //     try {
-  //       const response = await axios.get('/api/price-chart', {
-  //         params: {id: data?.id}
-  //       });
-  //     } catch (error) {
-  //       console.log('error fetching price chart: ', error)
-  //     }
-  //   }
-  //   if (id) getCoinPriceChart();
+    // async function getCoinPriceChart() {
+    //   try {
+    //     const response = await axios.get('/api/price-chart', {
+    //       params: {id: data?.id}
+    //     });
+    //     console.log('PRICE CHART', response.data)
+    //   } catch (error) {
+    //     console.log('error fetching price chart: ', error)
+    //   }
+    // }
   // }, [id]);
 
   return (
@@ -44,10 +44,10 @@ export default function CoinPage({ data }) {
       <BreadCrumbItems name={data?.name} />
       <div className={styles?.['coin']}>
         <div className={styles?.['coin_name']}>
-          <img src={data?.image?.thumb} alt={data?.symbol} />
+          <img src={data?.image?.thumb} alt={data?.symbol} width={25} height={25} />
           <h1>{data?.name}</h1>
           <span className={styles?.['coin_name_symbol']}>
-            {data?.symbol?.toUpperCase?.()} Price
+            {symbol} Price
           </span>
           <span className={styles?.['coin_name_rank']}>
             #{data?.market_cap_rank}
@@ -289,7 +289,14 @@ export default function CoinPage({ data }) {
           />
         </div>
       </div>
-      <TickersList name={data?.name} symbol={data?.symbol} coinId={data?.id} />
+      {/** Related Market List */}
+      <div className={styles?.['table_tickersList']}>
+        <TickersList name={data?.name} symbol={data?.symbol} coinId={data?.id} />
+      </div>
+      {/** News */}
+      <div>
+        <CoinIdNews id={data?.id} />
+      </div>
     </Layout>
   );
 }
@@ -298,17 +305,16 @@ export default function CoinPage({ data }) {
 export async function getServerSideProps(context) {
   const { id } = context.params;
   try {
-    // get coins data by id
-    const response = await axios.get(
-      `https://api.coingecko.com/api/v3/coins/${id}`,
-      {
+    // get coin's data by id
+    const response = await fetch(
+      `https://api.coingecko.com/api/v3/coins/${id}`, {
         headers: {
-          accept: 'application/json',
+          'content-type': 'application/json',
           'x-cg-demo-api-key': process.env.NEXT_PRIVATE_COINGECKO_KEY,
         },
       }
     );
-    const data = response?.data;
+    const data = await response.json();
     return {
       props: {
         data: data,
@@ -316,7 +322,7 @@ export async function getServerSideProps(context) {
     };
   } catch (error) {
     return {
-      notFound: true,
+      data: [],
     };
   }
 }

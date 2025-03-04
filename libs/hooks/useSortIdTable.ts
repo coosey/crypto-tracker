@@ -1,4 +1,4 @@
-import { sortNumeric, sortLocalCompare, sortTrustScore } from "libs/helpers/sort-id-helpers";
+import { sortNumeric, sortLocalCompare, sortTrustScore } from "libs/helpers/sortIdHelpers";
 import { SortDirection, BaseDataType, SortFieldById } from "libs/types/market-data-table/types";
 import { useState } from "react";
 

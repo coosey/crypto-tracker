@@ -4,7 +4,7 @@ import styles from './index.module.scss';
 import { TrendingCoinsResponse } from 'libs/types/trending-list';
 import { IconChevronRight } from '@tabler/icons-react';
 import { TrendingCardSkeleton } from '../trending-card-skeleton';
-import { formatNumberWithSubscriptZeros } from 'libs/helpers/format-numbers-with-subscript';
+import { formatNumberWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
 
 export interface TrendingCardProps {
   trendingCoins: TrendingCoinsResponse[];

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { CoinsListResponse } from 'libs/types/coins-list';
 import { NextApiRequest, NextApiResponse } from 'next';
 
@@ -11,13 +10,14 @@ export default async function handler(
   const { page = 1 } = query;
   const URL = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=${page}&price_change_percentage=1h%2C24h%2C7d&locale=en`;
   try {
-    const response = await axios.get(URL, {
+    const response = await fetch(URL, {
       headers: {
-        accept: 'application/json',
+        'content-type': 'application/json',
         'x-cg-demo-api-key': process.env.NEXT_PRIVATE_COINGECKO_KEY,
       },
     });
-    res.status(200).send(response?.data);
+    const data = await response.json();
+    res.status(200).send(data);
   } catch (error) {
     res.status(error?.status || 400).send(error);
   }

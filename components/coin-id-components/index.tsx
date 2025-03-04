@@ -18,7 +18,7 @@ export const TickersList = ({ name, symbol, coinId }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowItems, setRowItems] = useState(ITEMS_PER_PAGE?.[0]);
 
-  // custom hook to retrieve ticker data by coin id
+  // retrieve ticker data by coin id
   const { tickersData, pageTotal, loading } = useGetTickerData(
     currentPage,
     coinId,

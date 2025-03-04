@@ -1,0 +1,42 @@
+@import '/styles/design.scss';
+
+.wrapper {
+  background-color: $bg-primary;
+  &:hover {
+    text-decoration: none;
+    color: $text-primary;
+  }
+
+  &_image {
+    object-fit: fill;
+
+    img {
+      height: auto;
+      width: auto;
+    }
+  }
+
+  &_title {
+    color: $text-primary;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0;
+  }
+
+  &_titleText {
+    flex: 1 1 0;
+    font-size: 1.25rem;
+
+    > p {
+      font-weight: 900;
+    }
+  }
+
+  &_bottom {
+    .source {
+      color: $text-primary;
+      font-size: 1rem;
+      line-height: 1.25rem;
+    }
+  }
+}

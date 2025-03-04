@@ -6,8 +6,8 @@ export const useGetMarketData = (currentPage: number) => {
   const [coinsList, setCoinsList] = useState<CoinsListResponse[]>([]);
   const [pageTotal, setPageTotal] = useState(0);
 
-  useEffect(() => {
-    async function fetchMarketData() {
+  async function fetchMarketData() {
+    try {
       const response = await axios.get('/api/coins-list', {
         params: { page: currentPage },
       });
@@ -15,7 +15,12 @@ export const useGetMarketData = (currentPage: number) => {
         setCoinsList(response?.data || []);
         setPageTotal(response?.data?.length);
       }
+    } catch (error) {
+      console.log('Error', error);
     }
+  };
+
+  useEffect(() => {
     fetchMarketData();
   }, [currentPage]);
 
