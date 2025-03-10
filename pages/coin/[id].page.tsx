@@ -10,12 +10,12 @@ import { IconChevronDown } from '@tabler/icons-react';
 import { TickersList } from 'components/coin-id-components';
 import { BreadCrumbItems } from 'components/coin-id-components/breadcrumb-items';
 import { STATISTIC_INFO } from 'components/coin-id-components/statistics-info';
-// import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { CoinIdNews } from 'components/coin-id-components/news';
+import { TradingViewChart } from '@/components/trading-view-chart';
+import { PriceChart } from '@/libs/types/price-chart';
 
 export default function CoinPage({ data }) {
-  const router = useRouter();
   // ticker symbol
   const symbol = data?.symbol?.toUpperCase?.();
   // Parse URL for website
@@ -25,20 +25,23 @@ export default function CoinPage({ data }) {
   const firstCategory = categories?.[0];
   const restOfCategories = categories?.slice?.(1, categories?.length);
 
-  // TODO: WIP for coin ID chart
-  // useEffect(() => {
-    // async function getCoinPriceChart() {
-    //   try {
-    //     const response = await axios.get('/api/price-chart', {
-    //       params: {id: data?.id}
-    //     });
-    //     console.log('PRICE CHART', response.data)
-    //   } catch (error) {
-    //     console.log('error fetching price chart: ', error)
-    //   }
-    // }
-  // }, [id]);
+  const [priceChart, setPriceChart] = useState<PriceChart>({} as PriceChart);
 
+  async function getCoinPriceChart() {
+    try {
+      const response = await axios.get('/api/price-chart', {
+        params: {id: data?.id}
+      });
+      setPriceChart(response?.data || {});
+    } catch (error) {
+      console.log('error fetching price chart: ', error)
+    }
+  };
+
+  useEffect(() => {
+    getCoinPriceChart();
+  }, [data?.id]);
+  
   return (
     <Layout>
       <BreadCrumbItems name={data?.name} />
@@ -289,6 +292,9 @@ export default function CoinPage({ data }) {
           />
         </div>
       </div>
+      {priceChart?.prices && <div>
+          <TradingViewChart prices={priceChart?.prices} total_volumes={priceChart?.total_volumes} />
+      </div>}
       {/** Related Market List */}
       <div className={styles?.['table_tickersList']}>
         <TickersList name={data?.name} symbol={data?.symbol} coinId={data?.id} />
