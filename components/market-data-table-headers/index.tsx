@@ -10,7 +10,11 @@ export const MarketDataTableHeaders = ({
   handleSortChange,
   dataTableHeaders,
 }: MarketDataTHProps) => {
-  if (!dataTableHeaders?.length) return null;
+
+  if (!dataTableHeaders?.length) {
+    return null;
+  };
+
   return (
     <>
       {dataTableHeaders?.map?.((header, index) => {
