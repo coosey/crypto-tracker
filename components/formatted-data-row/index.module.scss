@@ -26,6 +26,10 @@
       font-weight: 400;
       color: $text-secondary;
       line-height: 1.25rem;
+
+      @include mobileMaxWidth() {
+        font-size: 0.875rem;
+      }
     }
 
     &_price-percent {

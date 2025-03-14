@@ -3,17 +3,21 @@
 
 * {
   box-sizing: border-box;
+  margin: $space_0;
+  padding: $space_0;
 }
 
 html,
 body {
-  margin: $space_0;
-  padding: $space_0;
   font-family: $font-secondary;
   background-color: $bg-primary;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
-/* Container/Panel Styling */
+// -----------------------------
+// ------ Container/Panel ------
 .container, .panel {
   background-color: $bg-panel;
   border: 1px solid $border-primary;
@@ -21,7 +25,8 @@ body {
   border-radius: $space_2;
 }
 
-/* Headings */
+// -----------------------------
+// -------- Heading ------------
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-primary;
   color: $text-primary;
@@ -33,12 +38,12 @@ h1 {
   line-height: 1.2;
 }
 
-/* Paragraphs and Secondary Text */
+// -----------------------------
+// -------- Text ---------------
 p {
   color: $text-secondary;
-  font-size: 1rem; /* Adjust for readability*/
+  font-size: 1rem;
   line-height: 1.5;
-  // margin-bottom: 1.5rem;
 }
 
 a {
@@ -51,7 +56,8 @@ a:hover {
   cursor: pointer;
 }
 
-/* Inputs */
+// -----------------------------
+// -------- Inputs -------------
 input, textarea {
   background-color: $bg-secondary;
   color: $text-primary;
@@ -65,7 +71,8 @@ input:focus, textarea:focus {
   outline: none;
 }
 
-/* Buttons */
+// -----------------------------
+// -------- Button -------------
 button {
   background-color: $accent-color1;
   color: $text-primary;
@@ -76,11 +83,8 @@ button {
   font-family: $font-primary;
 }
 
-// button:hover {
-//   background-color: $accent-color2;
-// }
-
-/* Success, Warning, Error States */
+// -----------------------------
+// ---- Error Handling ---------
 .success {
   color: $success-color;
 }
@@ -93,13 +97,12 @@ button {
   color: $error-color;
 }
 
-@media (max-width: 767px) {
+@include mobileMinWidth() {
   h1 {
     font-size: 2.5rem;
   }
 
   p {
     font-size: 1rem;
-    margin-bottom: 1rem;
   }
 }

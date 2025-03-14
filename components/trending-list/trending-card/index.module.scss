@@ -2,7 +2,7 @@
 
 .card-component {
   background-color: $bg-primary;
-  min-width: 500px;
+  width: -webkit-fill-available;
 
   h3 {
     padding-left: 15px;

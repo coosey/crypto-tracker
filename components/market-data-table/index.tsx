@@ -18,20 +18,22 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
     useSortTable(data);
 
   return (
-    <Table verticalSpacing="lg" highlightOnHover>
-      <Table.Thead>
-        <Table.Tr>
-          <MarketDataTableHeaders
-            sortField={sortField}
-            sortDirection={sortDirection}
-            handleSortChange={handleSortChange}
-            dataTableHeaders={DataTableHeaders}
-          />
-        </Table.Tr>
-      </Table.Thead>
-      <Table.Tbody>
-        <DataTableRows rows={sortedData} handleRowClick={handleRowClick} />
-      </Table.Tbody>
-    </Table>
+    <Table.ScrollContainer minWidth={700} type="native">
+      <Table verticalSpacing="lg" highlightOnHover>
+        <Table.Thead>
+          <Table.Tr>
+            <MarketDataTableHeaders
+              sortField={sortField}
+              sortDirection={sortDirection}
+              handleSortChange={handleSortChange}
+              dataTableHeaders={DataTableHeaders}
+            />
+          </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
+          <DataTableRows rows={sortedData} handleRowClick={handleRowClick} />
+        </Table.Tbody>
+      </Table>
+    </Table.ScrollContainer>
   );
 };

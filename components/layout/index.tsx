@@ -1,29 +1,26 @@
-import Container from 'components/container';
 import styles from './index.module.scss';
 import {
   HeaderComponent,
-  SidebarComponent,
+  // SidebarComponent,
   MainComponent,
   FooterComponent,
 } from 'components/layout-components';
+import cn from 'classnames';
 
 interface LayoutProps {
   children?: React.ReactNode;
+  className?: string;
 }
 
-const LayoutContainer = ({ children }: LayoutProps) => {
-  return <div className={styles['container']}>{children}</div>;
-};
-
-export const Layout = ({ children }: LayoutProps) => {
+export const Layout = ({ children, className }: LayoutProps) => {
   return (
-    <Container>
-      <LayoutContainer>
-        <HeaderComponent />
-        <SidebarComponent />
-        <MainComponent>{children}</MainComponent>
-        <FooterComponent />
-      </LayoutContainer>
-    </Container>
+    <div className={cn(
+      styles['layout'], { className: className }
+    )}>
+      <HeaderComponent className={styles?.['header']} />
+      {/* <SidebarComponent /> */}
+      <MainComponent className={styles?.['main']}>{children}</MainComponent>
+      <FooterComponent />
+    </div>
   );
 };

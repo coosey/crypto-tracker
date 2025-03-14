@@ -1,16 +1,18 @@
 import styles from './index.module.scss';
+import cn from 'classnames';
 
 interface MainComponentProps {
   children?: React.ReactNode;
+  className?: string;
 }
 
-export const MainComponent = ({ children }: MainComponentProps) => {
+export const MainComponent = ({ children, className }: MainComponentProps) => {
   return (
-    <>
-      <main className={styles['main']}>
-        {/* <!-- Main content goes here, like charts, tables, etc. --> */}
-        {children}
-      </main>
-    </>
+    <div className={cn(
+      styles['main'], 
+      styles?.['screener-grid'], 
+      { className: className })}>
+      {children}
+    </div>
   );
 };

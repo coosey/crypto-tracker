@@ -7,9 +7,11 @@
   padding-top: $space_4;
   padding-bottom: $space_4;
 
+  height: 55px;
+
   &_avatar {
     gap: 10px;
-    padding: $space_5;
+    padding: $space_5 $space_0 $space_5 $space_0;
     display: flex;
     flex-direction: row;
     width: 100%;

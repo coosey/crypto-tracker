@@ -1,0 +1,7 @@
+@import '/styles/design.scss';
+
+.trendingList {
+  @include mobileMaxWidth() {
+    justify-content: center;
+  }
+}

@@ -1,3 +1,5 @@
+@import '/styles/design.scss';
+
 .title {
   margin: 0;
   padding-top: 24px;
@@ -6,11 +8,18 @@
   font-weight: 700;
 
   h1 {
-    font-size: 25px !important;
+    font-size: 1.55rem;
+
+    @include mobileMaxWidth() {
+      font-size: 1.3rem;
+    }
   }
 }
 
-.pagination {
-  display: flex;
-  justify-content: center;
+.paginationWrapper {
+  margin-top: 1.2rem;
+  &__content {
+    display: flex;
+    justify-content: center;
+  }
 }

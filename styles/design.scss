@@ -1,8 +1,10 @@
-// Fonts
+// -------------------------
+// Fonts -------------------
 $font-primary: 'Montserrat', sans-serif;
 $font-secondary: 'Roboto', sans-serif;
 
-// Color Theme
+// -------------------------
+// Color Theme -------------
 $bg-primary: #0B0F14;
 $bg-secondary: #1A2029;
 $bg-panel: #2C353F;
@@ -24,7 +26,8 @@ $border-accent: #00BFA6;
 $price-green: rgb(2, 192, 118);
 $price-red: rgb(248, 73, 96);
 
-// Spacing
+// -------------------------
+// Spacing -----------------
 $space_0: 0;
 $space_2: 2px;
 $space_4: 4px;
@@ -35,3 +38,40 @@ $space_12: 12px;
 $space_16: 16px;
 $space_20: 20px;
 $space_24: 24px;
+
+// -------------------------
+// Breakpoints -------------
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+@mixin tabletMaxWidth() {
+  @media screen and (max-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin mobileMaxWidth() {
+  @media screen and (max-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin mobileMinWidth() {
+  @media screen and (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin smallMobileMaxWidth() {
+  @media screen and (max-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin smallMobileMinWidth() {
+  @media screen and (min-width: $breakpoint-sm) {
+    @content;
+  }
+}

@@ -43,7 +43,7 @@ export default function CoinPage({ data }) {
   }, [data?.id]);
   
   return (
-    <Layout>
+    <Layout className={styles?.['coinPage']}>
       <BreadCrumbItems name={data?.name} />
       <div className={styles?.['coin']}>
         <div className={styles?.['coin_name']}>
@@ -128,7 +128,7 @@ export default function CoinPage({ data }) {
               rowName="Website"
               rowValue={
                 <Anchor href={`${data?.links?.homepage?.[0]}`} target="_blank">
-                  <Pill radius="md" size="lg" className={styles?.['pill-text']}>
+                  <Pill radius="md" className={styles?.['pill-text']}>
                     {parsedUrl}
                   </Pill>
                 </Anchor>
@@ -147,7 +147,6 @@ export default function CoinPage({ data }) {
                   >
                     <Pill
                       radius="md"
-                      size="lg"
                       className={styles?.['pill-text']}
                     >
                       Reddit
@@ -161,7 +160,6 @@ export default function CoinPage({ data }) {
                   >
                     <Pill
                       radius="md"
-                      size="lg"
                       className={styles?.['pill-text']}
                     >
                       Telegram
@@ -175,7 +173,6 @@ export default function CoinPage({ data }) {
                   >
                     <Pill
                       radius="md"
-                      size="lg"
                       className={styles?.['pill-text']}
                     >
                       Twitter
@@ -194,7 +191,7 @@ export default function CoinPage({ data }) {
                   href={`${data?.links?.repo_url?.github?.[0]}`}
                   target="_blank"
                 >
-                  <Pill radius="md" size="lg" className={styles?.['pill-text']}>
+                  <Pill radius="md" className={styles?.['pill-text']}>
                     GitHub
                   </Pill>
                 </Anchor>
@@ -208,7 +205,9 @@ export default function CoinPage({ data }) {
               rowValue={
                 <span className={styles?.['pill-container']}>
                   <div>
-                    <Pill radius="md" size="lg">
+                    <Pill 
+                      radius="md"
+                      className={styles?.['pill-text']}>
                       {firstCategory}
                     </Pill>
                   </div>
@@ -222,7 +221,6 @@ export default function CoinPage({ data }) {
                       <Popover.Target>
                         <Pill
                           radius="md"
-                          size="lg"
                           className={styles?.['pill-text']}
                         >
                           <span className={styles?.['show-more__icon']}>
@@ -239,7 +237,6 @@ export default function CoinPage({ data }) {
                           >
                             <Pill
                               radius="md"
-                              size="lg"
                               className={styles?.['pill-text']}
                             >
                               {category}
@@ -292,9 +289,11 @@ export default function CoinPage({ data }) {
           />
         </div>
       </div>
-      {priceChart?.prices && <div>
+      {priceChart?.prices && (
+        <div>
           <TradingViewChart prices={priceChart?.prices} total_volumes={priceChart?.total_volumes} />
-      </div>}
+        </div>
+      )}
       {/** Related Market List */}
       <div className={styles?.['table_tickersList']}>
         <TickersList name={data?.name} symbol={data?.symbol} coinId={data?.id} />
