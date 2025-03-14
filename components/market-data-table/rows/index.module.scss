@@ -13,8 +13,12 @@
   }
 
   &_name {
-    font-size: 16px;
+    font-size: 0.875rem;
     font-family: $font-primary;
+
+    @include mobileMaxWidth() {
+      line-height: 1.2;
+    }
 
     h4 {
       font-weight: 600;

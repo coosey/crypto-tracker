@@ -1,5 +1,9 @@
 @import '/styles/design.scss';
 
+.coinPage {
+  display: flex;
+}
+
 .coin {
   &_name {
     display: flex;
@@ -84,6 +88,14 @@
 
 .pill-text {
   font-weight: 600;
+  span {
+    font-size: 0.875rem;
+  }
+  @include mobileMaxWidth() {
+    span {
+      font-size: 0.75rem;
+    }
+  }
 }
 
 .description {

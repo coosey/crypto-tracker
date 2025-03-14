@@ -14,19 +14,15 @@ interface Props {
 }
 
 export const DataTableRows = memo(function DataTableRows({ rows, handleRowClick }: Props) {
-  if (!rows?.length) {
-    return (
-      <>
-        {Array(100)
+  return (
+    <>
+      {/** Skeleton */}
+      {!rows?.length && Array(50)
           .fill(null)
           .map((_, idx) => (
             <DataTableSkeleton key={idx} />
           ))}
-      </>
-    );
-  }
-  return (
-    <>
+      {/** Data Table rows */}
       {rows?.map?.((row) => {
         const numberedCoinPrice = Number(
           formatNumberWithSubscriptZeros(row?.current_price?.toString?.())

@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 import {
   TrendingCoinsResponse,
   TrendingListResponse,
-  TrendingListType,
 } from 'libs/types/trending-list';
 import { TrendingCard } from './trending-card';
+import styles from './index.module.scss';
 
 export const TrendingList = () => {
   const [trendingCoins, setTrendingCoins] = useState<TrendingCoinsResponse[]>(
@@ -34,7 +34,7 @@ export const TrendingList = () => {
   }, []);
 
   return (
-    <Flex direction="row">
+    <Flex direction="row" className={styles?.['trendingList']}>
       <TrendingCard trendingCoins={trendingCoins} isLoading={loading} />
     </Flex>
   );

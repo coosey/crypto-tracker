@@ -15,14 +15,16 @@ export const CoinMarketList = () => {
         <h1 id="current-prices">Today's Cryptocurrency Prices</h1>
       </div>
       <MarketDataTable data={coinsList} />
-      <PaginateComponent
-        className={styles?.['pagination']}
-        pageTotal={pageTotal}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        scrollToDiv
-        scrollId="current-prices"
-      />
+      <div className={styles?.['paginationWrapper']}>
+        <PaginateComponent
+          className={styles?.['paginationWrapper__content']}
+          pageTotal={pageTotal}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          scrollToDiv
+          scrollId="current-prices"
+        />
+      </div>
     </>
   );
 };

@@ -1,8 +1,35 @@
   @import '/styles/design.scss';
-  
-  .main {
-    grid-area: main;
-    color: $text-primary;
+
+.main {
+  flex: 1; // Allow main content to grow and fill remaining space
+  padding: 1rem;
+  background-color: $bg-primary;
+  color: $text-primary;
+
+  @media (min-width: $breakpoint-md) {
     padding: 1rem;
-    background-color: $bg-primary;
   }
+
+  @media (min-width: $breakpoint-lg) {
+    padding: 1.5rem;
+  }
+
+  // Grid layout for cryptocurrency screener
+  .screener-grid {
+    display: grid;
+    grid-template-columns: 1fr; // Single column on small screens
+    gap: 1rem;
+
+    @media (min-width: $breakpoint-sm) {
+      grid-template-columns: repeat(2, 1fr); // Two columns on medium screens
+    }
+
+    @media (min-width: $breakpoint-md) {
+      grid-template-columns: repeat(3, 1fr); // Three columns on larger screens
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      grid-template-columns: repeat(4, 1fr); // Four columns on extra-large screens
+    }
+  }
+}

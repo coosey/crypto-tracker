@@ -25,6 +25,7 @@ export const PaginateComponent = (props: Props) => {
   return (
     <div className={classNames(styles?.['pagination'], props?.className)}>
       <Pagination
+        size="sm"
         total={props?.pageTotal}
         value={props?.currentPage}
         onChange={handlePageChange}

@@ -35,3 +35,39 @@ $space_12: 12px;
 $space_16: 16px;
 $space_20: 20px;
 $space_24: 24px;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+@mixin tabletMaxWidth() {
+  @media screen and (max-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin mobileMaxWidth() {
+  @media screen and (max-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin mobileMinWidth() {
+  @media screen and (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin smallMobileMaxWidth() {
+  @media screen and (max-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin smallMobileMinWidth() {
+  @media screen and (min-width: $breakpoint-sm) {
+    @content;
+  }
+}
