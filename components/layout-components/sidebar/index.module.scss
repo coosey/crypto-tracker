@@ -1,7 +1,6 @@
 @import '/styles/design.scss';
 
 .sidebar {
-  grid-area: sidebar;
   background-color: $bg-panel;
   color: white;
   display: none; /* Hidden by default */
