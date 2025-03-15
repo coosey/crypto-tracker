@@ -1,10 +1,11 @@
-import { Box, LoadingOverlay, Table } from "@mantine/core";
-import styles from './index.module.scss';
+import { Box, LoadingOverlay } from "@mantine/core";
 import { TickersMarketObject } from "libs/types/tickers";
 import { CoinIdTableHeaders } from "../headers";
 import { MarketDataTableHeaders } from "components/market-data-table-headers";
 import { CoinIdTableRows } from "../rows";
 import { useSortIdTable } from "libs/hooks/useSortIdTable";
+import { DataTable } from "components/data-table";
+import styles from './index.module.scss';
 
 interface Props {
   name: string;
@@ -31,21 +32,19 @@ export const CoinIdMarket = ({
       <h2>{name} Markets</h2>
       <Box pos="relative">
         <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
-        <Table verticalSpacing="sm" highlightOnHover className={styles?.['table']}>
-          <Table.Thead>
-            <Table.Tr>
-              <MarketDataTableHeaders
-                sortField={sortField}
-                sortDirection={sortDirection}
-                handleSortChange={handleSortChange}
-                dataTableHeaders={CoinIdTableHeaders}
-              />
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>
+        <DataTable
+          children={
+            <MarketDataTableHeaders
+              sortField={sortField}
+              sortDirection={sortDirection}
+              handleSortChange={handleSortChange}
+              dataTableHeaders={CoinIdTableHeaders}
+            />
+          }
+          dataTableChildren={
             <CoinIdTableRows tickers={sortedData} symbol={symbol} />
-          </Table.Tbody>
-        </Table>
+          }
+        />
       </Box>
     </div>
   )
