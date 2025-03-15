@@ -4,14 +4,22 @@ import { NewsArticle } from "../news-article";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { capitalize } from "lodash";
+import useResponsive from "libs/hooks/useResponsive";
 import styles from './index.module.scss';
 
+interface Props {
+  id: string;
+}
 
-export const CoinIdNews = ({ id }) => {
+export const CoinIdNews = ({ id }: Props) => {
   const [newsData, setNewsData] = useState<NewsArticleObj[]>([]);
 
+  const { isMobile } = useResponsive();
+
   useEffect(() => {
-    // retrieve news based on coin's id
+    /**
+     * Fetch news data from News API
+     */
     async function getNewsData() {
       try {
         const response = await axios.get('/api/news', {
@@ -20,7 +28,7 @@ export const CoinIdNews = ({ id }) => {
           }
         });
         if (response?.status === 200) {
-          setNewsData(response?.data?.articles);
+          setNewsData(response?.data?.articles || []);
         }
       } catch (error) {
         console.log('Error', error);
@@ -51,10 +59,10 @@ export const CoinIdNews = ({ id }) => {
       </h2>
       <Carousel
         className={styles?.['newsCarousel']}
-        slideSize={{ base: '50%', sm: '25%' }}
-        slideGap={{ base: 2, sm: 'xl' }}
+        slideSize={{ base: '100%', xs: '50%', md: '25%' }}
+        slideGap={{ base: 'xl', md: 'lg' }}
         align="start"
-        // slidesToScroll={mobile ? 1 : 2}
+        slidesToScroll={isMobile ? 1 : 4}
       >
         {slides}
       </Carousel>

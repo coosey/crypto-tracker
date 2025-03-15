@@ -12,4 +12,12 @@
 
 .newsCarousel {
   padding-top: 1rem;
+
+}
+
+.control {
+  &[data-inactive] {
+    opacity: 0;
+    cursor: default;
+  }
 }
