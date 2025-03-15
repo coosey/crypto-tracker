@@ -8,10 +8,7 @@ interface MainComponentProps {
 
 export const MainComponent = ({ children, className }: MainComponentProps) => {
   return (
-    <div className={cn(
-      styles['main'], 
-      styles?.['screener-grid'], 
-      { className: className })}>
+    <div className={cn(styles['main'], styles?.['screener-grid'], { className: className })}>
       {children}
     </div>
   );

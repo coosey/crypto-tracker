@@ -6,7 +6,7 @@ interface Props {
   className?: string;
 }
 
-export const HeaderComponent = ({className}: Props) => {
+export const HeaderComponent = ({ className }: Props) => {
   return (
     <>
       <header className={cn(styles['header'], { className: className })}>

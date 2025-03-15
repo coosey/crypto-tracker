@@ -30,18 +30,18 @@ export default function CoinPage({ data }) {
   async function getCoinPriceChart() {
     try {
       const response = await axios.get('/api/price-chart', {
-        params: {id: data?.id}
+        params: { id: data?.id },
       });
       setPriceChart(response?.data || {});
     } catch (error) {
-      console.log('error fetching price chart: ', error)
+      console.log('error fetching price chart: ', error);
     }
-  };
+  }
 
   useEffect(() => {
     getCoinPriceChart();
   }, [data?.id]);
-  
+
   return (
     <Layout className={styles?.['coinPage']}>
       <BreadCrumbItems name={data?.name} />
@@ -49,12 +49,8 @@ export default function CoinPage({ data }) {
         <div className={styles?.['coin_name']}>
           <img src={data?.image?.thumb} alt={data?.symbol} width={25} height={25} />
           <h1>{data?.name}</h1>
-          <span className={styles?.['coin_name_symbol']}>
-            {symbol} Price
-          </span>
-          <span className={styles?.['coin_name_rank']}>
-            #{data?.market_cap_rank}
-          </span>
+          <span className={styles?.['coin_name_symbol']}>{symbol} Price</span>
+          <span className={styles?.['coin_name_rank']}>#{data?.market_cap_rank}</span>
         </div>
         <div>
           <div className={styles?.['coin_price']}>
@@ -66,10 +62,7 @@ export default function CoinPage({ data }) {
             </span>
             <span className={styles?.['coin_price_24h']}>
               <CarrotPriceChange
-                price={
-                  data?.market_data?.price_change_percentage_24h_in_currency
-                    ?.usd
-                }
+                price={data?.market_data?.price_change_percentage_24h_in_currency?.usd}
               />
             </span>
           </div>
@@ -141,14 +134,8 @@ export default function CoinPage({ data }) {
             rowValue={
               <span className={styles?.['pill-container']}>
                 {data?.links?.subreddit_url && (
-                  <Anchor
-                    href={`${data?.links?.subreddit_url}`}
-                    target="_blank"
-                  >
-                    <Pill
-                      radius="md"
-                      className={styles?.['pill-text']}
-                    >
+                  <Anchor href={`${data?.links?.subreddit_url}`} target="_blank">
+                    <Pill radius="md" className={styles?.['pill-text']}>
                       Reddit
                     </Pill>
                   </Anchor>
@@ -158,10 +145,7 @@ export default function CoinPage({ data }) {
                     href={`https://t.me/${data?.links?.telegram_channel_identifier}`}
                     target="_blank"
                   >
-                    <Pill
-                      radius="md"
-                      className={styles?.['pill-text']}
-                    >
+                    <Pill radius="md" className={styles?.['pill-text']}>
                       Telegram
                     </Pill>
                   </Anchor>
@@ -171,10 +155,7 @@ export default function CoinPage({ data }) {
                     href={`https://x.com/${data?.links?.twitter_screen_name}`}
                     target="_blank"
                   >
-                    <Pill
-                      radius="md"
-                      className={styles?.['pill-text']}
-                    >
+                    <Pill radius="md" className={styles?.['pill-text']}>
                       Twitter
                     </Pill>
                   </Anchor>
@@ -187,10 +168,7 @@ export default function CoinPage({ data }) {
             <FormattedDataRow
               rowName="Source Code"
               rowValue={
-                <Anchor
-                  href={`${data?.links?.repo_url?.github?.[0]}`}
-                  target="_blank"
-                >
+                <Anchor href={`${data?.links?.repo_url?.github?.[0]}`} target="_blank">
                   <Pill radius="md" className={styles?.['pill-text']}>
                     GitHub
                   </Pill>
@@ -205,24 +183,14 @@ export default function CoinPage({ data }) {
               rowValue={
                 <span className={styles?.['pill-container']}>
                   <div>
-                    <Pill 
-                      radius="md"
-                      className={styles?.['pill-text']}>
+                    <Pill radius="md" className={styles?.['pill-text']}>
                       {firstCategory}
                     </Pill>
                   </div>
                   <div className={styles?.['show-more']}>
-                    <Popover
-                      width={300}
-                      position="bottom"
-                      withArrow
-                      shadow="md"
-                    >
+                    <Popover width={300} position="bottom" withArrow shadow="md">
                       <Popover.Target>
-                        <Pill
-                          radius="md"
-                          className={styles?.['pill-text']}
-                        >
+                        <Pill radius="md" className={styles?.['pill-text']}>
                           <span className={styles?.['show-more__icon']}>
                             Show {restOfCategories?.length}
                             <IconChevronDown stroke={1.5} />
@@ -231,14 +199,8 @@ export default function CoinPage({ data }) {
                       </Popover.Target>
                       <Popover.Dropdown>
                         {restOfCategories?.map?.((category, idx) => (
-                          <p
-                            className={styles?.['pill-container-item']}
-                            key={idx}
-                          >
-                            <Pill
-                              radius="md"
-                              className={styles?.['pill-text']}
-                            >
+                          <p className={styles?.['pill-container-item']} key={idx}>
+                            <Pill radius="md" className={styles?.['pill-text']}>
                               {category}
                             </Pill>
                           </p>
@@ -271,10 +233,7 @@ export default function CoinPage({ data }) {
             priceChange={data?.market_data?.ath_change_percentage?.usd}
           />
           {/** ATL */}
-          <FormattedDataRow
-            rowName="All-time Low"
-            rowPrice={data?.market_data?.atl?.usd}
-          />
+          <FormattedDataRow rowName="All-time Low" rowPrice={data?.market_data?.atl?.usd} />
         </div>
       </div>
       {/** About */}
@@ -311,14 +270,12 @@ export async function getServerSideProps(context) {
   const { id } = context.params;
   try {
     // get coin's data by id
-    const response = await fetch(
-      `https://api.coingecko.com/api/v3/coins/${id}`, {
-        headers: {
-          'content-type': 'application/json',
-          'x-cg-demo-api-key': process.env.NEXT_PRIVATE_COINGECKO_KEY,
-        },
-      }
-    );
+    const response = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`, {
+      headers: {
+        'content-type': 'application/json',
+        'x-cg-demo-api-key': process.env.NEXT_PRIVATE_COINGECKO_KEY,
+      },
+    });
     const data = await response.json();
     return {
       props: {

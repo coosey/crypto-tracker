@@ -15,8 +15,8 @@ export const MarketCapHoverCard = ({ groupStyle, infoStyle }: Props) => {
         </HoverCard.Target>
         <HoverCard.Dropdown>
           <Text size="xs">
-            The total market value of a cryptocurrency's circulating supply. It
-            is analogous to the free-float capitalization in the stock market.
+            The total market value of a cryptocurrency's circulating supply. It is analogous to the
+            free-float capitalization in the stock market.
           </Text>
           <Text size="xs" mt="md">
             Market Cap = Current Price x Circulating Supply.

@@ -1,10 +1,10 @@
-import { Box, LoadingOverlay } from "@mantine/core";
-import { TickersMarketObject } from "libs/types/tickers";
-import { CoinIdTableHeaders } from "../headers";
-import { MarketDataTableHeaders } from "components/market-data-table-headers";
-import { CoinIdTableRows } from "../rows";
-import { useSortIdTable } from "libs/hooks/useSortIdTable";
-import { DataTable } from "components/data-table";
+import { Box, LoadingOverlay } from '@mantine/core';
+import { TickersMarketObject } from 'libs/types/tickers';
+import { CoinIdTableHeaders } from '../headers';
+import { MarketDataTableHeaders } from 'components/market-data-table-headers';
+import { CoinIdTableRows } from '../rows';
+import { useSortIdTable } from 'libs/hooks/useSortIdTable';
+import { DataTable } from 'components/data-table';
 import styles from './index.module.scss';
 
 interface Props {
@@ -14,24 +14,14 @@ interface Props {
   loading?: boolean;
 }
 
-export const CoinIdMarket = ({
-  name,
-  tickers,
-  symbol,
-  loading
-}: Props) => { 
-  const {
-    sortField,
-    sortDirection,
-    handleSortChange,
-    sortedData
-  } = useSortIdTable(tickers);
+export const CoinIdMarket = ({ name, tickers, symbol, loading }: Props) => {
+  const { sortField, sortDirection, handleSortChange, sortedData } = useSortIdTable(tickers);
 
   return (
     <div className={styles?.['coin-market']}>
       <h2>{name} Markets</h2>
       <Box pos="relative">
-        <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: "sm", blur: 2 }} />
+        <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
         <DataTable
           children={
             <MarketDataTableHeaders
@@ -41,11 +31,9 @@ export const CoinIdMarket = ({
               dataTableHeaders={CoinIdTableHeaders}
             />
           }
-          dataTableChildren={
-            <CoinIdTableRows tickers={sortedData} symbol={symbol} />
-          }
+          dataTableChildren={<CoinIdTableRows tickers={sortedData} symbol={symbol} />}
         />
       </Box>
     </div>
-  )
-}
+  );
+};

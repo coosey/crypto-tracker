@@ -52,11 +52,10 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
       grid: {
         horzLines: {
           color: GRID_COLOR,
-
         },
         vertLines: {
           visible: false,
-        }
+        },
       },
       timeScale: {
         // Show time on the x-axis
@@ -111,7 +110,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
     container.appendChild(toolTip);
 
     // update tooltip
-    chart.subscribeCrosshairMove(param => {
+    chart.subscribeCrosshairMove((param) => {
       const areaData = param.seriesData.get(areaSeries);
       const volumeData = param.seriesData.get(volumeSeries);
       if (isEmpty(areaData)) {
@@ -180,7 +179,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '400px' }}>
-      <div ref={chartContainerRef} className={styles?.['container']} id='container' />
+      <div ref={chartContainerRef} className={styles?.['container']} id="container" />
     </div>
   );
 };
@@ -191,13 +190,13 @@ function convertTime(dataToConvert) {
     time: (time / 1000) as Time,
     value,
   }));
-};
+}
 
 function getChartData(
   chartData: HistogramData<Time> | BarData<Time> | LineData<Time> | CustomData<Time>
 ) {
   return chartData['value'] !== undefined ? chartData['value'] : chartData['close'];
-};
+}
 
 /**
  * Helper function to add an area series to the chart.
@@ -228,7 +227,7 @@ function addAreaSeries(newChart: IChartApi, prices: number[][]) {
   // Set the data for the area series
   areaSeries.setData(formattedPriceData);
   return areaSeries;
-};
+}
 
 /**
  * Helper function to add a volume series to the chart.
@@ -255,4 +254,4 @@ function addVolumeSeries(newChart: IChartApi, volume: number[][]) {
   const formattedVolumeData = convertTime(volume);
   volumeSeries.setData(formattedVolumeData);
   return volumeSeries;
-};
+}

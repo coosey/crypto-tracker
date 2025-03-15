@@ -1,4 +1,4 @@
-import {Table} from '@mantine/core';
+import { Table } from '@mantine/core';
 import cn from 'classnames';
 import styles from './index.module.scss';
 
@@ -17,23 +17,20 @@ export const DataTable = ({
   highlightOnHover = false,
   className,
   minWidth = 700,
-  dataTableChildren
+  dataTableChildren,
 }: Props) => {
   return (
     <Table.ScrollContainer minWidth={minWidth} type="native">
-      <Table 
+      <Table
         verticalSpacing={verticalSpacing}
-        highlightOnHover={highlightOnHover} 
-        className={cn(styles?.['table'], className)}>
+        highlightOnHover={highlightOnHover}
+        className={cn(styles?.['table'], className)}
+      >
         <Table.Thead>
-          <Table.Tr>
-            {children}
-          </Table.Tr>
+          <Table.Tr>{children}</Table.Tr>
         </Table.Thead>
-        <Table.Tbody>
-          {dataTableChildren}
-        </Table.Tbody>
+        <Table.Tbody>{dataTableChildren}</Table.Tbody>
       </Table>
     </Table.ScrollContainer>
-  )
-}
+  );
+};

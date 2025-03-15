@@ -10,10 +10,9 @@ export const MarketDataTableHeaders = ({
   handleSortChange,
   dataTableHeaders,
 }: MarketDataTHProps) => {
-
   if (!dataTableHeaders?.length) {
     return null;
-  };
+  }
 
   return (
     <>
@@ -32,7 +31,7 @@ export const MarketDataTableHeaders = ({
             >
               <MarketCapHoverCard groupStyle={styles?.['table_info-icon']} />
             </TableHeader>
-          )
+          );
         }
         return (
           <TableHeader
@@ -44,7 +43,7 @@ export const MarketDataTableHeaders = ({
             sortField={header?.sortField}
             onSort={() => handleSortChange(header?.sortField)}
           />
-        )
+        );
       })}
     </>
   );

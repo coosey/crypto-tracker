@@ -1,10 +1,7 @@
 import { NewsApiResponse } from 'libs/types/news';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<NewsApiResponse>
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<NewsApiResponse>) {
   const { id, page = 1 } = req.query;
   // get the current date
   const today = new Date();
@@ -14,7 +11,7 @@ export default async function handler(
 
   const year = previousDate.getFullYear();
   // Months are zero-based
-  const month = String(previousDate.getMonth() + 1).padStart(2, '0'); 
+  const month = String(previousDate.getMonth() + 1).padStart(2, '0');
   const day = String(previousDate.getDate()).padStart(2, '0');
   // format the date as yyyy-mm-dd
   const formattedDate = `${year}-${month}-${day}`;

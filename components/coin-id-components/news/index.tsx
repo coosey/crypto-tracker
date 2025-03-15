@@ -1,10 +1,10 @@
 import { Carousel } from '@mantine/carousel';
-import { NewsArticleObj } from "libs/types/news"
-import { NewsArticle } from "../news-article";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { capitalize } from "lodash";
-import useResponsive from "libs/hooks/useResponsive";
+import { NewsArticleObj } from 'libs/types/news';
+import { NewsArticle } from '../news-article';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { capitalize } from 'lodash';
+import useResponsive from 'libs/hooks/useResponsive';
 import styles from './index.module.scss';
 
 interface Props {
@@ -25,7 +25,7 @@ export const CoinIdNews = ({ id }: Props) => {
         const response = await axios.get('/api/news', {
           params: {
             id: id,
-          }
+          },
         });
         if (response?.status === 200) {
           setNewsData(response?.data?.articles || []);
@@ -33,19 +33,19 @@ export const CoinIdNews = ({ id }: Props) => {
       } catch (error) {
         console.log('Error', error);
       }
-    };
+    }
     getNewsData();
   }, [id]);
 
   const slides = newsData?.map?.((news) => (
     <Carousel.Slide key={news?.title}>
-       <NewsArticle
+      <NewsArticle
         key={news?.title}
         title={news?.title}
         url={news?.url}
         source={news?.source?.name}
         urlToImg={news?.urlToImage}
-        publishedDate={""}
+        publishedDate={''}
       />
     </Carousel.Slide>
   ));
@@ -67,5 +67,5 @@ export const CoinIdNews = ({ id }: Props) => {
         {slides}
       </Carousel>
     </>
-  )
-}
+  );
+};

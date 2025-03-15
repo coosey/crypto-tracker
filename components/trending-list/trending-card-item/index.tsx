@@ -19,11 +19,7 @@ export const TrendingCardItem = ({
   return (
     <div key={imgAlt} className={styles?.['card-item']}>
       <div className={styles?.['card-item_side']}>
-        <img
-          className={styles?.['card-item_image']}
-          src={imgSrc}
-          alt={imgAlt}
-        />
+        <img className={styles?.['card-item_image']} src={imgSrc} alt={imgAlt} />
         <p>{name}</p>
       </div>
       <div className={styles?.['card-item_side']}>

@@ -14,8 +14,7 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
     router.push(`/coin/${coinId}`);
   };
 
-  const { sortField, sortDirection, handleSortChange, sortedData } =
-    useSortTable(data);
+  const { sortField, sortDirection, handleSortChange, sortedData } = useSortTable(data);
 
   return (
     <>
@@ -28,9 +27,7 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
             dataTableHeaders={DataTableHeaders}
           />
         }
-        dataTableChildren={
-          <DataTableRows rows={sortedData} handleRowClick={handleRowClick} />
-        }
+        dataTableChildren={<DataTableRows rows={sortedData} handleRowClick={handleRowClick} />}
       />
     </>
   );
