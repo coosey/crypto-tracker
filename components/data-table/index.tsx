@@ -1,10 +1,15 @@
 import { Table } from '@mantine/core';
 import cn from 'classnames';
 import styles from './index.module.scss';
+import React from 'react';
+
+interface DataTableChildren {
+  header: React.ReactNode;
+  body: React.ReactNode;
+}
 
 interface Props {
-  children: React.ReactNode;
-  dataTableChildren: React.ReactNode;
+  children: DataTableChildren;
   verticalSpacing?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   highlightOnHover?: boolean;
   className?: string;
@@ -17,7 +22,6 @@ export const DataTable = ({
   highlightOnHover = false,
   className,
   minWidth = 700,
-  dataTableChildren,
 }: Props) => {
   return (
     <Table.ScrollContainer minWidth={minWidth} type="native">
@@ -27,9 +31,9 @@ export const DataTable = ({
         className={cn(styles?.['table'], className)}
       >
         <Table.Thead>
-          <Table.Tr>{children}</Table.Tr>
+          <Table.Tr>{children.header}</Table.Tr>
         </Table.Thead>
-        <Table.Tbody>{dataTableChildren}</Table.Tbody>
+        <Table.Tbody>{children.body}</Table.Tbody>
       </Table>
     </Table.ScrollContainer>
   );

@@ -18,17 +18,12 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
 
   return (
     <>
-      <DataTable
-        children={
-          <MarketDataTableHeaders
-            sortField={sortField}
-            sortDirection={sortDirection}
-            handleSortChange={handleSortChange}
-            dataTableHeaders={DataTableHeaders}
-          />
-        }
-        dataTableChildren={<DataTableRows rows={sortedData} handleRowClick={handleRowClick} />}
-      />
+      <DataTable>
+        {{
+          header: <MarketDataTableHeaders sortField={sortField} sortDirection={sortDirection} handleSortChange={handleSortChange} dataTableHeaders={DataTableHeaders} />,
+          body: <DataTableRows rows={sortedData} handleRowClick={handleRowClick} />,
+        }}
+      </DataTable>
     </>
   );
 };
