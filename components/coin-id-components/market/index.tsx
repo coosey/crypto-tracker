@@ -22,17 +22,12 @@ export const CoinIdMarket = ({ name, tickers, symbol, loading }: Props) => {
       <h2>{name} Markets</h2>
       <Box pos="relative">
         <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
-        <DataTable
-          children={
-            <MarketDataTableHeaders
-              sortField={sortField}
-              sortDirection={sortDirection}
-              handleSortChange={handleSortChange}
-              dataTableHeaders={CoinIdTableHeaders}
-            />
-          }
-          dataTableChildren={<CoinIdTableRows tickers={sortedData} symbol={symbol} />}
-        />
+        <DataTable>
+          {{
+            header: <MarketDataTableHeaders sortField={sortField} sortDirection={sortDirection} handleSortChange={handleSortChange} dataTableHeaders={CoinIdTableHeaders}/>,
+            body: <CoinIdTableRows tickers={sortedData} symbol={symbol} />
+          }}
+        </DataTable>
       </Box>
     </div>
   );
