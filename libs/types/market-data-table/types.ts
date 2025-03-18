@@ -1,3 +1,5 @@
+import { SortFieldEnum, SortFieldEnumById } from './enums';
+
 export type SortDirection = 'ASC' | 'DESC';
 
 export type BaseDataType = Record<string, any>;
@@ -20,3 +22,7 @@ export type SortField =
   'price_change_percentage_7d_in_currency' |
   'total_volume' |
   'market_cap';
+
+export type THSortFieldType = SortFieldById | SortField;
+
+export type THSortType = SortFieldEnum | SortFieldEnumById;

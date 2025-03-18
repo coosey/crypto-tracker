@@ -1,6 +1,6 @@
-import { DataTHProps } from 'libs/types/market-data-table';
-import { SortFieldEnumById } from 'libs/types/market-data-table/enums';
-import { SortFieldById } from 'libs/types/market-data-table/types';
+import { DataTHProps } from '@libs/types/market-data-table';
+import { SortFieldEnumById } from '@libs/types/market-data-table/enums';
+import { SortFieldById } from '@libs/types/market-data-table/types';
 
 export const CoinIdTableHeaders: DataTHProps[] = [
   {

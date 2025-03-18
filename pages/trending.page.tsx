@@ -1,7 +1,7 @@
-import { Layout } from 'components/layout';
+import { Layout } from '@components/layout';
 import { observer } from 'mobx-react';
-import { TrendingList } from 'components/trending-list';
-import { MarketDataTable } from 'components/market-data-table';
+import { TrendingList } from '@components/trending-list';
+import { MarketDataTable } from '@components/market-data-table';
 import { useEffect } from 'react';
 import axios from 'axios';
 

@@ -1,6 +1,6 @@
 import '@testing-library/react';
 import { CarrotPriceChange } from '.';
-import { render, screen } from '../../libs/utils/mantineTestUtil';
+import { render, screen } from '@libs/utils/mantineTestUtil';
 
 function expectComponentInDocument(priceComponent: HTMLElement) {
   expect(priceComponent).toBeInTheDocument();
@@ -14,7 +14,7 @@ function CarrotPriceComponent(testPrice: number) {
   return <CarrotPriceChange price={testPrice} data-testid="carrot-price" />
 };
 
-describe('CarrotPriceChange', () => {
+describe('CarrotPriceChange Component', () => {
   it('renders component correctly', () => {
     render(CarrotPriceComponent(0.5));
     const carrotComponent = screen.getByTestId('carrot-price');

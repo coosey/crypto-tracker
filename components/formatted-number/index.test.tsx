@@ -1,8 +1,8 @@
 import '@testing-library/react';
 import { FormattedNumber } from '.';
-import { render, screen } from '../../libs/utils/mantineTestUtil';
+import { render, screen } from '@libs/utils/mantineTestUtil';
 
-describe('FormattedNumber', () => {
+describe('FormattedNumber Component', () => {
   it('renders component correctly', () => {
     render(<FormattedNumber value={0.5} />);
     const formattedNumber = screen.getByTestId('formatted-number');

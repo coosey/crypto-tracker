@@ -1,10 +1,10 @@
 import { Carousel } from '@mantine/carousel';
-import { NewsArticleObj } from 'libs/types/news';
+import { NewsArticleObj } from '@libs/types/news';
 import { NewsArticle } from '../news-article';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { capitalize } from 'lodash';
-import useResponsive from 'libs/hooks/useResponsive';
+import useResponsive from '@libs/hooks/useResponsive';
 import styles from './index.module.scss';
 
 interface Props {

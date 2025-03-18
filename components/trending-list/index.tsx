@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import {
   TrendingCoinsResponse,
   TrendingListResponse,
-} from 'libs/types/trending-list';
+} from '@libs/types/trending-list';
 import { TrendingCard } from './trending-card';
 import styles from './index.module.scss';
 

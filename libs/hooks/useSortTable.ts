@@ -1,5 +1,5 @@
-import { CoinsListResponse } from "libs/types/coins-list";
-import { SortDirection, SortField } from "libs/types/market-data-table/types";
+import { CoinsListResponse } from "@libs/types/coins-list";
+import { SortDirection, SortField } from "@libs/types/market-data-table/types";
 import { useState } from "react";
 
 export const useSortTable = (data: CoinsListResponse[]) => {

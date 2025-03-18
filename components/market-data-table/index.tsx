@@ -1,11 +1,11 @@
 import '@mantine/core/styles/Table.css';
-import { MarketDataTableProps } from 'libs/types/market-data-table';
+import { MarketDataTableProps } from '@libs/types/market-data-table';
 import { DataTableHeaders } from './headers';
 import { DataTableRows } from './rows';
 import { MarketDataTableHeaders } from '../market-data-table-headers';
 import { useRouter } from 'next/router';
-import { useSortTable } from 'libs/hooks/useSortTable';
-import { DataTable } from '../data-table';
+import { useSortTable } from '@libs/hooks/useSortTable';
+import { DataTable } from '@components/data-table';
 
 export const MarketDataTable = ({ data }: MarketDataTableProps) => {
   const router = useRouter();

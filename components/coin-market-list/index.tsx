@@ -1,8 +1,8 @@
 import styles from './index.module.scss';
-import { MarketDataTable } from 'components/market-data-table';
+import { MarketDataTable } from '@components/market-data-table';
 import { useState } from 'react';
-import { useGetMarketData } from 'libs/hooks/useGetMarketData';
-import { PaginateComponent } from 'components/pagination';
+import { useGetMarketData } from '@libs/hooks/useGetMarketData';
+import { PaginateComponent } from '@components/pagination';
 
 export const CoinMarketList = () => {
   const [currentPage, setCurrentPage] = useState(1);
