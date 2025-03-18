@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormattedDataRow Should render Circulating Supply correctly 1`] = `
+<span
+  class="table-row_name"
+>
+  Circulating Supply
+</span>
+`;
+
+exports[`FormattedDataRow Should render FDV correctly 1`] = `
+<span
+  class="table-row_name"
+>
+  FDV
+</span>
+`;
+
+exports[`FormattedDataRow Should render HoverCard correctly 1`] = `
+<span
+  class="table-row_name"
+>
+  HoverCard
+</span>
+`;
+
+exports[`FormattedDataRow Should render Market Cap correctly 1`] = `
+<span
+  class="table-row_name"
+>
+  Market Cap
+</span>
+`;
+
+exports[`FormattedDataRow Should render Max Supply correctly 1`] = `
+<span
+  class="table-row_name"
+>
+  Max Supply
+</span>
+`;
+
+exports[`FormattedDataRow Should render Total Supply correctly 1`] = `
+<span
+  class="table-row_name"
+>
+  Total Supply
+</span>
+`;
+
+exports[`FormattedDataRow Should render Volume correctly 1`] = `
+<span
+  class="table-row_name"
+>
+  Volume
+</span>
+`;

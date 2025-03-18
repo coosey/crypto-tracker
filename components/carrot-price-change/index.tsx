@@ -1,5 +1,5 @@
 import { IconCaretUpFilled, IconCaretDownFilled } from '@tabler/icons-react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import styles from './index.module.scss';
 
 interface Props {
@@ -22,7 +22,7 @@ export const CarrotPriceChange = ({
   const renderPriceContent = () => {
     if (value === null) {
       return (
-        <div className={classNames(styles?.price, className)} data-price-target="price">
+        <div className={cn(styles?.['price'], className)} data-price-target="price" data-testid="carrot-price">
           {showEmptyState}
         </div>
       );
