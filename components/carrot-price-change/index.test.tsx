@@ -1,6 +1,6 @@
 import '@testing-library/react';
 import { CarrotPriceChange } from '.';
-import { render, screen } from '@libs/utils/mantineTestUtil';
+import { render, screen } from 'libs/utils/mantineTestUtil';
 
 function expectComponentInDocument(priceComponent: HTMLElement) {
   expect(priceComponent).toBeInTheDocument();

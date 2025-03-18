@@ -1,6 +1,6 @@
 import '@testing-library/react';
 import { FormattedNumber } from '.';
-import { render, screen } from '@libs/utils/mantineTestUtil';
+import { render, screen } from 'libs/utils/mantineTestUtil';
 
 describe('FormattedNumber Component', () => {
   it('renders component correctly', () => {
