@@ -1,11 +1,9 @@
-import { Carousel } from '@mantine/carousel';
-import { NewsArticleObj } from '@libs/types/news';
-import { NewsArticle } from '../news-article';
+import { NewsArticleObj } from 'libs/types/news';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { capitalize } from 'lodash';
-import useResponsive from '@libs/hooks/useResponsive';
 import styles from './index.module.scss';
+import { NewsCarousel } from './news-carousel';
 
 interface Props {
   id: string;
@@ -13,8 +11,6 @@ interface Props {
 
 export const CoinIdNews = ({ id }: Props) => {
   const [newsData, setNewsData] = useState<NewsArticleObj[]>([]);
-
-  const { isMobile } = useResponsive();
 
   useEffect(() => {
     /**
@@ -37,19 +33,6 @@ export const CoinIdNews = ({ id }: Props) => {
     getNewsData();
   }, [id]);
 
-  const slides = newsData?.map?.((news) => (
-    <Carousel.Slide key={news?.title}>
-      <NewsArticle
-        key={news?.title}
-        title={news?.title}
-        url={news?.url}
-        source={news?.source?.name}
-        urlToImg={news?.urlToImage}
-        publishedDate={''}
-      />
-    </Carousel.Slide>
-  ));
-
   if (!newsData?.length) return null;
 
   return (
@@ -57,15 +40,7 @@ export const CoinIdNews = ({ id }: Props) => {
       <h2 className={styles?.['newsHeader']} id="news-header">
         Latest {capitalize(id)} News
       </h2>
-      <Carousel
-        className={styles?.['newsCarousel']}
-        slideSize={{ base: '100%', xs: '50%', md: '25%' }}
-        slideGap={{ base: 'xl', md: 'lg' }}
-        align="start"
-        slidesToScroll={isMobile ? 1 : 4}
-      >
-        {slides}
-      </Carousel>
+      <NewsCarousel newsData={newsData} />
     </>
   );
 };
