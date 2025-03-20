@@ -12,18 +12,23 @@ interface Props {
 export const NewsCarousel = ({newsData}: Props) => {
   const { isMobile } = useResponsive();
 
-  const slides = newsData?.map?.((news) => (
-    <Carousel.Slide key={news?.title}>
-      <NewsArticle
-        key={news?.title}
-        title={news?.title}
-        url={news?.url}
-        source={news?.source?.name}
-        urlToImg={news?.urlToImage}
-        publishedDate={''}
-      />
-    </Carousel.Slide>
-  ));
+  const slides = newsData?.map?.((news, idx) => {
+    const uniqueKey = `${news?.title}-${news?.publishedAt}`;
+    const uniqueArticleKey = `${news?.title}-${idx}`;
+    return (
+      <Carousel.Slide key={uniqueKey}>
+        <NewsArticle
+          key={uniqueArticleKey}
+          title={news?.title}
+          url={news?.url}
+          source={news?.source?.name}
+          urlToImg={news?.urlToImage}
+          publishedDate={''}
+        />
+      </Carousel.Slide>
+    );
+  });
+
   return (
     <Carousel
       className={styles?.['newsCarousel']}

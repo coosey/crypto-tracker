@@ -44,6 +44,10 @@
     font-weight: 600;
   }
 
+  &__date {
+    padding-bottom: 10px;
+  }
+
   .tooltipWrapper > * {
     display: flex;
     flex-direction: row;
