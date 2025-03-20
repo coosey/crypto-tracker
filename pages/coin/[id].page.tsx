@@ -41,7 +41,7 @@ export default function CoinPage({ data }) {
   useEffect(() => {
     getCoinPriceChart();
   }, [data?.id]);
-
+  
   return (
     <Layout className={styles?.['coinPage']}>
       <BreadCrumbItems name={data?.name} />

@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   // format the date as yyyy-mm-dd
   const formattedDate = `${year}-${month}-${day}`;
 
-  const URL = `https://newsapi.org/v2/everything?q=+"${id}"&searchIn=title&from=${formattedDate}&sortBy=relevancy&language=en&page=${page}&pageSize=10&apiKey=${process.env.NEXT_PRIVATE_NEWS_API_KEY}`;
+  const URL = `https://newsapi.org/v2/everything?q=+"${id}"&searchIn=title&from=${formattedDate}&sortBy=relevancy&language=en&page=${page}&apiKey=${process.env.NEXT_PRIVATE_NEWS_API_KEY}`;
 
   try {
     const response = await fetch(URL, {

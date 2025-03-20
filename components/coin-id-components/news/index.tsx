@@ -24,7 +24,8 @@ export const CoinIdNews = ({ id }: Props) => {
           },
         });
         if (response?.status === 200) {
-          setNewsData(response?.data?.articles || []);
+          const uniqueArticles = parseUniqueArticles(response?.data?.articles);
+          setNewsData(uniqueArticles);
         }
       } catch (error) {
         console.log('Error', error);
@@ -44,3 +45,18 @@ export const CoinIdNews = ({ id }: Props) => {
     </>
   );
 };
+
+/**
+ * Helper function to parse unique articles from NewsAPI
+ * @param articles NewsArticleObj[]
+ * @returns NewsArticleObj[]
+ */
+function parseUniqueArticles(articles: NewsArticleObj[]): NewsArticleObj[] {
+  const uniqueArticles = articles?.reduce?.((acc, article) => {
+    if (!acc?.[article?.title]) {
+      acc[article.title] = article;
+    }
+    return acc;
+  }, {});
+  return Object.values(uniqueArticles);
+}
