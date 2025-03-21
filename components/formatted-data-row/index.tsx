@@ -59,12 +59,12 @@ const renderPrice = (value, Component = null) => {
     return null; // Or return a fallback UI
   }
   return (
-  <span className={styles?.['table-row_price']}>
-    {Component ? <Component value={value} /> : value}
-  </span>
-
+    <span className={styles?.['table-row_price']}>
+      {Component ? <Component value={value} /> : value}
+    </span>
   )
 };
+
 
 export const FormattedDataRow = ({
   rowName,

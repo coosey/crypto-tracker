@@ -225,12 +225,16 @@ export default function CoinPage({ data }) {
             {/* <FormattedDataRow rowName="7D Range" priceDiff7Low={data?.market_data?.low_7h?.usd} priceDiff7High={data?.market_data?.high_7h?.usd} /> */}
             {/** ATH */}
             <FormattedDataRow
-              rowName="All-time High"
+              rowName="All-Time High"
               rowPrice={data?.market_data?.ath?.usd}
               priceChange={data?.market_data?.ath_change_percentage?.usd}
             />
             {/** ATL */}
-            <FormattedDataRow rowName="All-time Low" rowPrice={data?.market_data?.atl?.usd} />
+            <FormattedDataRow 
+              rowName="All-Time Low" 
+              rowPrice={data?.market_data?.atl?.usd}
+              priceChange={data?.market_data?.atl_change_percentage?.usd}
+            />
           </div>
         </div>
         {/** About */}
