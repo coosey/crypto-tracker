@@ -1,7 +1,6 @@
-
-import { NewsArticleObj } from "libs/types/news";
-import { NewsArticle } from "../news-article";
-import { Carousel } from "@mantine/carousel";
+import { NewsArticleObj } from 'libs/types/news';
+import { NewsArticle } from '../news-article';
+import { Carousel } from '@mantine/carousel';
 import styles from './index.module.scss';
 import useResponsive from 'libs/hooks/useResponsive';
 
@@ -9,7 +8,7 @@ interface Props {
   newsData: NewsArticleObj[];
 }
 
-export const NewsCarousel = ({newsData}: Props) => {
+export const NewsCarousel = ({ newsData }: Props) => {
   const { isMobile } = useResponsive();
 
   const slides = newsData?.map?.((news, idx) => {
@@ -39,5 +38,5 @@ export const NewsCarousel = ({newsData}: Props) => {
     >
       {slides}
     </Carousel>
-  )
-}
+  );
+};

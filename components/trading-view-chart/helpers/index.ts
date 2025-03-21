@@ -1,6 +1,6 @@
-import { 
-  Time, 
-  IChartApi, 
+import {
+  Time,
+  IChartApi,
   AreaSeries,
   HistogramSeries,
   BarData,
@@ -35,7 +35,7 @@ export const TOOLTIP_DISPLAY = {
  * @param toolTip tooltip to be displayed
  */
 export function updateTooltipPosition(
-  param: MouseEventParams<Time>, 
+  param: MouseEventParams<Time>,
   container: HTMLElement,
   toolTip: HTMLDivElement
 ) {
@@ -51,7 +51,7 @@ export function updateTooltipPosition(
   }
   toolTip.style.left = left + 'px';
   toolTip.style.top = top + 'px';
-};
+}
 
 /**
  * Helper function to convert time scale to a formatted date string.
@@ -78,7 +78,7 @@ export function convertTime(dataToConvert) {
     time: (time / 1000) as Time,
     value,
   }));
-};
+}
 
 /**
  * Helper function to get the chart value or close value based on chart type.
@@ -89,7 +89,7 @@ export function getChartData(
   chartData: HistogramData<Time> | BarData<Time> | LineData<Time> | CustomData<Time>
 ) {
   return chartData['value'] !== undefined ? chartData['value'] : chartData['close'];
-};
+}
 
 /**
  * Helper function to add an area series to the chart.

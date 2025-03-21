@@ -12,11 +12,7 @@ export const BreadCrumbItems = ({ name }: Props) => {
   ].map((item, index) => {
     if (item?.href) {
       return (
-        <Anchor
-          className={styles?.['breadcrumb_link']}
-          href={item?.href}
-          key={index}
-        >
+        <Anchor className={styles?.['breadcrumb_link']} href={item?.href} key={index}>
           {item?.title}
         </Anchor>
       );
