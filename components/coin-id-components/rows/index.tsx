@@ -9,9 +9,44 @@ interface Props {
   symbol: string;
 }
 
-export const CoinIdTableRows = ({ tickers, symbol }: Props) => {
-  const EmptyRow = () => <>{' - '}</>;
+const EmptyRow = () => <>{' - '}</>;
 
+const renderCoinIdRow = (value, Component = null) => {
+  if (!value) return <EmptyRow />;
+  else if (Component) return <Component value={value} />;
+  else return value;
+};
+
+const renderTrustScore = (trustScore: string) => {
+  if (!trustScore) return <EmptyRow />;
+  return (
+    <div
+      className={styles?.['trust-score']}
+      style={{ backgroundColor: `${trustScore}` }}
+    />
+  );
+};
+
+const renderTradeUrl = (
+  tradeUrl: string,
+  symbol: string,
+  ticker: TickersMarketObject
+) => {
+  if (!tradeUrl) return <EmptyRow />;
+  return (
+    <Anchor
+      className={styles?.['trade-url']}
+      href={tradeUrl}
+      target="_blank">
+      {symbol?.toUpperCase?.() === ticker?.base
+        ? `${ticker?.base}/${ticker?.target}`
+        : `${symbol?.toUpperCase?.()}/USDT`}
+      <IconExternalLink strokeWidth={2} size={20} />
+    </Anchor>
+  );
+};
+
+export const CoinIdTableRows = ({ tickers, symbol }: Props) => {
   return (
     <>
       {tickers?.map?.((ticker, idx) => {
@@ -25,43 +60,19 @@ export const CoinIdTableRows = ({ tickers, symbol }: Props) => {
               </div>
             </Table.Td>
             <Table.Td>
-              <Anchor className={styles?.['trade-url']} href={ticker?.trade_url} target="_blank">
-                {symbol?.toUpperCase?.() === ticker?.base
-                  ? `${ticker?.base}/${ticker?.target}`
-                  : `${symbol?.toUpperCase?.()}/USDT`}
-                <IconExternalLink strokeWidth={2} size={20} />
-              </Anchor>
+              {renderTradeUrl(ticker?.trade_url, symbol, ticker)}
             </Table.Td>
             <Table.Td data-price-target="price">
-              {ticker?.converted_last?.usd ? (
-                <FormattedNumber value={ticker?.converted_last?.usd} />
-              ) : (
-                <EmptyRow />
-              )}
+              {renderCoinIdRow(ticker?.converted_last?.usd, FormattedNumber)}
             </Table.Td>
             <Table.Td>
-              {ticker?.bid_ask_spread_percentage ? (
-                ticker?.bid_ask_spread_percentage?.toFixed?.(2)
-              ) : (
-                <EmptyRow />
-              )}
+              {renderCoinIdRow(ticker?.bid_ask_spread_percentage?.toFixed?.(2))}
             </Table.Td>
             <Table.Td data-price-target="price">
-              {ticker?.converted_volume?.usd ? (
-                <FormattedNumber value={ticker?.converted_volume?.usd} />
-              ) : (
-                <EmptyRow />
-              )}
+              {renderCoinIdRow(ticker?.converted_volume?.usd, FormattedNumber)}
             </Table.Td>
             <Table.Td className={styles?.['table-body']}>
-              {ticker?.trust_score ? (
-                <div
-                  className={styles?.['trust-score']}
-                  style={{ backgroundColor: `${ticker?.trust_score}` }}
-                />
-              ) : (
-                <EmptyRow />
-              )}
+              {renderTrustScore(ticker?.trust_score)}
             </Table.Td>
           </Table.Tr>
         );
