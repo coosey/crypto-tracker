@@ -14,8 +14,13 @@ import { useEffect, useState } from 'react';
 import { CoinIdNews } from 'components/coin-id-components/news';
 import { TradingViewChart } from '@/components/trading-view-chart';
 import { PriceChart } from '@/libs/types/price-chart';
+import { CoinDataResponse } from '@/libs/types/coin-id';
 
-export default function CoinPage({ data }) {
+interface Props {
+  data: CoinDataResponse;
+}
+
+export default function CoinPage({ data }: Props) {
   // ticker symbol
   const symbol = data?.symbol?.toUpperCase?.();
   // Parse URL for website
@@ -127,7 +132,7 @@ export default function CoinPage({ data }) {
                 <FormattedDataRow
                   rowName="Source Code"
                   rowValue={
-                    <Anchor href={`${data?.links?.repo_url?.github?.[0]}`} target="_blank">
+                    <Anchor href={`${data?.links?.repos_url?.github?.[0]}`} target="_blank">
                       <Pill radius="md" className={styles?.['pill-text']}>
                         GitHub
                       </Pill>
@@ -276,7 +281,7 @@ export async function getServerSideProps(context) {
         'x-cg-demo-api-key': process.env.NEXT_PRIVATE_COINGECKO_KEY,
       },
     });
-    const data = await response.json();
+    const data: CoinDataResponse = await response.json();
     return {
       props: {
         data: data,
