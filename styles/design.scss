@@ -52,6 +52,12 @@ $breakpoint-xl: 1200px;
   }
 }
 
+@mixin tabletMinWidth() {
+  @media screen and (min-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
 @mixin mobileMaxWidth() {
   @media screen and (max-width: $breakpoint-md) {
     @content;

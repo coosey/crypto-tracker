@@ -22,7 +22,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
     const chart = createChart(chartContainerRef.current, {
       // handleScale: false,
       // handleScroll: false,
-      width: chartContainerRef.current.clientWidth / 2,
+      width: chartContainerRef.current.clientWidth,
       height: 400,
       layout: {
         background: { type: ColorType.Solid, color: CHART_COLORS.background },
@@ -149,11 +149,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
     chart.timeScale().fitContent();
     // Handle resizing
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        chart.applyOptions({ width: chartContainerRef.current.clientWidth });
-      } else {
-        chart.applyOptions({ width: chartContainerRef.current.clientWidth / 2 });
-      }
+      chart.applyOptions({ width: chartContainerRef.current.clientWidth });
     };
 
     window.addEventListener('resize', handleResize);

@@ -66,8 +66,9 @@
     flex-grow: 1;
   }
 
-  &_tickersList {
-    margin-top: 3.5rem;
+  &_tickersList,
+  &_news {
+    padding-top: 25px;
   }
 
   @media screen and (max-width: 600px) {
@@ -104,6 +105,7 @@
     text-decoration: underline;
     color: $accent-color2;
   }
+  font-size: 0.875rem;
 }
 
 .show-more {
@@ -119,5 +121,30 @@
   svg {
     height: 20px;
     width: 20px;
+  }
+}
+
+.chartDetails {
+  // display: flex; /* Create a flex container */
+  // gap: 20px; /* Space between columns */
+  // align-items: flex-start; /* Align items at the top */
+  // @include mobileMaxWidth() {
+  //   flex-direction: column; /* Stack columns vertically */
+  // }
+  // &__about,
+  // &__chart {
+  //   flex: 1; /* Each column takes equal width */
+  //   @include mobileMaxWidth() {
+  //     flex: none; /* Reset flex to allow full width */
+  //     width: 100%; /* Full width for stacked layout */
+  //   }
+  // }
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px; 
+
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+     /* One column on smaller screens */
   }
 }
