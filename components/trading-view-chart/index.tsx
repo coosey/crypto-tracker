@@ -22,7 +22,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
     const chart = createChart(chartContainerRef.current, {
       // handleScale: false,
       // handleScroll: false,
-      width: chartContainerRef.current.clientWidth,
+      width: chartContainerRef.current.clientWidth / 2,
       height: 400,
       layout: {
         background: { type: ColorType.Solid, color: CHART_COLORS.background },
@@ -146,10 +146,14 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
     // -------------------------------------------------------
     // -------------------------------------------------------
     // Fit the chart to the data
-    // chart.timeScale().fitContent();
+    chart.timeScale().fitContent();
     // Handle resizing
     const handleResize = () => {
-      chart.applyOptions({ width: chartContainerRef.current.clientWidth });
+      if (window.innerWidth <= 768) {
+        chart.applyOptions({ width: chartContainerRef.current.clientWidth });
+      } else {
+        chart.applyOptions({ width: chartContainerRef.current.clientWidth / 2 });
+      }
     };
 
     window.addEventListener('resize', handleResize);
@@ -162,7 +166,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
   }, [prices]);
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '400px' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
       <div ref={chartContainerRef} className={styles?.['container']} id="container" />
     </div>
   );

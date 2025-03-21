@@ -79,6 +79,7 @@
   display: flex;
   gap: $space_10;
   flex-grow: 1;
+  align-items: center;
 
   &-item {
     margin: $space_0;

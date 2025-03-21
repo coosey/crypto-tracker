@@ -3,31 +3,31 @@ import classNames from 'classnames';
 import styles from './index.module.scss';
 
 interface Props {
-  price: number | null;
+  value: number | null;
   className?: string;
   decimalPlaces?: number;
   showEmptyState?: string;
 }
 
 export const CarrotPriceChange = ({
-  price,
+  value,
   className,
   decimalPlaces = 2,
   showEmptyState = '-',
 }: Props) => {
-  const getPriceDisplay = (value: number) => {
-    return `${value?.toFixed?.(decimalPlaces)}%`;
+  const getPriceDisplay = (price: number) => {
+    return `${price?.toFixed?.(decimalPlaces)}%`;
   };
 
   const renderPriceContent = () => {
-    if (price === null) {
+    if (value === null) {
       return (
         <div className={classNames(styles?.price, className)} data-price-target="price">
           {showEmptyState}
         </div>
       );
     }
-    const isPositive = price > 0;
+    const isPositive = value > 0;
     const priceClassName = isPositive ? styles?.price_green : styles?.price_red;
     const CaretIcon = isPositive ? IconCaretUpFilled : IconCaretDownFilled;
 
@@ -35,7 +35,7 @@ export const CarrotPriceChange = ({
       <div className={`${priceClassName} ${className}`} data-price-target="price">
         <span className={styles.price_change}>
           <CaretIcon stroke={1} />
-          {getPriceDisplay(price)}
+          {getPriceDisplay(value)}
         </span>
       </div>
     );
