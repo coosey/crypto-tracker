@@ -68,195 +68,193 @@ export default function CoinPage({ data }) {
           </span>
         </div>
       </div>
-      {/** Market Data Rows */}
-      <div className={styles?.['table']}>
-        <h2 className={styles?.['table_header']}>{data?.name} Statistics</h2>
-        <FormattedDataRow
-          rowName="Market Cap"
-          rowPrice={data?.market_data?.market_cap?.usd}
-          hoverCard
-          hoverCardName={STATISTIC_INFO.market_cap_name}
-          hoverCardDescription={STATISTIC_INFO.market_cap_description}
-        />
-        <FormattedDataRow
-          rowName="Volume"
-          rowPrice={data?.market_data?.total_volume?.usd}
-          hoverCard
-          hoverCardName={STATISTIC_INFO.volume}
-        />
-        <FormattedDataRow
-          rowName="Fully Diluted Valuation"
-          rowPrice={data?.market_data?.fully_diluted_valuation?.usd}
-          hoverCard
-          hoverCardName={STATISTIC_INFO.fdv_name}
-          hoverCardDescription={STATISTIC_INFO.fdv_desc}
-        />
-        <FormattedDataRow
-          rowName="Circulating Supply"
-          rowPrice={data?.market_data?.circulating_supply}
-          hoverCard
-          hoverCardName={STATISTIC_INFO.circulating_supply}
-        />
-        <FormattedDataRow
-          rowName="Total Supply"
-          rowPrice={data?.market_data?.total_supply}
-          hoverCard
-          hoverCardName={STATISTIC_INFO.total_supply_desc}
-          hoverCardDescription={STATISTIC_INFO.total_supply_name}
-        />
-        <FormattedDataRow
-          rowName="Max Supply"
-          rowValue={'∞'}
-          hoverCard
-          hoverCardName={STATISTIC_INFO.max_supply_desc}
-          hoverCardDescription={STATISTIC_INFO.max_supply_name}
-        />
-      </div>
-      <div className={styles?.['table']}>
-        <h3 className={styles?.['table_header']}>Info</h3>
-        <div className={styles?.['table_info']}>
-          {/** Website */}
-          {data?.links?.homepage?.[0] && (
-            <FormattedDataRow
-              rowName="Website"
-              rowValue={
-                <Anchor href={`${data?.links?.homepage?.[0]}`} target="_blank">
-                  <Pill radius="md" className={styles?.['pill-text']}>
-                    {parsedUrl}
-                  </Pill>
-                </Anchor>
-              }
-            />
-          )}
-          {/** Communities */}
-          <FormattedDataRow
-            rowName="Communities"
-            rowValue={
-              <span className={styles?.['pill-container']}>
-                {data?.links?.subreddit_url && (
-                  <Anchor href={`${data?.links?.subreddit_url}`} target="_blank">
-                    <Pill radius="md" className={styles?.['pill-text']}>
-                      Reddit
-                    </Pill>
-                  </Anchor>
-                )}
-                {data?.links?.telegram_channel_identifier && (
-                  <Anchor
-                    href={`https://t.me/${data?.links?.telegram_channel_identifier}`}
-                    target="_blank"
-                  >
-                    <Pill radius="md" className={styles?.['pill-text']}>
-                      Telegram
-                    </Pill>
-                  </Anchor>
-                )}
-                {data?.links?.twitter_screen_name && (
-                  <Anchor
-                    href={`https://x.com/${data?.links?.twitter_screen_name}`}
-                    target="_blank"
-                  >
-                    <Pill radius="md" className={styles?.['pill-text']}>
-                      Twitter
-                    </Pill>
-                  </Anchor>
-                )}
-              </span>
-            }
-          />
-          {/** Source Code */}
-          {data?.links?.repos_url?.github?.[0] && (
-            <FormattedDataRow
-              rowName="Source Code"
-              rowValue={
-                <Anchor href={`${data?.links?.repo_url?.github?.[0]}`} target="_blank">
-                  <Pill radius="md" className={styles?.['pill-text']}>
-                    GitHub
-                  </Pill>
-                </Anchor>
-              }
-            />
-          )}
-          {/** Categories */}
-          {data?.categories && (
-            <FormattedDataRow
-              rowName="Categories"
-              rowValue={
-                <span className={styles?.['pill-container']}>
-                  <Pill radius="md" className={styles?.['pill-text']}>
-                    {firstCategory}
-                  </Pill>
-                  <div className={styles?.['show-more']}>
-                    <Popover width={300} position="bottom" withArrow shadow="md">
-                      <Popover.Target>
+      <div className={styles?.['chartDetails']}>
+        <div className={styles?.['chartDetails__data']}>
+          {/** Info */}
+          <div className={styles?.['table']}>
+            <h3 className={styles?.['table_header']}>Info</h3>
+            <div className={styles?.['table_info']}>
+              {/** Website */}
+              {data?.links?.homepage?.[0] && (
+                <FormattedDataRow
+                  rowName="Website"
+                  rowValue={
+                    <Anchor href={`${data?.links?.homepage?.[0]}`} target="_blank">
+                      <Pill radius="md" className={styles?.['pill-text']}>
+                        {parsedUrl}
+                      </Pill>
+                    </Anchor>
+                  }
+                />
+              )}
+              {/** Communities */}
+              <FormattedDataRow
+                rowName="Communities"
+                rowValue={
+                  <span className={styles?.['pill-container']}>
+                    {data?.links?.subreddit_url && (
+                      <Anchor href={`${data?.links?.subreddit_url}`} target="_blank">
                         <Pill radius="md" className={styles?.['pill-text']}>
-                          <span className={styles?.['show-more__icon']}>
-                            Show {restOfCategories?.length}
-                            <IconChevronDown stroke={1.5} />
-                          </span>
+                          Reddit
                         </Pill>
-                      </Popover.Target>
-                      <Popover.Dropdown>
-                        {restOfCategories?.map?.((category, idx) => (
-                          <p className={styles?.['pill-container-item']} key={idx}>
+                      </Anchor>
+                    )}
+                    {data?.links?.telegram_channel_identifier && (
+                      <Anchor
+                        href={`https://t.me/${data?.links?.telegram_channel_identifier}`}
+                        target="_blank"
+                      >
+                        <Pill radius="md" className={styles?.['pill-text']}>
+                          Telegram
+                        </Pill>
+                      </Anchor>
+                    )}
+                    {data?.links?.twitter_screen_name && (
+                      <Anchor
+                        href={`https://x.com/${data?.links?.twitter_screen_name}`}
+                        target="_blank"
+                      >
+                        <Pill radius="md" className={styles?.['pill-text']}>
+                          Twitter
+                        </Pill>
+                      </Anchor>
+                    )}
+                  </span>
+                }
+              />
+              {/** Source Code */}
+              {data?.links?.repos_url?.github?.[0] && (
+                <FormattedDataRow
+                  rowName="Source Code"
+                  rowValue={
+                    <Anchor href={`${data?.links?.repo_url?.github?.[0]}`} target="_blank">
+                      <Pill radius="md" className={styles?.['pill-text']}>
+                        GitHub
+                      </Pill>
+                    </Anchor>
+                  }
+                />
+              )}
+              {/** Categories */}
+              {data?.categories && (
+                <FormattedDataRow
+                  rowName="Categories"
+                  rowValue={
+                    <span className={styles?.['pill-container']}>
+                      <Pill radius="md" className={styles?.['pill-text']}>
+                        {firstCategory}
+                      </Pill>
+                      <div className={styles?.['show-more']}>
+                        <Popover width={300} position="bottom" withArrow shadow="md">
+                          <Popover.Target>
                             <Pill radius="md" className={styles?.['pill-text']}>
-                              {category}
+                              <span className={styles?.['show-more__icon']}>
+                                Show {restOfCategories?.length}
+                                <IconChevronDown stroke={1.5} />
+                              </span>
                             </Pill>
-                          </p>
-                        ))}
-                      </Popover.Dropdown>
-                    </Popover>
-                  </div>
-                </span>
-              }
+                          </Popover.Target>
+                          <Popover.Dropdown>
+                            {restOfCategories?.map?.((category, idx) => (
+                              <p className={styles?.['pill-container-item']} key={idx}>
+                                <Pill radius="md" className={styles?.['pill-text']}>
+                                  {category}
+                                </Pill>
+                              </p>
+                            ))}
+                          </Popover.Dropdown>
+                        </Popover>
+                      </div>
+                    </span>
+                  }
+                />
+              )}
+            </div>
+          </div>
+          {/** Market Data Rows */}
+          <h2 className={styles?.['table_header']}>{data?.name} Statistics</h2>
+          <FormattedDataRow
+            rowName="Market Cap"
+            rowPrice={data?.market_data?.market_cap?.usd}
+            hoverCard
+            hoverCardName={STATISTIC_INFO.market_cap_name}
+            hoverCardDescription={STATISTIC_INFO.market_cap_description}
+          />
+          <FormattedDataRow
+            rowName="Volume"
+            rowPrice={data?.market_data?.total_volume?.usd}
+            hoverCard
+            hoverCardName={STATISTIC_INFO.volume}
+          />
+          <FormattedDataRow
+            rowName="Fully Diluted Valuation"
+            rowPrice={data?.market_data?.fully_diluted_valuation?.usd}
+            hoverCard
+            hoverCardName={STATISTIC_INFO.fdv_name}
+            hoverCardDescription={STATISTIC_INFO.fdv_desc}
+          />
+          <FormattedDataRow
+            rowName="Circulating Supply"
+            rowPrice={data?.market_data?.circulating_supply}
+            hoverCard
+            hoverCardName={STATISTIC_INFO.circulating_supply}
+          />
+          <FormattedDataRow
+            rowName="Total Supply"
+            rowPrice={data?.market_data?.total_supply}
+            hoverCard
+            hoverCardName={STATISTIC_INFO.total_supply_desc}
+            hoverCardDescription={STATISTIC_INFO.total_supply_name}
+          />
+          <FormattedDataRow
+            rowName="Max Supply"
+            rowValue={'∞'}
+            hoverCard
+            hoverCardName={STATISTIC_INFO.max_supply_desc}
+            hoverCardDescription={STATISTIC_INFO.max_supply_name}
+          />
+          <h2 className={styles?.['table_header']}>{symbol} Historical Price</h2>
+          <div className={styles?.['table']}>
+            {/** 24H range */}
+            <FormattedDataRow
+              rowName="24H Range"
+              priceDiff24Low={data?.market_data?.low_24h?.usd}
+              priceDiff24High={data?.market_data?.high_24h?.usd}
             />
-          )}
+            {/** 7D range */}
+            {/* <FormattedDataRow rowName="7D Range" priceDiff7Low={data?.market_data?.low_7h?.usd} priceDiff7High={data?.market_data?.high_7h?.usd} /> */}
+            {/** ATH */}
+            <FormattedDataRow
+              rowName="All-time High"
+              rowPrice={data?.market_data?.ath?.usd}
+              priceChange={data?.market_data?.ath_change_percentage?.usd}
+            />
+            {/** ATL */}
+            <FormattedDataRow rowName="All-time Low" rowPrice={data?.market_data?.atl?.usd} />
+          </div>
         </div>
-      </div>
-      {/** Historical price */}
-      <div className={styles?.['table']}>
-        <h2 className={styles?.['table_header']}>{symbol} Historical Price</h2>
-        <div className={styles?.['table']}>
-          {/** 24H range */}
-          <FormattedDataRow
-            rowName="24H Range"
-            priceDiff24Low={data?.market_data?.low_24h?.usd}
-            priceDiff24High={data?.market_data?.high_24h?.usd}
-          />
-          {/** 7D range */}
-          {/* <FormattedDataRow rowName="7D Range" priceDiff7Low={data?.market_data?.low_7h?.usd} priceDiff7High={data?.market_data?.high_7h?.usd} /> */}
-          {/** ATH */}
-          <FormattedDataRow
-            rowName="All-time High"
-            rowPrice={data?.market_data?.ath?.usd}
-            priceChange={data?.market_data?.ath_change_percentage?.usd}
-          />
-          {/** ATL */}
-          <FormattedDataRow rowName="All-time Low" rowPrice={data?.market_data?.atl?.usd} />
-        </div>
-      </div>
-      {/** About */}
-      <>
-        <h3 className={styles?.['table_header']}>
-          About {capitalize(data?.id)} ({symbol})
-        </h3>
-        <div>
+        {/** About */}
+        <div className={styles?.['chartDetails__about']}>
+          <h3 className={styles?.['table_header']}>
+            About {capitalize(data?.id)} ({symbol})
+          </h3>
           <p
             className={styles?.['description']}
             dangerouslySetInnerHTML={{ __html: data?.description?.en }}
           />
+          {priceChart?.prices && (
+            <div className={styles?.['chart']}>
+              <TradingViewChart prices={priceChart?.prices} total_volumes={priceChart?.total_volumes} />
+            </div>
+          )}
         </div>
-      </>
-      {priceChart?.prices && (
-        <div className={styles?.['chart']}>
-          <TradingViewChart prices={priceChart?.prices} total_volumes={priceChart?.total_volumes} />
-        </div>
-      )}
+      </div>
       {/** Related Market List */}
       <div className={styles?.['table_tickersList']}>
         <TickersList name={data?.name} symbol={data?.symbol} coinId={data?.id} />
       </div>
       {/** News */}
-      <div>
+      <div className={styles?.['table_news']}>
         <CoinIdNews id={data?.id} />
       </div>
     </Layout>
