@@ -123,7 +123,7 @@ export interface CoinIdDeveloperData {
     deletions: number;
   };
   commit_count_4_weeks: number;
-  last_4_weeks_commit_activity_series: any[];
+  last_4_weeks_commit_activity_series: any[]; // API doc does not provide additional data
 };
 
 export interface CoinDataResponse {
@@ -142,7 +142,7 @@ export interface CoinDataResponse {
   categories: string[];
   preview_listing: boolean;
   public_notice: null | string;
-  additional_notices: any[];
+  additional_notices: any[]; // API doc does not provide additional data
   localization: Record<string, string>;
   description: Record<string, string>;
   links: CoinDatalinks;
