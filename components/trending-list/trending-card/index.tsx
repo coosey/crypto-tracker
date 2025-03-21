@@ -11,17 +11,9 @@ export interface TrendingCardProps {
   isLoading: boolean;
 }
 
-export const TrendingCard = ({
-  trendingCoins,
-  isLoading,
-}: TrendingCardProps) => {
+export const TrendingCard = ({ trendingCoins, isLoading }: TrendingCardProps) => {
   return (
-    <Card
-      className={styles?.['card-component']}
-      withBorder
-      shadow="lg"
-      radius="md"
-    >
+    <Card className={styles?.['card-component']} withBorder shadow="lg" radius="md">
       <Card.Section>
         <Group justify="space-between" mt="md" mb="xs">
           <h3>Trending Coins</h3>
@@ -43,9 +35,7 @@ export const TrendingCard = ({
               name={item?.name}
               imgAlt={item?.name}
               imgSrc={item?.thumb}
-              marketPrice={formatNumberWithSubscriptZeros(
-                item?.data?.price?.toString?.()
-              )}
+              marketPrice={formatNumberWithSubscriptZeros(item?.data?.price?.toString?.())}
               percentageChange={item?.data?.price_change_percentage_24h?.usd}
             />
           );

@@ -19,8 +19,8 @@ interface FormattedDataRowProps {
 }
 
 const renderHoverCard = (
-  hoverCard: boolean, 
-  hoverCardName?: string, 
+  hoverCard: boolean,
+  hoverCardName?: string,
   hoverCardDescription?: string
 ) => {
   if (!hoverCard) return;
@@ -62,9 +62,8 @@ const renderPrice = (value, Component = null) => {
     <span className={styles?.['table-row_price']}>
       {Component ? <Component value={value} /> : value}
     </span>
-  )
+  );
 };
-
 
 export const FormattedDataRow = ({
   rowName,

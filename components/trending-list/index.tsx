@@ -1,17 +1,12 @@
 import { Flex } from '@mantine/core';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import {
-  TrendingCoinsResponse,
-  TrendingListResponse,
-} from 'libs/types/trending-list';
+import { TrendingCoinsResponse, TrendingListResponse } from 'libs/types/trending-list';
 import { TrendingCard } from './trending-card';
 import styles from './index.module.scss';
 
 export const TrendingList = () => {
-  const [trendingCoins, setTrendingCoins] = useState<TrendingCoinsResponse[]>(
-    []
-  );
+  const [trendingCoins, setTrendingCoins] = useState<TrendingCoinsResponse[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

@@ -235,8 +235,8 @@ export default function CoinPage({ data }: Props) {
               priceChange={data?.market_data?.ath_change_percentage?.usd}
             />
             {/** ATL */}
-            <FormattedDataRow 
-              rowName="All-Time Low" 
+            <FormattedDataRow
+              rowName="All-Time Low"
               rowPrice={data?.market_data?.atl?.usd}
               priceChange={data?.market_data?.atl_change_percentage?.usd}
             />
@@ -253,7 +253,10 @@ export default function CoinPage({ data }: Props) {
           />
           {priceChart?.prices && (
             <div className={styles?.['chart']}>
-              <TradingViewChart prices={priceChart?.prices} total_volumes={priceChart?.total_volumes} />
+              <TradingViewChart
+                prices={priceChart?.prices}
+                total_volumes={priceChart?.total_volumes}
+              />
             </div>
           )}
         </div>
