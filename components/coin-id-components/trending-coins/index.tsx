@@ -1,8 +1,8 @@
 import styles from './index.module.scss';
-import { TrendingCard } from '@components/trending-list/card';
-import useTrendingList from '@libs/hooks/useTrendingList';
-import { TrendingCardItem } from '@components/trending-list/card-item';
-import { formatNumberWithSubscriptZeros } from '@libs/helpers/formatNumbersWithSubscript';
+import { TrendingCard } from 'components/trending-list/card';
+import useTrendingList from 'libs/hooks/useTrendingList';
+import { TrendingCardItem } from 'components/trending-list/card-item';
+import { formatNumberWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
