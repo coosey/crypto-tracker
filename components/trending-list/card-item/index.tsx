@@ -1,4 +1,5 @@
 import styles from './index.module.scss';
+import cn from 'classnames';
 import { CarrotPriceChange } from 'components/carrot-price-change';
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
   name: string;
   marketPrice: string;
   percentageChange: number;
+  className?: string;
 }
 
 export const TrendingCardItem = ({
@@ -15,9 +17,12 @@ export const TrendingCardItem = ({
   name,
   marketPrice,
   percentageChange,
+  className
 }: Props) => {
   return (
-    <div key={imgAlt} className={styles?.['card-item']}>
+    <div key={imgAlt} className={cn({
+      [`${className}`]: className,
+      [styles?.['card-item']]: !className})}>
       <div className={styles?.['card-item_side']}>
         <img className={styles?.['card-item_image']} src={imgSrc} alt={imgAlt} />
         <p>{name}</p>

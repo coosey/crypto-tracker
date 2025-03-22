@@ -125,26 +125,16 @@
 }
 
 .chartDetails {
-  // display: flex; /* Create a flex container */
-  // gap: 20px; /* Space between columns */
-  // align-items: flex-start; /* Align items at the top */
-  // @include mobileMaxWidth() {
-  //   flex-direction: column; /* Stack columns vertically */
-  // }
-  // &__about,
-  // &__chart {
-  //   flex: 1; /* Each column takes equal width */
-  //   @include mobileMaxWidth() {
-  //     flex: none; /* Reset flex to allow full width */
-  //     width: 100%; /* Full width for stacked layout */
-  //   }
-  // }
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px; 
 
   @media (max-width: 992px) {
     grid-template-columns: repeat(1, minmax(0, 1fr));
-     /* One column on smaller screens */
   }
+}
+
+.trendingCoinHeader {
+  padding-top: 1rem;
+  font-size: 1.5rem;
 }
