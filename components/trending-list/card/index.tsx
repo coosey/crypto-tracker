@@ -2,6 +2,7 @@ import { Card, Group } from '@mantine/core';
 import cn from 'classnames';
 import styles from './index.module.scss';
 import { IconChevronRight } from '@tabler/icons-react';
+import React from 'react';
 
 interface TrendingCardChildren {
   list: React.ReactNode;
@@ -11,7 +12,8 @@ interface Props {
   className?: string;
   renderTitleLink?: boolean;
   children?: TrendingCardChildren;
-}
+  onClick?: () => void;
+};
 
 const renderTitleLinkComponent = () => {
   return (
@@ -27,10 +29,11 @@ const renderTitleLinkComponent = () => {
   );
 };
 
-export const TrendingCard = ({
+export const TrendingCard = React.memo(({
   className, 
   renderTitleLink,
-  children
+  children,
+  onClick,
 }: Props) => {
   return (
     <Card
@@ -38,6 +41,7 @@ export const TrendingCard = ({
       withBorder
       shadow="lg"
       radius="md"
+      onClick={onClick}
     >
       <Card.Section>
         {renderTitleLink && renderTitleLinkComponent()}
@@ -45,4 +49,4 @@ export const TrendingCard = ({
       <>{children?.list}</>
     </Card>
   );
-};
+});
