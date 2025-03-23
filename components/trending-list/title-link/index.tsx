@@ -1,4 +1,4 @@
-import { Group } from "@mantine/core";
+import { Group } from '@mantine/core';
 import { IconChevronRight } from '@tabler/icons-react';
 import styles from './index.module.scss';
 
@@ -13,5 +13,5 @@ export const TrendingCardTitleLink = () => {
         </a>
       </span>
     </Group>
-  )
-}
+  );
+};
