@@ -14,7 +14,11 @@ interface Props {
   onClick?: () => void;
 }
 
-export const TrendingCard = React.memo(({ className, children, onClick }: Props) => {
+export const TrendingCard = React.memo(({
+  className,
+  children,
+  onClick,
+}: Props) => {
   return (
     <Card
       className={cn(styles?.['card-component'], className)}
