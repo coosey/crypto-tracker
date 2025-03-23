@@ -3,6 +3,7 @@ import { TrendingCard } from 'components/trending-list/card';
 import useTrendingList from 'libs/hooks/useTrendingList';
 import { TrendingCardItem } from 'components/trending-list/card-item';
 import { formatNumberWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
+<<<<<<< HEAD
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
@@ -14,13 +15,23 @@ export const TrendingCoins = () => {
     router.push(`/coin/${coinId}`);
   }, []);
 
+=======
+
+export const TrendingCoins = () => {
+  const { trendingList } = useTrendingList();
+>>>>>>> 5561e03 (added trending coins list on coin[id] page + styling)
   return (
     <div className={styles?.['wrapper']}>
       {trendingList?.coins?.map?.((coin) => {
         const item = coin?.item;
+<<<<<<< HEAD
         const coinName = item?.id?.toLowerCase?.();
         return (
           <TrendingCard key={item?.coin_id} onClick={() => handleClickTrendinCoin(coinName)}>
+=======
+        return (
+          <TrendingCard key={coin.item.coin_id}>
+>>>>>>> 5561e03 (added trending coins list on coin[id] page + styling)
             {{
               list: (
                 <TrendingCardItem
