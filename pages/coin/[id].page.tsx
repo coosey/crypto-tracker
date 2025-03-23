@@ -273,11 +273,6 @@ export default function CoinPage({ data }: Props) {
         <h2 className={styles?.['trendingCoinHeader']}>Trending Coins</h2>
         <TrendingCoins />
       </div>
-      {/** Trending Coins List */}
-      <div>
-        <h2 className={styles?.['trendingCoinHeader']}>Trending Coins</h2>
-        <TrendingCoins />
-      </div>
     </Layout>
   );
 }
