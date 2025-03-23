@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react';
 import { CoinIdNews } from 'components/coin-id-components/news';
 import { TradingViewChart } from '@/components/trading-view-chart';
 import { PriceChart } from '@/libs/types/price-chart';
+import { TrendingCoins } from '@/components/coin-id-components/trending-coins';
 import { CoinDataResponse } from '@/libs/types/coin-id';
 
 interface Props {
@@ -30,7 +31,7 @@ export default function CoinPage({ data }: Props) {
   const firstCategory = categories?.[0];
   const restOfCategories = categories?.slice?.(1, categories?.length);
 
-  const [priceChart, setPriceChart] = useState<PriceChart>({} as PriceChart);
+  const [priceChart, setPriceChart] = useState<PriceChart>();
 
   async function getCoinPriceChart() {
     try {
@@ -265,9 +266,14 @@ export default function CoinPage({ data }: Props) {
       <div className={styles?.['table_tickersList']}>
         <TickersList name={data?.name} symbol={data?.symbol} coinId={data?.id} />
       </div>
-      {/** News */}
+      {/** News List */}
       <div className={styles?.['table_news']}>
         <CoinIdNews id={data?.id} symbol={symbol} />
+      </div>
+      {/** Trending Coins List */}
+      <div>
+        <h2 className={styles?.['trendingCoinHeader']}>Trending Coins</h2>
+        <TrendingCoins />
       </div>
     </Layout>
   );

@@ -158,6 +158,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
     return () => {
       window.removeEventListener('resize', handleResize);
       chart.remove();
+      toolTip.remove();
     };
   }, [prices]);
 
