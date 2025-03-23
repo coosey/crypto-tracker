@@ -16,6 +16,7 @@ import { TradingViewChart } from '@/components/trading-view-chart';
 import { PriceChart } from '@/libs/types/price-chart';
 import { TrendingCoins } from '@/components/coin-id-components/trending-coins';
 import { CoinDataResponse } from '@/libs/types/coin-id';
+import { TrendingCoins } from '@/components/coin-id-components/trending-coins';
 
 interface Props {
   data: CoinDataResponse;
