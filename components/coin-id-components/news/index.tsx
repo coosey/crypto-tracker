@@ -7,9 +7,10 @@ import { NewsCarousel } from './news-carousel';
 
 interface Props {
   id: string;
+  symbol: string;
 }
 
-export const CoinIdNews = ({ id }: Props) => {
+export const CoinIdNews = ({ id, symbol }: Props) => {
   const [newsData, setNewsData] = useState<NewsArticleObj[]>([]);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export const CoinIdNews = ({ id }: Props) => {
         const response = await axios.get('/api/news', {
           params: {
             id: id,
+            symbol: symbol
           },
         });
         if (response?.status === 200) {
