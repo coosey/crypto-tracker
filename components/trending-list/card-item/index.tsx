@@ -17,12 +17,16 @@ export const TrendingCardItem = ({
   name,
   marketPrice,
   percentageChange,
-  className
+  className,
 }: Props) => {
   return (
-    <div key={imgAlt} className={cn({
-      [`${className}`]: className,
-      [styles?.['card-item']]: !className})}>
+    <div
+      key={imgAlt}
+      className={cn({
+        [`${className}`]: className,
+        [styles?.['card-item']]: !className,
+      })}
+    >
       <div className={styles?.['card-item_side']}>
         <img className={styles?.['card-item_image']} src={imgSrc} alt={imgAlt} />
         <p>{name}</p>

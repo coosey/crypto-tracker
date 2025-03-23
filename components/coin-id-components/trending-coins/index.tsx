@@ -26,16 +26,16 @@ export const TrendingCoins = () => {
                 <TrendingCardItem
                   className={styles?.['wrapper__item']}
                   imgSrc={item?.thumb}
-                  imgAlt={item?.name} 
-                  name={item?.name} 
-                  marketPrice={formatNumberWithSubscriptZeros(item?.data?.price?.toString?.())} 
+                  imgAlt={item?.name}
+                  name={item?.name}
+                  marketPrice={formatNumberWithSubscriptZeros(item?.data?.price?.toString?.())}
                   percentageChange={item?.data?.price_change_percentage_24h?.usd}
                 />
-              )
+              ),
             }}
           </TrendingCard>
-        )
+        );
       })}
     </div>
-  )
+  );
 };
