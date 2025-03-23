@@ -2,7 +2,7 @@ import { NewsApiResponse } from '@libs/types/news';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<NewsApiResponse>) {
-  const { id, page = 1 } = req.query;
+  const { id, symbol } = req.query;
   // get the current date
   const today = new Date();
   // subtract two day to get desired date
@@ -16,11 +16,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   // format the date as yyyy-mm-dd
   const formattedDate = `${year}-${month}-${day}`;
 
-  const URL = `https://newsapi.org/v2/everything?q=+"${id}"&searchIn=title&from=${formattedDate}&sortBy=relevancy&language=en&page=${page}&apiKey=${process.env.NEXT_PRIVATE_NEWS_API_KEY}`;
+  const query = `${id}+${symbol}`;
 
+  const URL = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&from=${formattedDate}&sortBy=publishedAt&language=en&apiKey=${process.env.NEXT_PRIVATE_NEWS_API_KEY}`;
+  console.log('URL', URL);
   try {
     const response = await fetch(URL, {
-      cache: 'force-cache',
       headers: {
         'content-type': 'application/json',
         'x-cg-demo-api-key': process.env.NEXT_PRIVATE_COINGECKO_KEY,

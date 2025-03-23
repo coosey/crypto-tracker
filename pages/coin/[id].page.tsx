@@ -268,7 +268,7 @@ export default function CoinPage({ data }: Props) {
       </div>
       {/** News List */}
       <div className={styles?.['table_news']}>
-        <CoinIdNews id={data?.id} />
+        <CoinIdNews id={data?.id} symbol={symbol} />
       </div>
       {/** Trending Coins List */}
       <div>
