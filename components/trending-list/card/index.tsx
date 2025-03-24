@@ -12,7 +12,7 @@ interface Props {
   className?: string;
   children?: TrendingCardChildren;
   onClick?: () => void;
-}
+};
 
 export const TrendingCard = React.memo(({
   className,
