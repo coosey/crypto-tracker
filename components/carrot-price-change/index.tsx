@@ -32,9 +32,9 @@ export const CarrotPriceChange = ({
     const CaretIcon = isPositive ? IconCaretUpFilled : IconCaretDownFilled;
 
     return (
-      <div className={`${priceClassName} ${className}`} data-price-target="price">
-        <span className={styles.price_change}>
-          <CaretIcon stroke={1} />
+      <div className={cn(priceClassName, className)} data-price-target="price" data-testid="carrot-price">
+        <span className={styles?.['price_change']}>
+          <CaretIcon stroke={1} data-testid="carrot-icon" />
           {getPriceDisplay(value)}
         </span>
       </div>

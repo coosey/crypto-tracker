@@ -11,7 +11,7 @@ function expectIconToHaveClass(carrotIcon: HTMLElement, expectedIcon: string) {
 };
 
 function CarrotPriceComponent(testPrice: number) {
-  return <CarrotPriceChange price={testPrice} data-testid="carrot-price" />
+  return <CarrotPriceChange value={testPrice} data-testid="carrot-price" />
 };
 
 describe('CarrotPriceChange Component', () => {
