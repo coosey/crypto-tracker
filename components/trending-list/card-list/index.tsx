@@ -1,7 +1,7 @@
 import { TrendingCardSkeleton } from '../card-skeleton';
 import { TrendingCardItem } from '../card-item';
-import { formatNumberWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
-import { NormalizedTrendList } from '@/libs/types/trending-list';
+import { formatNumberWithSubscriptZeros } from '@libs/helpers/formatNumbersWithSubscript';
+import { NormalizedTrendList } from '@libs/types/trending-list';
 
 interface Props {
   limit?: number;
