@@ -28,11 +28,11 @@ export const TrendingCardItem = ({
       })}
     >
       <div className={styles?.['card-item_side']}>
-        <img className={styles?.['card-item_image']} src={imgSrc} alt={imgAlt} />
+        {imgSrc && <img className={styles?.['card-item_image']} src={imgSrc} alt={imgAlt} />}
         <p>{name}</p>
       </div>
       <div className={styles?.['card-item_side']}>
-        <div>${marketPrice}</div>
+        {marketPrice && <div>${marketPrice}</div>}
         <CarrotPriceChange value={percentageChange} />
       </div>
     </div>

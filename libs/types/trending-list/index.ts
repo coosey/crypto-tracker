@@ -89,3 +89,14 @@ export interface TrendingCoinsObject {
 export interface AllTrendingCoinsResponse {
   [ids: string]: TrendingCoinsObject;
 };
+
+export type TrendListVariant = 'category' | 'coin' | 'nft';
+
+export interface NormalizedTrendList {
+  key: string | number;
+  name: string;
+  imgAlt: string;
+  imgSrc?: string | null;
+  marketPrice?: string | null;
+  percentageChange: number;
+}
