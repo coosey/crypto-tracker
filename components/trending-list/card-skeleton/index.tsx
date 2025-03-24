@@ -1,20 +1,25 @@
 import { Skeleton } from '@mantine/core';
 import styles from './index.module.scss';
 
-export const TrendingCardSkeleton = () => {
+interface Props {
+  isLoading: boolean;
+}
+
+export const TrendingCardSkeleton = ({ isLoading }: Props) => {
   return (
     <>
-      {Array(3)
-        .fill(null)
-        .map((_, idx) => (
-          <div className={styles?.['loading']} key={idx}>
-            <div className={styles?.['loading_avatar']}>
-              <Skeleton height={24} width={24} circle />
-              <Skeleton height={15} mt={5} width="15%" />
+      {isLoading &&
+        Array(3)
+          .fill(null)
+          .map((_, idx) => (
+            <div className={styles?.['loading']} key={idx}>
+              <div className={styles?.['loading_avatar']}>
+                <Skeleton height={24} width={24} circle />
+                <Skeleton height={15} mt={5} width="15%" />
+              </div>
+              <Skeleton height={15} mt={5} width="40%" />
             </div>
-            <Skeleton height={15} mt={5} width="40%" />
-          </div>
-        ))}
+          ))}
     </>
   );
 };
