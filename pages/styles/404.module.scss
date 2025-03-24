@@ -1,0 +1,43 @@
+@import '/styles/design.scss';
+
+.container {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+.label {
+  text-align: center;
+  font-weight: 900;
+  font-size: 38px;
+  line-height: 1;
+  margin-bottom: calc(1.5 * 2rem);
+  color: $text-secondary;
+
+  @include mobileMaxWidth() {
+    font-size: 32px;
+  }
+}
+
+.description {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: calc(1.5 * 2rem);
+}
+
+.title {
+  font-family: $font-primary;
+  text-align: center;
+  font-weight: 900;
+  font-size: 38px;
+  padding-bottom: 1rem;
+
+  @include mobileMaxWidth() {
+    font-size: 32px;
+  }
+}
+
+.backButton {
+  border-color: $border-primary;
+  color: $text-primary;
+}
