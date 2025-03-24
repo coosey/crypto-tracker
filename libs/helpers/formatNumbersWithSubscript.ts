@@ -4,6 +4,7 @@
  * GITHUB REPO: https://github.com/haqq-network/format-number-with-subscript-zeros/blob/master/src/formatNumberWithSubscriptZeros.ts
  */
 export function formatNumberWithSubscriptZeros(numberStr: string, presiction = 3, min = 0.001): string {
+  if (!numberStr?.length) return;
   const number = parseFloat(numberStr);
   if (number >= min) {
       const [part0, part1] = numberStr.split('.')
