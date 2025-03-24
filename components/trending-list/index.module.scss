@@ -1,6 +1,7 @@
 @import '/styles/design.scss';
 
 .trendingList {
+  gap: 1rem;
   @include mobileMaxWidth() {
     justify-content: center;
   }
