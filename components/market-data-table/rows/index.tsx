@@ -1,9 +1,9 @@
 import { Table } from '@mantine/core';
-import { CoinsListResponse } from 'lib/types/coins-list';
+import { CoinsListResponse } from 'libs/types/coins-list';
 import styles from './index.module.scss';
 import { FavoriteButton } from '../../favorite-button';
 import { CarrotPriceChange } from '../../carrot-price-change';
-import { formatNumberWithSubscriptZeros } from 'lib/helpers/formatNumbersWithSubscript';
+import { formatNumberWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
 import { DataTableSkeleton } from '../skeleton';
 import { FormattedNumber } from 'components/formatted-number';
 import { memo } from 'react';

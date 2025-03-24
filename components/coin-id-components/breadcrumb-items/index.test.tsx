@@ -1,6 +1,6 @@
 
 import { BreadCrumbItems } from '.';
-import { render, screen } from 'lib/utils/mantineTestUtil';
+import { render, screen } from 'libs/utils/mantineTestUtil';
 describe('BreadCrumbItems Component', () => {
   it('Should render BreadcrumbItems Component correctly', () => {
     render(

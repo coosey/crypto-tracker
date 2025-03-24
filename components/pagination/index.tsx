@@ -1,7 +1,7 @@
 import { Pagination } from '@mantine/core';
 import { SetStateAction } from 'react';
 import styles from './index.module.scss';
-import { handleScrollToDiv } from 'lib/helpers/handleScrollToDiv';
+import { handleScrollToDiv } from 'libs/helpers/handleScrollToDiv';
 import classNames from 'classnames';
 
 interface Props {

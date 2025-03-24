@@ -1,5 +1,5 @@
 import '@testing-library/react';
-import { render, screen } from 'lib/utils/mantineTestUtil';
+import { render, screen } from 'libs/utils/mantineTestUtil';
 import { FormattedDataRow } from '.';
 
 describe('FormattedDataRow Component', () => {
