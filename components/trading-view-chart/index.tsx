@@ -2,14 +2,14 @@ import React, { useEffect, useRef } from 'react';
 import { createChart, ColorType } from 'lightweight-charts';
 import styles from './index.module.scss';
 import { isEmpty } from 'lodash';
-import { compactNumbers } from 'libs/helpers/compactNumbers';
+import { compactNumbers } from '@libs/helpers/compactNumbers';
 import {
   CHART_COLORS,
   getChartData,
   addAreaSeries,
   addVolumeSeries,
   convertTimeScale,
-  updateTooltipPosition
+  updateTooltipPosition,
 } from './helpers';
 
 export const TradingViewChart = ({ prices, total_volumes }) => {
@@ -59,7 +59,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
         rightBarStaysOnScroll: true,
         visible: true,
         // Ensure time is visible on the x-axis
-        timeVisible: true, 
+        timeVisible: true,
         secondsVisible: false,
         shiftVisibleRangeOnNewBar: true,
       },
@@ -110,7 +110,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
       } else {
         // Convert the date to a more readable format
         const dateStr = param.time;
-        const modifiedDateFormat = new Date(dateStr as number * 1000).toLocaleString()
+        const modifiedDateFormat = new Date((dateStr as number) * 1000).toLocaleString();
         // Set the tooltip content and style
         toolTip.style.display = 'block';
         toolTip.style.width = '200px';
@@ -168,5 +168,3 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
     </div>
   );
 };
-
-

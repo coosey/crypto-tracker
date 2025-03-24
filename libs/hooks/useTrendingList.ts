@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TrendingListResponse } from 'libs/types/trending-list';
+import { TrendingListResponse } from '@libs/types/trending-list';
 import axios from 'axios';
 
 

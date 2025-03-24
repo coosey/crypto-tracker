@@ -1,4 +1,4 @@
-import { TrendingCoinsResponse } from 'libs/types/trending-list';
+import { TrendingCoinsResponse } from '@libs/types/trending-list';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(

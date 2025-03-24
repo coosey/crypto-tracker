@@ -4,14 +4,14 @@ import styles from './[id].module.scss';
 import { CarrotPriceChange } from '@components/carrot-price-change';
 import { Anchor, Pill, Popover } from '@mantine/core';
 import { FormattedDataRow } from '@components/formatted-data-row';
-import { parseDomain } from 'libs/helpers/parseDomain';
+import { parseDomain } from '@libs/helpers/parseDomain';
 import { capitalize } from 'lodash';
 import { IconChevronDown } from '@tabler/icons-react';
 import { TickersList } from '@components/coin-id-components';
 import { BreadCrumbItems } from '@components/coin-id-components/breadcrumb-items';
 import { STATISTIC_INFO } from '@components/coin-id-components/statistics-info';
 import { useEffect, useState } from 'react';
-import { CoinIdNews } from 'components/coin-id-components/news';
+import { CoinIdNews } from '@components/coin-id-components/news';
 import { TradingViewChart } from '@components/trading-view-chart';
 import { PriceChart } from '@libs/types/price-chart';
 import { TrendingCoins } from '@components/coin-id-components/trending-coins';
@@ -236,8 +236,8 @@ export default function CoinPage({ data }: Props) {
               priceChange={data?.market_data?.ath_change_percentage?.usd}
             />
             {/** ATL */}
-            <FormattedDataRow 
-              rowName="All-Time Low" 
+            <FormattedDataRow
+              rowName="All-Time Low"
               rowPrice={data?.market_data?.atl?.usd}
               priceChange={data?.market_data?.atl_change_percentage?.usd}
             />
@@ -254,7 +254,10 @@ export default function CoinPage({ data }: Props) {
           />
           {priceChart?.prices && (
             <div className={styles?.['chart']}>
-              <TradingViewChart prices={priceChart?.prices} total_volumes={priceChart?.total_volumes} />
+              <TradingViewChart
+                prices={priceChart?.prices}
+                total_volumes={priceChart?.total_volumes}
+              />
             </div>
           )}
         </div>

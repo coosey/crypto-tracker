@@ -19,25 +19,13 @@ const renderCoinIdRow = (value, Component = null) => {
 
 const renderTrustScore = (trustScore: string) => {
   if (!trustScore) return <EmptyRow />;
-  return (
-    <div
-      className={styles?.['trust-score']}
-      style={{ backgroundColor: `${trustScore}` }}
-    />
-  );
+  return <div className={styles?.['trust-score']} style={{ backgroundColor: `${trustScore}` }} />;
 };
 
-const renderTradeUrl = (
-  tradeUrl: string,
-  symbol: string,
-  ticker: TickersMarketObject
-) => {
+const renderTradeUrl = (tradeUrl: string, symbol: string, ticker: TickersMarketObject) => {
   if (!tradeUrl) return <EmptyRow />;
   return (
-    <Anchor
-      className={styles?.['trade-url']}
-      href={tradeUrl}
-      target="_blank">
+    <Anchor className={styles?.['trade-url']} href={tradeUrl} target="_blank">
       {symbol?.toUpperCase?.() === ticker?.base
         ? `${ticker?.base}/${ticker?.target}`
         : `${symbol?.toUpperCase?.()}/USDT`}
@@ -59,15 +47,11 @@ export const CoinIdTableRows = ({ tickers, symbol }: Props) => {
                 <div>{ticker?.market?.name}</div>
               </div>
             </Table.Td>
-            <Table.Td>
-              {renderTradeUrl(ticker?.trade_url, symbol, ticker)}
-            </Table.Td>
+            <Table.Td>{renderTradeUrl(ticker?.trade_url, symbol, ticker)}</Table.Td>
             <Table.Td data-price-target="price">
               {renderCoinIdRow(ticker?.converted_last?.usd, FormattedNumber)}
             </Table.Td>
-            <Table.Td>
-              {renderCoinIdRow(ticker?.bid_ask_spread_percentage?.toFixed?.(2))}
-            </Table.Td>
+            <Table.Td>{renderCoinIdRow(ticker?.bid_ask_spread_percentage?.toFixed?.(2))}</Table.Td>
             <Table.Td data-price-target="price">
               {renderCoinIdRow(ticker?.converted_volume?.usd, FormattedNumber)}
             </Table.Td>

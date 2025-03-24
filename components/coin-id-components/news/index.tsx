@@ -1,4 +1,4 @@
-import { NewsArticleObj } from 'libs/types/news';
+import { NewsArticleObj } from '@libs/types/news';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { capitalize } from 'lodash';

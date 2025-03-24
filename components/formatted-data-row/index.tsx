@@ -1,6 +1,6 @@
-import { FormattedNumber } from 'components/formatted-number';
+import { FormattedNumber } from '@components/formatted-number';
 import styles from './index.module.scss';
-import { CarrotPriceChange } from 'components/carrot-price-change';
+import { CarrotPriceChange } from '@components/carrot-price-change';
 import { HoverCard, Text } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 
@@ -19,8 +19,8 @@ export interface FormattedDataRowProps {
 }
 
 const renderHoverCard = (
-  hoverCard: boolean, 
-  hoverCardName?: string, 
+  hoverCard: boolean,
+  hoverCardName?: string,
   hoverCardDescription?: string
 ) => {
   if (!hoverCard) return;
@@ -62,9 +62,8 @@ const renderPrice = (value, Component = null) => {
     <span className={styles?.['table-row_price']}>
       {Component ? <Component value={value} /> : value}
     </span>
-  )
+  );
 };
-
 
 export const FormattedDataRow = ({
   rowName,
