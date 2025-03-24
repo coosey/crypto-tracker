@@ -16,10 +16,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
   // format the date as yyyy-mm-dd
   const formattedDate = `${year}-${month}-${day}`;
 
-  const query = `${id}+${symbol}`;
+  const query = `crypto AND (${id} OR ${symbol})`;
 
   const URL = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&from=${formattedDate}&sortBy=publishedAt&language=en&apiKey=${process.env.NEXT_PRIVATE_NEWS_API_KEY}`;
-  console.log('URL', URL);
   try {
     const response = await fetch(URL, {
       headers: {
