@@ -38,7 +38,7 @@ export default function CoinPage({ data }: Props) {
     } catch (error) {
       console.log('error fetching price chart: ', error);
     }
-  };
+  }
 
   useEffect(() => {
     getCoinPriceChart();

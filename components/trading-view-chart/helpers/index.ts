@@ -40,7 +40,7 @@ export function updateTooltipPosition(
   toolTip: HTMLDivElement
 ) {
   const y = param.point.y;
-  const {margin, width, height} = TOOLTIP_DISPLAY;
+  const { margin, width, height } = TOOLTIP_DISPLAY;
 
   let left = param.point.x + margin;
   let top = y + margin;

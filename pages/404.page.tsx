@@ -12,10 +12,16 @@ export default function Page404() {
           The page you are trying to open does not exist. You may have mistyped the address, or the
           page has been moved to another URL. If you think this is an error please contact support.
         </Text>
-        <Button variant="outline" size="md" mt="xl" className={styles?.['backButton']} onClick={() => router.push('/')}>
+        <Button
+          variant="outline"
+          size="md"
+          mt="xl"
+          className={styles?.['backButton']}
+          onClick={() => router.push('/')}
+        >
           Go back to home page
         </Button>
       </Flex>
     </Container>
   );
-};
+}
