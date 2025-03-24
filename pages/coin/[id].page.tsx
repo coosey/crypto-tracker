@@ -4,7 +4,7 @@ import styles from './[id].module.scss';
 import { CarrotPriceChange } from '@components/carrot-price-change';
 import { Anchor, Pill, Popover } from '@mantine/core';
 import { FormattedDataRow } from '@components/formatted-data-row';
-import { parseDomain } from 'libs/helpers/parseDomain';
+import { parseDomain } from '@libs/helpers/parseDomain';
 import { capitalize } from 'lodash';
 import { IconChevronDown } from '@tabler/icons-react';
 import { TickersList } from '@components/coin-id-components';
