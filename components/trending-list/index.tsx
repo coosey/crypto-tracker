@@ -1,4 +1,3 @@
-import { Flex } from '@mantine/core';
 import { TrendingCard } from './card';
 import { TrendingCardList } from './card-list';
 import { TrendingCoinTitleLink } from './coin-title-link';
@@ -12,7 +11,7 @@ export const TrendingList = () => {
   const trendingCategories = normalizeTrendList(trendingList, 'category');
 
   return (
-    <Flex direction="row" className={styles?.['trendingList']}>
+    <div className={styles?.['trendingList']}>
       <TrendingCard>
         {{
           titleLink: <TrendingCoinTitleLink title="Trending Coins" />,
@@ -25,6 +24,6 @@ export const TrendingList = () => {
           list: <TrendingCardList limit={3} loading={loading} trendingList={trendingCategories} />,
         }}
       </TrendingCard>
-    </Flex>
+    </div>
   );
 };
