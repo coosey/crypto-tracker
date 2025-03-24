@@ -22,16 +22,12 @@ interface Props {
 }
 
 export default function CoinPage({ data }: Props) {
+  const [priceChart, setPriceChart] = useState<PriceChart>();
+  const { firstCategory, restOfCategories } = retrieveCategories(data);
   // ticker symbol
   const symbol = data?.symbol?.toUpperCase?.();
   // Parse URL for website
   const parsedUrl = parseDomain(data?.links?.homepage?.[0]);
-  // Retrieve all categories, get 1st item, then parse rest of items
-  const categories = data?.categories;
-  const firstCategory = categories?.[0];
-  const restOfCategories = categories?.slice?.(1, categories?.length);
-
-  const [priceChart, setPriceChart] = useState<PriceChart>();
 
   async function getCoinPriceChart() {
     try {
@@ -42,7 +38,7 @@ export default function CoinPage({ data }: Props) {
     } catch (error) {
       console.log('error fetching price chart: ', error);
     }
-  }
+  };
 
   useEffect(() => {
     getCoinPriceChart();
@@ -74,6 +70,7 @@ export default function CoinPage({ data }: Props) {
           </span>
         </div>
       </div>
+      {/** Left-hand side of coin[id] page, contains: statistics, info, & historical prices */}
       <div className={styles?.['chartDetails']}>
         <div className={styles?.['chartDetails__data']}>
           {/** Info */}
@@ -243,8 +240,9 @@ export default function CoinPage({ data }: Props) {
             />
           </div>
         </div>
-        {/** About */}
+        {/** Right-hand side of coin[id] page, contains: about section & chart details */}
         <div className={styles?.['chartDetails__about']}>
+          {/** About */}
           <h3 className={styles?.['table_header']}>
             About {capitalize(data?.id)} ({symbol})
           </h3>
@@ -277,6 +275,18 @@ export default function CoinPage({ data }: Props) {
       </div>
     </Layout>
   );
+}
+
+/**
+ * Helper to parse CoinDataResponse categories
+ * @param response CoinDataResponse
+ * @returns 1st category and the rest of the categories
+ */
+function retrieveCategories(response: CoinDataResponse) {
+  const categories = response?.categories;
+  const firstCategory = categories?.[0];
+  const restOfCategories = categories?.slice?.(1, categories?.length);
+  return { firstCategory, restOfCategories };
 }
 
 // Fetch data server-side

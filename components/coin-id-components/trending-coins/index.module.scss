@@ -18,4 +18,8 @@
 
     cursor: pointer;
   }
+
+  @include tabletMaxWidth() {
+    grid-template-columns: repeat(2, minmax(0px, 1fr));
+  }
 }
