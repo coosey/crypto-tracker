@@ -1,0 +1,21 @@
+@import '/styles/design.scss';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0px, 1fr));
+  column-gap: 1rem;
+  row-gap: 1rem;
+  padding-top: 1rem;
+  
+  &__item {
+    display: flex;
+    flex-direction: column;
+    max-width: 20rem;
+    gap: 1.5rem;
+
+    padding-top: $space_20;
+    padding-bottom: $space_20;
+
+    cursor: pointer;
+  }
+}
