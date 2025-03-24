@@ -18,6 +18,54 @@ export interface FormattedDataRowProps {
   hoverCardDescription?: string;
 }
 
+const renderHoverCard = (
+  hoverCard: boolean, 
+  hoverCardName?: string, 
+  hoverCardDescription?: string
+) => {
+  if (!hoverCard) return;
+  return (
+    <span className={styles?.['table-row_hover-card']}>
+      <HoverCard width={360} shadow="md">
+        <HoverCard.Target>
+          <IconInfoCircle stroke={1.5} />
+        </HoverCard.Target>
+        <HoverCard.Dropdown>
+          <Text size="md">{hoverCardName}</Text>
+          {hoverCardDescription && (
+            <Text size="md" mt="md">
+              {hoverCardDescription}
+            </Text>
+          )}
+        </HoverCard.Dropdown>
+      </HoverCard>
+    </span>
+  );
+};
+
+const renderPriceRange = (low?: number, high?: number) => {
+  if (!low || !high) return;
+  return (
+    <span className={styles?.['table-row_price']}>
+      <FormattedNumber value={low} />
+      {` - `}
+      <FormattedNumber value={high} />
+    </span>
+  );
+};
+
+const renderPrice = (value, Component = null) => {
+  if (value === undefined) {
+    return null; // Or return a fallback UI
+  }
+  return (
+  <span className={styles?.['table-row_price']}>
+    {Component ? <Component value={value} /> : value}
+  </span>
+
+  )
+};
+
 export const FormattedDataRow = ({
   rowName,
   rowPrice,
@@ -35,52 +83,14 @@ export const FormattedDataRow = ({
     <div key={rowName} className={styles?.['table-row']}>
       <div className={styles?.['table-row_name-icon']}>
         <span className={styles?.['table-row_name']}>{rowName}</span>
-        {hoverCard && (
-          <span className={styles?.['table-row_hover-card']}>
-            <HoverCard width={360} shadow="md">
-              <HoverCard.Target>
-                <IconInfoCircle stroke={1.5} />
-              </HoverCard.Target>
-              <HoverCard.Dropdown>
-                <Text size="md">{hoverCardName}</Text>
-                {hoverCardDescription && (
-                  <Text size="md" mt="md">
-                    {hoverCardDescription}
-                  </Text>
-                )}
-              </HoverCard.Dropdown>
-            </HoverCard>
-          </span>
-        )}
+        {renderHoverCard(hoverCard, hoverCardName, hoverCardDescription)}
       </div>
       <div className={styles?.['table-row_price-percent']}>
-        {rowValue && (
-          <span className={styles?.['table-row_price']}>{rowValue}</span>
-        )}
-        {rowPrice && (
-          <span className={styles?.['table-row_price']}>
-            <FormattedNumber value={rowPrice} />
-          </span>
-        )}
-        {priceChange && (
-          <span className={styles?.['table-row_price']}>
-            <CarrotPriceChange price={priceChange} />
-          </span>
-        )}
-        {priceDiff24High && priceDiff24Low && (
-          <span className={styles?.['table-row_price']}>
-            <FormattedNumber value={priceDiff24Low} />
-            {` - `}
-            <FormattedNumber value={priceDiff24High} />
-          </span>
-        )}
-        {priceDiff7High && priceDiff7Low && (
-          <span className={styles?.['table-row_price']}>
-            <FormattedNumber value={priceDiff7Low} />
-            {` - `}
-            <FormattedNumber value={priceDiff7High} />
-          </span>
-        )}
+        {rowValue && renderPrice(rowValue)}
+        {rowPrice && renderPrice(rowPrice, FormattedNumber)}
+        {priceChange && renderPrice(priceChange, CarrotPriceChange)}
+        {renderPriceRange(priceDiff24Low, priceDiff24High)}
+        {renderPriceRange(priceDiff7Low, priceDiff7High)}
       </div>
     </div>
   );

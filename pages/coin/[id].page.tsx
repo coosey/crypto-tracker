@@ -41,31 +41,31 @@ export default function CoinPage({ data }) {
   useEffect(() => {
     getCoinPriceChart();
   }, [data?.id]);
-  
+
   return (
     <Layout className={styles?.['coinPage']}>
       <BreadCrumbItems name={data?.name} />
       <div className={styles?.['coin']}>
+        {/** Coin[id] Details */}
         <div className={styles?.['coin_name']}>
           <img src={data?.image?.thumb} alt={data?.symbol} width={25} height={25} />
           <h1>{data?.name}</h1>
           <span className={styles?.['coin_name_symbol']}>{symbol} Price</span>
           <span className={styles?.['coin_name_rank']}>#{data?.market_cap_rank}</span>
         </div>
-        <div>
-          <div className={styles?.['coin_price']}>
-            <span className={styles?.['coin_price_amount']}>
-              $
-              {data?.market_data?.current_price?.usd?.toLocaleString?.('en', {
-                minimumFractionDigits: 2,
-              })}
-            </span>
-            <span className={styles?.['coin_price_24h']}>
-              <CarrotPriceChange
-                price={data?.market_data?.price_change_percentage_24h_in_currency?.usd}
-              />
-            </span>
-          </div>
+        {/** Coin[id] Price Details */}
+        <div className={styles?.['coin_price']}>
+          <span className={styles?.['coin_price_amount']}>
+            $
+            {data?.market_data?.current_price?.usd?.toLocaleString?.('en', {
+              minimumFractionDigits: 2,
+            })}
+          </span>
+          <span className={styles?.['coin_price_24h']}>
+            <CarrotPriceChange
+              value={data?.market_data?.price_change_percentage_24h_in_currency?.usd}
+            />
+          </span>
         </div>
       </div>
       {/** Market Data Rows */}
@@ -182,11 +182,9 @@ export default function CoinPage({ data }) {
               rowName="Categories"
               rowValue={
                 <span className={styles?.['pill-container']}>
-                  <div>
-                    <Pill radius="md" className={styles?.['pill-text']}>
-                      {firstCategory}
-                    </Pill>
-                  </div>
+                  <Pill radius="md" className={styles?.['pill-text']}>
+                    {firstCategory}
+                  </Pill>
                   <div className={styles?.['show-more']}>
                     <Popover width={300} position="bottom" withArrow shadow="md">
                       <Popover.Target>
@@ -237,7 +235,7 @@ export default function CoinPage({ data }) {
         </div>
       </div>
       {/** About */}
-      <div>
+      <>
         <h3 className={styles?.['table_header']}>
           About {capitalize(data?.id)} ({symbol})
         </h3>
@@ -247,9 +245,9 @@ export default function CoinPage({ data }) {
             dangerouslySetInnerHTML={{ __html: data?.description?.en }}
           />
         </div>
-      </div>
+      </>
       {priceChart?.prices && (
-        <div>
+        <div className={styles?.['chart']}>
           <TradingViewChart prices={priceChart?.prices} total_volumes={priceChart?.total_volumes} />
         </div>
       )}

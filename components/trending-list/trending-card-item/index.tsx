@@ -24,7 +24,7 @@ export const TrendingCardItem = ({
       </div>
       <div className={styles?.['card-item_side']}>
         <div>${marketPrice}</div>
-        <CarrotPriceChange price={percentageChange} />
+        <CarrotPriceChange value={percentageChange} />
       </div>
     </div>
   );

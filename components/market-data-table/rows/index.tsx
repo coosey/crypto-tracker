@@ -60,19 +60,21 @@ export const DataTableRows = memo(function DataTableRows({ rows, handleRowClick 
             </Table.Td>
             {/** 1H */}
             <Table.Td>
-              <CarrotPriceChange price={row?.price_change_percentage_1h_in_currency} />
+              <CarrotPriceChange value={row?.price_change_percentage_1h_in_currency} />
             </Table.Td>
             {/** 1D */}
             <Table.Td>
-              <CarrotPriceChange price={row?.price_change_percentage_24h_in_currency} />
+              <CarrotPriceChange value={row?.price_change_percentage_24h_in_currency} />
             </Table.Td>
             {/** 7D */}
             <Table.Td>
-              <CarrotPriceChange price={row?.price_change_percentage_7d_in_currency} />
+              <CarrotPriceChange value={row?.price_change_percentage_7d_in_currency} />
             </Table.Td>
+            {/** Volume */}
             <Table.Td data-price-target="price">
               <FormattedNumber value={row?.total_volume} />
             </Table.Td>
+            {/** Market Cap */}
             <Table.Td data-price-target="price">
               <FormattedNumber value={row?.market_cap} />
             </Table.Td>
