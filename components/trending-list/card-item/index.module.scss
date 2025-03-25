@@ -21,7 +21,9 @@
     width: 24px;
     border-radius: 50%;
   }
+}
 
+.card-item_hover {
   &:hover {
     background-color: $bg_secondary;
     opacity: 1;

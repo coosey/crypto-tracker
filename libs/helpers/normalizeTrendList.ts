@@ -13,6 +13,7 @@ export function normalizeTrendList(
   const trendingCoins = trendListResponse?.coins?.map?.((coin) => {
     const item = coin?.item;
     return {
+      id: item?.id,
       key: item?.coin_id,
       name: item?.name,
       imgAlt: item?.name,
@@ -24,6 +25,7 @@ export function normalizeTrendList(
 
   const trendingCategories = trendListResponse?.categories?.map?.((category) => {
     return {
+      id: null,      
       key: category?.id,
       name: category?.name,
       imgAlt: category?.name,

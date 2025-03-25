@@ -93,6 +93,7 @@ export interface AllTrendingCoinsResponse {
 export type TrendListVariant = 'category' | 'coin' | 'nft';
 
 export interface NormalizedTrendList {
+  id: string;
   key: string | number;
   name: string;
   imgAlt: string;
