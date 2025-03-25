@@ -1,10 +1,7 @@
 import { PriceChart } from 'libs/types/price-chart';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<PriceChart>
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<PriceChart>) {
   const { query } = req;
   const { id } = query;
 

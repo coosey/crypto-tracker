@@ -6,8 +6,8 @@
   justify-content: space-between;
   cursor: pointer;
 
-  padding-top: $space_10;
-  padding-bottom: $space_10;
+  padding: $space_10;
+  border-radius: $space_10;
 
   &_side {
     display: flex;
@@ -20,5 +20,12 @@
     height: 24px;
     width: 24px;
     border-radius: 50%;
+  }
+}
+
+.card-item_hover {
+  &:hover {
+    background-color: $bg_secondary;
+    opacity: 1;
   }
 }

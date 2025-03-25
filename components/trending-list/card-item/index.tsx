@@ -9,6 +9,8 @@ interface Props {
   marketPrice: string;
   percentageChange: number;
   className?: string;
+  onClick?: () => void;
+  hasHover?: boolean;
 }
 
 export const TrendingCardItem = ({
@@ -18,6 +20,8 @@ export const TrendingCardItem = ({
   marketPrice,
   percentageChange,
   className,
+  onClick,
+  hasHover,
 }: Props) => {
   return (
     <div
@@ -25,7 +29,9 @@ export const TrendingCardItem = ({
       className={cn({
         [`${className}`]: className,
         [styles?.['card-item']]: !className,
+        [styles?.['card-item_hover']]: hasHover,
       })}
+      onClick={onClick}
     >
       <div className={styles?.['card-item_side']}>
         {imgSrc && <img className={styles?.['card-item_image']} src={imgSrc} alt={imgAlt} />}
