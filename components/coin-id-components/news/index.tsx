@@ -22,11 +22,7 @@ export const CoinIdNews = ({ id, symbol }: Props) => {
         const response = await axios.get('/api/news', {
           params: {
             id: id,
-<<<<<<< HEAD
             symbol: symbol,
-=======
-            symbol: symbol
->>>>>>> 1ec0adb (updated newsAPI query)
           },
         });
         if (response?.status === 200) {
