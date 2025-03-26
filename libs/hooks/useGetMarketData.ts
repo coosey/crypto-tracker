@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CoinsListResponse } from "lib/types/coins-list";
+import { CoinsListResponse } from "libs/types/coins-list";
 import { useState, useEffect } from "react";
 
 export const useGetMarketData = (currentPage: number) => {

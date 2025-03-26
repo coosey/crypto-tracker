@@ -1,4 +1,4 @@
-import {render} from 'libs/utils/mantineTestUtil';
+import { render } from 'libs/utils/mantineTestUtil';
 import { CoinIdNews } from '.';
 
 describe('Component News', () => {
