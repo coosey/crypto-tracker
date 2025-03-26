@@ -8,7 +8,7 @@ interface Props {
 export const BreadCrumbItems = ({ name }: Props) => {
   const breadCrumbItems = [
     { title: 'Crytocurrencies', href: '/' },
-    { title: `${name} Price`, href: null },
+    { title: name, href: null },
   ].map((item, index) => {
     if (item?.href) {
       return (
