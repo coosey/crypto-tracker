@@ -1,9 +1,6 @@
 @import '/styles/design.scss';
 
 .title {
-  margin: 0;
-  padding-top: 24px;
-  padding-bottom: 24px;
   line-height: 130%;
   font-weight: 700;
 
@@ -14,6 +11,10 @@
       font-size: 1.3rem;
     }
   }
+}
+
+.trendingList {
+  padding: 24px 0;
 }
 
 .paginationWrapper {

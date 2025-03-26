@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useGetMarketData } from 'libs/hooks/useGetMarketData';
 import { PaginateComponent } from 'components/pagination';
 import { transformData } from 'libs/helpers/transformData';
+import { TrendingList } from 'components/trending-list';
 
 export const CoinMarketList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,6 +29,9 @@ export const CoinMarketList = () => {
     <>
       <div className={styles?.['title']}>
         <h1 id="current-prices">Today's Cryptocurrency Prices</h1>
+      </div>
+      <div className={styles?.['trendingList']}>
+        <TrendingList />
       </div>
       <MarketDataTable data={coinsListTableData} />
       <div className={styles?.['paginationWrapper']}>
