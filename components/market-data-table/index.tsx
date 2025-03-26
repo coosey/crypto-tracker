@@ -52,4 +52,4 @@ function transformCoinsListResponse(responseList: CoinsListResponse[]): TableDat
     market_cap: coin?.market_cap,
     market_cap_rank: coin?.market_cap_rank,
   }));
-};
+}
