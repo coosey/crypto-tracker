@@ -149,11 +149,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
     chart.timeScale().fitContent();
     // Handle resizing
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        chart.applyOptions({ width: chartContainerRef.current.clientWidth });
-      } else {
-        chart.applyOptions({ width: chartContainerRef.current.clientWidth / 2 });
-      }
+      chart.applyOptions({ width: chartContainerRef.current.clientWidth });
     };
 
     window.addEventListener('resize', handleResize);
