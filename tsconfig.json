@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
+    "types": ["jest", "node", "@testing-library/jest-dom"],
     "target": "es6",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["*/"],
+      "@/*": ["src/*"],
+      "libs/*": ["libs/*"],
+      "components/*": ["components/*"],
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

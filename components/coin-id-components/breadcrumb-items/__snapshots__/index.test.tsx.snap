@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BreadCrumbItems Component Should render BreadcrumbItems Component correctly 1`] = `
+<span
+  class="m_f678d540 mantine-Breadcrumbs-breadcrumb breadcrumb_nolink"
+>
+  Home Price
+</span>
+`;

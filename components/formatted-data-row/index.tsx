@@ -4,7 +4,7 @@ import { CarrotPriceChange } from 'components/carrot-price-change';
 import { HoverCard, Text } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 
-interface FormattedDataRowProps {
+export interface FormattedDataRowProps {
   rowName: string;
   rowPrice?: number;
   rowValue?: string | number | React.ReactNode;

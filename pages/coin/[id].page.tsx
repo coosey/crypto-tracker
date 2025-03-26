@@ -12,10 +12,10 @@ import { BreadCrumbItems } from 'components/coin-id-components/breadcrumb-items'
 import { STATISTIC_INFO } from 'components/coin-id-components/statistics-info';
 import { useEffect, useState } from 'react';
 import { CoinIdNews } from 'components/coin-id-components/news';
-import { TradingViewChart } from '@/components/trading-view-chart';
-import { PriceChart } from '@/libs/types/price-chart';
-import { TrendingCoins } from '@/components/coin-id-components/trending-coins';
-import { CoinDataResponse } from '@/libs/types/coin-id';
+import { TradingViewChart } from 'components/trading-view-chart';
+import { PriceChart } from 'libs/types/price-chart';
+import { TrendingCoins } from 'components/coin-id-components/trending-coins';
+import { CoinDataResponse } from 'libs/types/coin-id';
 
 interface Props {
   data: CoinDataResponse;
@@ -267,6 +267,11 @@ export default function CoinPage({ data }: Props) {
       {/** News List */}
       <div className={styles?.['table_news']}>
         <CoinIdNews id={data?.id} symbol={symbol} />
+      </div>
+      {/** Trending Coins List */}
+      <div>
+        <h2 className={styles?.['trendingCoinHeader']}>Trending Coins</h2>
+        <TrendingCoins />
       </div>
       {/** Trending Coins List */}
       <div>
