@@ -2,8 +2,7 @@ export const STATISTIC_INFO = {
   market_cap_name: 'Market Cap = Current Price x Circulating Supply',
   market_cap_description:
     'Refers to the total market value of a cryptocurrency’s circulating supply. It is similar to the stock market’s measurement of multiplying price per share by shares readily available in the market (not held & locked by insiders, governments)',
-  volume:
-    'A measure of how much of a cryptocurrency was traded in the last 24 hours.',
+  volume: 'A measure of how much of a cryptocurrency was traded in the last 24 hours.',
   fdv_name: 'Fully Diluted Valuation (FDV) = Current Price x Total Supply',
   fdv_desc:
     "Fully Diluted Valuation (FDV) is the theoretical market capitalization of a coin if the entirety of its supply is in circulation, based on its current market price. The FDV value is theoretical as increasing the circulating supply of a coin may impact its market price. Also depending on the tokenomics, emission schedule or lock-up period of a coin's supply, it may take a significant time before its entire supply is released into circulation.",
