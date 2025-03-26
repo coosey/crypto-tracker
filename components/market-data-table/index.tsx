@@ -40,16 +40,16 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
 
 function transformCoinsListResponse(responseList: CoinsListResponse[]): TableData[] {
   return responseList?.map?.((coin) => ({
-    id: coin?.id,
-    name: coin?.name,
-    symbol: coin?.symbol,
-    image: coin?.image,
-    current_price: coin?.current_price,
-    price_change_percentage_1h_in_currency: coin?.price_change_percentage_1h_in_currency,
-    price_change_percentage_24h_in_currency: coin?.price_change_percentage_24h_in_currency,
-    price_change_percentage_7d_in_currency: coin?.price_change_percentage_7d_in_currency,
-    total_volume: coin?.total_volume,
-    market_cap: coin?.market_cap,
-    market_cap_rank: coin?.market_cap_rank,
+    id: coin?.id || '',
+    name: coin?.name || '',
+    symbol: coin?.symbol || '',
+    image: coin?.image || '',
+    current_price: coin?.current_price || 0,
+    price_change_percentage_1h_in_currency: coin?.price_change_percentage_1h_in_currency || 0,
+    price_change_percentage_24h_in_currency: coin?.price_change_percentage_24h_in_currency || 0,
+    price_change_percentage_7d_in_currency: coin?.price_change_percentage_7d_in_currency || 0,
+    total_volume: coin?.total_volume || 0,
+    market_cap: coin?.market_cap || 0,
+    market_cap_rank: coin?.market_cap_rank || 0,
   }));
 }
