@@ -3,8 +3,8 @@ import { CoinIdMarket } from './market';
 import styles from './index.module.scss';
 import { useState } from 'react';
 import { Select } from '@mantine/core';
-import { useGetTickerData } from 'libs/hooks/useGetTickersData';
-import { handleScrollToDiv } from 'libs/helpers/handleScrollToDiv';
+import { useGetTickerData } from 'lib/hooks/useGetTickersData';
+import { handleScrollToDiv } from 'lib/helpers/handleScrollToDiv';
 
 interface Props {
   name: string;

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { TickersMarketObject } from "libs/types/tickers";
+import { TickersMarketObject } from "lib/types/tickers";
 import { useState, useEffect, useCallback } from "react";
 
 /**

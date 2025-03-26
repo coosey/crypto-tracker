@@ -3,7 +3,7 @@ import { FavoriteButton } from '.';
 import {userEvent} from '@testing-library/user-event';
 import {render, screen, waitFor} from '../../libs/utils/mantineTestUtil';
 
-describe('FavoriteButton', () => {
+describe('FavoriteButton Component', () => {
   it('renders FavoriteButton component correctly', () => {
     render(
       <FavoriteButton />

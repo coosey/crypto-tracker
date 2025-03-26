@@ -1,9 +1,9 @@
 import { Box, LoadingOverlay } from '@mantine/core';
-import { TickersMarketObject } from 'libs/types/tickers';
+import { TickersMarketObject } from 'lib/types/tickers';
 import { CoinIdTableHeaders } from '../headers';
 import { MarketDataTableHeaders } from 'components/market-data-table-headers';
 import { CoinIdTableRows } from '../rows';
-import { useSortIdTable } from 'libs/hooks/useSortIdTable';
+import { useSortIdTable } from 'lib/hooks/useSortIdTable';
 import { DataTable } from 'components/data-table';
 import styles from './index.module.scss';
 

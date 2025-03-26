@@ -1,6 +1,6 @@
 import { Center, Group, Table, Text, UnstyledButton } from '@mantine/core';
 import { IconCaretDownFilled, IconCaretUpFilled } from '@tabler/icons-react';
-import { ThProps } from 'libs/types/market-data-table';
+import { ThProps } from 'lib/types/market-data-table';
 import styles from './index.module.scss';
 
 export const TableHeader = ({

@@ -1,8 +1,22 @@
 import '@testing-library/react';
-import { render, screen } from '../../libs/utils/mantineTestUtil';
+import { render, screen } from 'lib/utils/mantineTestUtil';
 import { FormattedDataRow } from '.';
 
-describe('FormattedDataRow', () => {
+describe('FormattedDataRow Component', () => {
+  it('Should render FormattedDataRow Component correctly', () => {
+    render(
+      <FormattedDataRow
+        rowName="Test"
+        rowPrice={10000}
+        priceDiff24High={100}
+        priceDiff24Low={20}
+        priceDiff7High={80}
+        priceDiff7Low={40}
+      />
+    );
+    const formattedDataRow = screen.getByText('Test');
+    expect(formattedDataRow).toMatchSnapshot();
+  });
   it('Should render HoverCard correctly', () => {
     render(
       <FormattedDataRow

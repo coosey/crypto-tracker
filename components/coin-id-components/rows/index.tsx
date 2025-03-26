@@ -1,7 +1,7 @@
 import { Table, Anchor } from '@mantine/core';
 import { IconExternalLink } from '@tabler/icons-react';
 import { FormattedNumber } from 'components/formatted-number';
-import { TickersMarketObject } from 'libs/types/tickers';
+import { TickersMarketObject } from 'lib/types/tickers';
 import styles from './index.module.scss';
 
 interface Props {
