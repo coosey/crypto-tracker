@@ -4,15 +4,15 @@ import { render, screen } from 'libs/utils/mantineTestUtil';
 
 function expectComponentInDocument(priceComponent: HTMLElement) {
   expect(priceComponent).toBeInTheDocument();
-};
+}
 
 function expectIconToHaveClass(carrotIcon: HTMLElement, expectedIcon: string) {
   expect(carrotIcon).toHaveClass(expectedIcon);
-};
+}
 
 function CarrotPriceComponent(testPrice: number) {
-  return <CarrotPriceChange value={testPrice} data-testid="carrot-price" />
-};
+  return <CarrotPriceChange value={testPrice} data-testid="carrot-price" />;
+}
 
 describe('CarrotPriceChange Component', () => {
   it('renders component correctly', () => {
