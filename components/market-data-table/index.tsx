@@ -6,6 +6,7 @@ import { MarketDataTableHeaders } from '../market-data-table-headers';
 import { useRouter } from 'next/router';
 import { useSortTable } from 'libs/hooks/useSortTable';
 import { DataTable } from '../data-table';
+import { transformData } from 'libs/helpers/transformData';
 
 export const MarketDataTable = ({ data }: MarketDataTableProps) => {
   const router = useRouter();
@@ -14,7 +15,22 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
     router.push(`/coin/${coinId}`);
   };
 
-  const { sortField, sortDirection, handleSortChange, sortedData } = useSortTable(data);
+  const coinsListTableData = transformData(data, (coin) => ({
+    id: coin?.id || '',
+    name: coin?.name || '',
+    symbol: coin?.symbol || '',
+    image: coin?.image || '',
+    current_price: coin?.current_price || 0,
+    price_change_percentage_1h_in_currency: coin?.price_change_percentage_1h_in_currency || 0,
+    price_change_percentage_24h_in_currency: coin?.price_change_percentage_24h_in_currency || 0,
+    price_change_percentage_7d_in_currency: coin?.price_change_percentage_7d_in_currency || 0,
+    total_volume: coin?.total_volume || 0,
+    market_cap: coin?.market_cap || 0,
+    market_cap_rank: coin?.market_cap_rank || 0,
+  }));
+
+  const { sortField, sortDirection, handleSortChange, sortedData } =
+    useSortTable(coinsListTableData);
 
   return (
     <>

@@ -14,7 +14,7 @@ export const TrendingList = () => {
     <div className={styles?.['trendingList']}>
       <TrendingCard>
         {{
-          titleLink: <TrendingCoinTitleLink title="Trending Coins" />,
+          titleLink: <TrendingCoinTitleLink title="Trending Coins" hasViewMore />,
           list: <TrendingCardList limit={3} loading={loading} trendingList={trendingCoins} />,
         }}
       </TrendingCard>

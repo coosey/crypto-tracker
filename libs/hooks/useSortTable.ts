@@ -1,8 +1,8 @@
-import { CoinsListResponse } from "libs/types/coins-list";
+import { TableData } from "libs/types/market-data-table";
 import { SortDirection, SortField } from "libs/types/market-data-table/types";
 import { useState } from "react";
 
-export const useSortTable = (data: CoinsListResponse[]) => {
+export const useSortTable = (data: TableData[]) => {
   const [sortDirection, setSortDirection] = useState<SortDirection | null>(
     'ASC'
   );
@@ -21,9 +21,8 @@ export const useSortTable = (data: CoinsListResponse[]) => {
     handleSortData(data, sortField, sortDirection);
   };
 
-
   const handleSortData = (
-    dataList: CoinsListResponse[],
+    dataList: TableData[],
     field: SortField,
     direction: SortDirection
   ) => {

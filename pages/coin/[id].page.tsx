@@ -46,7 +46,7 @@ export default function CoinPage({ data }: Props) {
 
   return (
     <Layout className={styles?.['coinPage']}>
-      <BreadCrumbItems name={data?.name} />
+      <BreadCrumbItems name={`${data?.name} Price`} />
       <div className={styles?.['coin']}>
         {/** Coin[id] Details */}
         <div className={styles?.['coin_name']}>
