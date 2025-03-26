@@ -22,7 +22,11 @@ export const CarrotPriceChange = ({
   const renderPriceContent = () => {
     if (value === null) {
       return (
-        <div className={cn(styles?.['price'], className)} data-price-target="price" data-testid="carrot-price">
+        <div
+          className={cn(styles?.['price'], className)}
+          data-price-target="price"
+          data-testid="carrot-price"
+        >
           {showEmptyState}
         </div>
       );
@@ -32,7 +36,11 @@ export const CarrotPriceChange = ({
     const CaretIcon = isPositive ? IconCaretUpFilled : IconCaretDownFilled;
 
     return (
-      <div className={cn(priceClassName, className)} data-price-target="price" data-testid="carrot-price">
+      <div
+        className={cn(priceClassName, className)}
+        data-price-target="price"
+        data-testid="carrot-price"
+      >
         <span className={styles?.['price_change']}>
           <CaretIcon stroke={1} data-testid="carrot-icon" />
           {getPriceDisplay(value)}

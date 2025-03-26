@@ -20,7 +20,7 @@ describe('FormattedNumber Component', () => {
     const formattedNumber = screen.getByTestId('formatted-number');
     expect(formattedNumber).toBeInTheDocument();
     expect(formattedNumber).toHaveTextContent('-$0.5');
-  })
+  });
   it('renders component correctly with large value', () => {
     render(<FormattedNumber value={1000000} />);
     const formattedNumber = screen.getByTestId('formatted-number');
