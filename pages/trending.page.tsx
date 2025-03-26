@@ -14,7 +14,9 @@ const TrendingPage = () => {
 
   return (
     <Layout>
-      <BreadCrumbItems name={`Today's Top Trending Cryptocurrencies`} />
+      <BreadCrumbItems
+        name={`Today's Top Trending Cryptocurrencies`} 
+      />
       <div className={styles?.['trendingPageHeader']}>
         <h2>Today's Top Trending Cryptocurrencies</h2>
         <p>
