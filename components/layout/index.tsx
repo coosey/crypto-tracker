@@ -4,7 +4,7 @@ import {
   // SidebarComponent,
   MainComponent,
   FooterComponent,
-} from '@components/layout-components';
+} from 'components/layout-components';
 import cn from 'classnames';
 
 interface LayoutProps {

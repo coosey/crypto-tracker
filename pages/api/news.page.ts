@@ -1,4 +1,4 @@
-import { NewsApiResponse } from '@libs/types/news';
+import { NewsApiResponse } from 'libs/types/news';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<NewsApiResponse>) {

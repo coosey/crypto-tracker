@@ -1,4 +1,4 @@
-import { NewsArticleObj } from '@libs/types/news';
+import { NewsArticleObj } from 'libs/types/news';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { capitalize } from 'lodash';
@@ -7,7 +7,7 @@ import { NewsCarousel } from './news-carousel';
 
 interface Props {
   id: string;
-  symbol: string;
+  symbol?: string;
 }
 
 export const CoinIdNews = ({ id, symbol }: Props) => {
@@ -22,7 +22,7 @@ export const CoinIdNews = ({ id, symbol }: Props) => {
         const response = await axios.get('/api/news', {
           params: {
             id: id,
-            symbol: symbol,
+            symbol: symbol || '',
           },
         });
         if (response?.status === 200) {

@@ -1,5 +1,5 @@
 import '@mantine/core/styles/Table.css';
-import { MarketDataTableProps } from '@libs/types/market-data-table';
+import { MarketDataTableProps } from 'libs/types/market-data-table';
 import { DataTableHeaders } from './headers';
 import { DataTableRows } from './rows';
 import { MarketDataTableHeaders } from '../market-data-table-headers';

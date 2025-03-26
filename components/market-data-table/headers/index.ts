@@ -1,6 +1,6 @@
-import { DataTHProps } from '@libs/types/market-data-table';
-import { SortFieldEnum } from '@libs/types/market-data-table/enums';
-import { SortField } from '@libs/types/market-data-table/types';
+import { DataTHProps } from 'libs/types/market-data-table';
+import { SortFieldEnum } from 'libs/types/market-data-table/enums';
+import { SortField } from 'libs/types/market-data-table/types';
 
 export const DataTableHeaders: DataTHProps[] = [
   {

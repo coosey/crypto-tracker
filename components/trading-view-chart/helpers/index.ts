@@ -9,7 +9,7 @@ import {
   LineData,
   MouseEventParams,
 } from 'lightweight-charts';
-import { monthObjectHelper } from '@libs/helpers/monthObjectHelper';
+import { monthObjectHelper } from 'libs/helpers/monthObjectHelper';
 
 // -------------------------------------------------------
 // Color constants ---------------------------------------

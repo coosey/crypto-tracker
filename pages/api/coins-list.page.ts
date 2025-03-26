@@ -1,4 +1,4 @@
-import { CoinsListResponse } from '@libs/types/coins-list';
+import { CoinsListResponse } from 'libs/types/coins-list';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(

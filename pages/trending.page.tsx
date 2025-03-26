@@ -1,4 +1,4 @@
-import { Layout } from '@components/layout';
+import { Layout } from 'components/layout';
 import { observer } from 'mobx-react';
 import { MarketDataTable } from 'components/market-data-table';
 import useTrendingList from 'libs/hooks/useTrendingList';

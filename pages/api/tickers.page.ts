@@ -1,4 +1,4 @@
-import { TickersResponse } from '@libs/types/tickers';
+import { TickersResponse } from 'libs/types/tickers';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(

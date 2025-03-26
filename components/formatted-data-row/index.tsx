@@ -1,6 +1,6 @@
-import { FormattedNumber } from '@components/formatted-number';
+import { FormattedNumber } from 'components/formatted-number';
 import styles from './index.module.scss';
-import { CarrotPriceChange } from '@components/carrot-price-change';
+import { CarrotPriceChange } from 'components/carrot-price-change';
 import { HoverCard, Text } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 

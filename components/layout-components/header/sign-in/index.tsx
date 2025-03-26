@@ -1,7 +1,7 @@
 import { ActionIcon } from '@mantine/core';
 import styles from './index.module.scss';
 import { IconUser } from '@tabler/icons-react';
-import { useAuth } from '@libs/context/sign-in';
+import { useAuth } from 'libs/context/sign-in';
 
 export const SignInComponent = () => {
   const { isAuthenticated, user, login, logout } = useAuth();

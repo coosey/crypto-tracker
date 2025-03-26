@@ -5,8 +5,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@libs/*": ["libs/*"],
-      "@components/*": ["components/*"],
+      "libs/*": ["libs/*"],
+      "components/*": ["components/*"],
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,

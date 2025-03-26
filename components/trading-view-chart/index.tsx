@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { createChart, ColorType } from 'lightweight-charts';
 import styles from './index.module.scss';
 import { isEmpty } from 'lodash';
-import { compactNumbers } from '@libs/helpers/compactNumbers';
+import { compactNumbers } from 'libs/helpers/compactNumbers';
 import {
   CHART_COLORS,
   getChartData,

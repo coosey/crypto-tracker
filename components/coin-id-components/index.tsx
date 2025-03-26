@@ -1,10 +1,10 @@
-import { PaginateComponent } from '@components/pagination';
+import { PaginateComponent } from 'components/pagination';
 import { CoinIdMarket } from './market';
 import styles from './index.module.scss';
 import { useState } from 'react';
 import { Select } from '@mantine/core';
-import { useGetTickerData } from '@libs/hooks/useGetTickersData';
-import { handleScrollToDiv } from '@libs/helpers/handleScrollToDiv';
+import { useGetTickerData } from 'libs/hooks/useGetTickersData';
+import { handleScrollToDiv } from 'libs/helpers/handleScrollToDiv';
 
 interface Props {
   name: string;

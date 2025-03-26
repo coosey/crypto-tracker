@@ -1,5 +1,5 @@
-import { MarketDataTHProps } from '@libs/types/market-data-table';
-import { SortFieldEnum } from '@libs/types/market-data-table/enums';
+import { MarketDataTHProps } from 'libs/types/market-data-table';
+import { SortFieldEnum } from 'libs/types/market-data-table/enums';
 import { MarketCapHoverCard } from '../market-data-table/market-cap-hovercard';
 import { TableHeader } from '../market-data-table/table-header';
 import styles from './index.module.scss';
