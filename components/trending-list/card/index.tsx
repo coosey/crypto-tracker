@@ -7,7 +7,6 @@ interface TrendingCardChildren {
   titleLink?: React.ReactNode;
   list?: React.ReactNode;
 }
-
 interface Props {
   className?: string;
   children?: TrendingCardChildren;
