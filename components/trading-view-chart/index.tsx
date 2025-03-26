@@ -22,7 +22,7 @@ export const TradingViewChart = ({ prices, total_volumes }) => {
     const chart = createChart(chartContainerRef.current, {
       // handleScale: false,
       // handleScroll: false,
-      width: chartContainerRef.current.clientWidth / 2,
+      width: chartContainerRef.current.clientWidth,
       height: 400,
       layout: {
         background: { type: ColorType.Solid, color: CHART_COLORS.background },
