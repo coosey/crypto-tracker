@@ -1,11 +1,13 @@
 import { Anchor, Breadcrumbs } from '@mantine/core';
+import cn from 'classnames';
 import styles from './index.module.scss';
 
 interface Props {
   name: string;
+  className?: string;
 }
 
-export const BreadCrumbItems = ({ name }: Props) => {
+export const BreadCrumbItems = ({ name, className }: Props) => {
   const breadCrumbItems = [
     { title: 'Crytocurrencies', href: '/' },
     { title: name, href: null },
@@ -26,7 +28,7 @@ export const BreadCrumbItems = ({ name }: Props) => {
   });
 
   return (
-    <div className={styles?.['breadcrumb']}>
+    <div className={cn(styles?.['breadcrumb'], className)}>
       <Breadcrumbs separator="→" separatorMargin="md" mt="xs">
         {breadCrumbItems}
       </Breadcrumbs>
