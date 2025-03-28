@@ -5,9 +5,12 @@ import { useGetMarketData } from 'libs/hooks/useGetMarketData';
 import { PaginateComponent } from 'components/pagination';
 import { transformData } from 'libs/helpers/transformData';
 import { TrendingList } from 'components/trending-list';
+import { useGlobalTrend } from 'libs/context/global-trend';
 
 export const CoinMarketList = () => {
   const [currentPage, setCurrentPage] = useState(1);
+
+  const { marketTrend } = useGlobalTrend();
 
   const { coinsList, pageTotal } = useGetMarketData(currentPage);
 
@@ -29,9 +32,13 @@ export const CoinMarketList = () => {
     <>
       <div className={styles?.['title']}>
         <h1 id="current-prices">Today's Cryptocurrency Prices</h1>
+        <p>
+          Stay updated with real-time price movements, market trends, and key metrics for top cryptocurrencies. 
+          Track Bitcoin (BTC), Ethereum (ETH), and 1,000+ altcoins with live charts, 24h volume, and price changes—all in one place.
+        </p>
       </div>
       <div className={styles?.['trendingList']}>
-        <TrendingList />
+        <TrendingList globalTrend={marketTrend} />
       </div>
       <MarketDataTable data={coinsListTableData} />
       <div className={styles?.['paginationWrapper']}>

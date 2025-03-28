@@ -1,6 +1,7 @@
 import styles from './index.module.scss';
 import cn from 'classnames';
 import { SignInComponent } from './sign-in';
+import { GlobalTrendPrice } from './global-trend-price';
 
 interface Props {
   className?: string;
@@ -8,16 +9,14 @@ interface Props {
 
 export const HeaderComponent = ({ className }: Props) => {
   return (
-    <>
-      <header className={cn(styles['header'], { className: className })}>
-        <div className={styles?.['sign-in-wrapper']}>
-          <div className="logo">Crypto Tracker</div>
-          <SignInComponent />
-        </div>
-        {/* <nav className={styles['nav-menu']}>
-        </nav> */}
-        {/* <div className={styles['hamburger']}>☰</div> */}
-      </header>
-    </>
+    <div className={cn(styles['header'], { className: className })}>
+      <div className={styles?.['logo']}>Crypto Tracker</div>
+      <div className={styles?.['trendPrice']}>
+        <GlobalTrendPrice />
+      </div>
+      <div className={styles?.['sign-in-wrapper']}>
+        <SignInComponent />
+      </div>
+    </div>
   );
 };

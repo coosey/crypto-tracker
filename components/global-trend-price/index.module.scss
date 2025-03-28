@@ -1,0 +1,28 @@
+@import '/styles/design.scss';
+
+.priceSectionWrapper {
+  padding: 0.5rem;
+  &__price {
+    font-size: 1.2rem;
+    font-weight: 600;
+
+    @include mobileMaxWidth() {
+      font-size: 1rem;
+    }
+  }
+
+  &__trend {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+}
+
+.globalTrendPrice {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}

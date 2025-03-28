@@ -7,6 +7,7 @@ import Container from 'components/container';
 import RootStore from '../stores/_RootStore';
 import { Provider, enableStaticRendering } from 'mobx-react';
 import { MantineProvider } from '@mantine/core';
+import { GlobalTrendProvider } from 'libs/context/global-trend';
 
 const isServer = typeof window !== undefined;
 
@@ -16,9 +17,11 @@ const Page = ({ Component, pageProps }) => {
   return (
     <Provider {...RootStore}>
       <MantineProvider defaultColorScheme="dark">
-        <Container>
-          <Component {...pageProps} />
-        </Container>
+        <GlobalTrendProvider>
+          <Container>
+            <Component {...pageProps} />
+          </Container>
+        </GlobalTrendProvider>
       </MantineProvider>
     </Provider>
   );

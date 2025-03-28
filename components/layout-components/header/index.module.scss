@@ -1,14 +1,15 @@
 @import '/styles/design.scss';
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   background-color: $bg-secondary;
   color: #fff;
   padding: 1rem;
-  text-align: left;
 
-  .sign-in-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  .trendPrice {
+    max-width: fit-content;
   }
 }

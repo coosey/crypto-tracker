@@ -22,7 +22,7 @@ export const TrendingCoins = () => {
         return (
           <TrendingCard key={item?.coin_id} onClick={() => handleClickTrendinCoin(coinName)}>
             {{
-              list: (
+              body: (
                 <TrendingCardItem
                   className={styles?.['wrapper__item']}
                   imgSrc={item?.thumb}

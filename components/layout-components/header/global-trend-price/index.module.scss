@@ -1,0 +1,33 @@
+@import '/styles/design.scss';
+
+.trendPriceWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.marketCap {
+  display: flex;
+  gap: $space_10;
+  
+  &--title {
+    padding-right: $space_5;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: $text-secondary;
+  }
+
+  &--price {
+    padding-right: $space_5;
+    color: $text-primary;
+  }
+
+  &--priceChange,
+  &--price {
+    font-weight: 800;
+    font-size: 0.875rem;
+  }
+}
+
+.skeleton-price {
+  display: inline-flex;
+}
