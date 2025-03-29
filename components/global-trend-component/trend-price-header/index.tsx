@@ -27,6 +27,7 @@ export const TrendPriceHeader = ({
   volume,
   loading,
 }: Props) => {
+  const wrapper = styles?.['wrapper'];
   const priceTrendTitle = styles?.['priceTrend--title'];
   const priceTrendPrice = styles?.['priceTrend--price'];
 
@@ -37,21 +38,21 @@ export const TrendPriceHeader = ({
   return (
     <div className={styles?.['priceTrend']}>
       {/** Active Coins */}
-      <div>
+      <div className={wrapper}>
         <span className={priceTrendTitle}>Coins:</span>
         <span className={priceTrendPrice}>
           {renderValue(activeCoins, activeCoins?.toLocaleString?.())}
         </span>
       </div>
       {/** # of Exchanges */}
-      <div>
+      <div className={wrapper}>
         <span className={priceTrendTitle}>Exchanges:</span>
         <span className={priceTrendPrice}>
           {renderValue(totalExchanges, totalExchanges?.toLocaleString?.())}
         </span>
       </div>
       {/** Current Market Cap */}
-      <div className={styles?.['trendPriceWrapper']}>
+      <div className={wrapper}>
         <span className={priceTrendTitle}>Market Cap:</span>
         <span className={priceTrendPrice}>
           {renderValue(totalMarketCap, compactNumbers(totalMarketCap))}
@@ -61,7 +62,7 @@ export const TrendPriceHeader = ({
         </div>
       </div>
       {/** 24h Volume */}
-      <div>
+      <div className={wrapper}>
         <span className={priceTrendTitle}>24h Volume:</span>
         <span className={priceTrendPrice}>{renderValue(volume, compactNumbers(volume))}</span>
       </div>

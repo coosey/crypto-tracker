@@ -1,17 +1,23 @@
 @import '/styles/design.scss';
 
-.trendPriceWrapper {
+.wrapper {
   display: flex;
-  align-items: flex-end;
+
+  @include mobileMaxWidth() {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .priceTrend {
   display: flex;
   gap: $space_10;
+  font-size: 0.875rem;
+  flex-wrap: wrap;
+  align-items: baseline;
   
   &--title {
     padding-right: $space_5;
-    font-size: 0.875rem;
     font-weight: 400;
     color: $text-secondary;
   }
@@ -21,10 +27,15 @@
     color: $text-primary;
   }
 
+  &--priceChange {
+    font-size: 0.875rem;
+    display: flex;
+    align-items: flex-end;
+  }
+
   &--priceChange,
   &--price {
     font-weight: 800;
-    font-size: 0.875rem;
   }
 }
 
