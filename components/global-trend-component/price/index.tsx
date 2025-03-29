@@ -1,24 +1,16 @@
-import { TrendingCard } from "components/trending-list/card";
+import { TrendingCard } from 'components/trending-list/card';
 import { FormattedNumber } from 'components/formatted-number';
 import styles from './index.module.scss';
-import { CarrotPriceChange } from "components/carrot-price-change";
-import { Skeleton } from "@mantine/core";
-import { useGlobalTrend } from "libs/context/global-trend";
+import { CarrotPriceChange } from 'components/carrot-price-change';
+import { Skeleton } from '@mantine/core';
+import { useGlobalTrend } from 'libs/context/global-trend';
 
-const renderMarketTrend = (
-  price: number,
-  carrotPrice: number | null,
-  priceTitle: string
-) => {
+const renderMarketTrend = (price: number, carrotPrice: number | null, priceTitle: string) => {
   return (
     <div className={styles?.['priceSectionWrapper']}>
       <div>
         <span className={styles?.['priceSectionWrapper__price']}>
-          {price ? (
-            <FormattedNumber value={price} />
-          ) : (
-            <Skeleton height={20} width={200} />
-          )}
+          {price ? <FormattedNumber value={price} /> : <Skeleton height={20} width={200} />}
         </span>
       </div>
       <div className={styles?.['priceSectionWrapper__trend']}>
@@ -32,8 +24,8 @@ const renderMarketTrend = (
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const GlobalTrendPrice = () => {
   const { marketTrend } = useGlobalTrend();
@@ -41,22 +33,18 @@ export const GlobalTrendPrice = () => {
     <div className={styles?.['globalTrendPrice']}>
       <TrendingCard>
         {{
-          body: (renderMarketTrend(
+          body: renderMarketTrend(
             marketTrend?.total_market_cap?.usd,
             marketTrend?.market_cap_change_percentage_24h_usd,
             'Market Cap'
-          ))
+          ),
         }}
       </TrendingCard>
       <TrendingCard>
         {{
-          body: (renderMarketTrend(
-            marketTrend?.total_volume?.usd,
-            null,
-            '24h Volume'
-          ))
+          body: renderMarketTrend(marketTrend?.total_volume?.usd, null, '24h Volume'),
         }}
       </TrendingCard>
     </div>
-  )
+  );
 };

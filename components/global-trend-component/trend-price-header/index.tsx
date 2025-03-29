@@ -1,7 +1,7 @@
-import { CarrotPriceChange } from "components/carrot-price-change";
-import { compactNumbers } from "libs/helpers/compactNumbers";
+import { CarrotPriceChange } from 'components/carrot-price-change';
+import { compactNumbers } from 'libs/helpers/compactNumbers';
 import styles from './index.module.scss';
-import { Skeleton } from "@mantine/core";
+import { Skeleton } from '@mantine/core';
 
 interface Props {
   activeCoins: number;
@@ -14,9 +14,9 @@ interface Props {
 
 const renderValue = (value: string | number, valueToDisplay: string | number) => {
   if (value) {
-    return <>{valueToDisplay}</>
+    return <>{valueToDisplay}</>;
   }
-  return <>{' - '}</>
+  return <>{' - '}</>;
 };
 
 export const TrendPriceHeader = ({
@@ -25,17 +25,17 @@ export const TrendPriceHeader = ({
   totalMarketCap,
   marketCapChangePercentage,
   volume,
-  loading
+  loading,
 }: Props) => {
-  const priceTrendTitle = styles?.["priceTrend--title"];
-  const priceTrendPrice = styles?.["priceTrend--price"];
+  const priceTrendTitle = styles?.['priceTrend--title'];
+  const priceTrendPrice = styles?.['priceTrend--price'];
 
   if (loading) {
-    return <Skeleton height={20} width="50%" />
+    return <Skeleton height={20} width="50%" />;
   }
 
   return (
-    <div className={styles?.["priceTrend"]}>
+    <div className={styles?.['priceTrend']}>
       {/** Active Coins */}
       <div>
         <span className={priceTrendTitle}>Coins:</span>
@@ -56,19 +56,15 @@ export const TrendPriceHeader = ({
         <span className={priceTrendPrice}>
           {renderValue(totalMarketCap, compactNumbers(totalMarketCap))}
         </span>
-        <div className={styles?.["priceTrend--priceChange"]}>
-          {marketCapChangePercentage && (
-            <CarrotPriceChange value={marketCapChangePercentage} />
-          )}
+        <div className={styles?.['priceTrend--priceChange']}>
+          {marketCapChangePercentage && <CarrotPriceChange value={marketCapChangePercentage} />}
         </div>
       </div>
       {/** 24h Volume */}
       <div>
         <span className={priceTrendTitle}>24h Volume:</span>
-        <span className={priceTrendPrice}>
-          {renderValue(volume, compactNumbers(volume))}
-        </span>
+        <span className={priceTrendPrice}>{renderValue(volume, compactNumbers(volume))}</span>
       </div>
     </div>
-  )
-}
+  );
+};

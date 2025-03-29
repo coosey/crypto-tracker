@@ -6,7 +6,7 @@ import React from 'react';
 interface TrendingCardChildren {
   titleLink?: React.ReactNode;
   body?: React.ReactNode;
-};
+}
 
 interface Props {
   className?: string;

@@ -1,9 +1,5 @@
 import styles from './index.module.scss';
-import {
-  HeaderComponent,
-  MainComponent,
-  FooterComponent,
-} from 'components/layout-components';
+import { HeaderComponent, MainComponent, FooterComponent } from 'components/layout-components';
 import cn from 'classnames';
 import { GlobalTrendHeader } from 'components/global-trend-component';
 
