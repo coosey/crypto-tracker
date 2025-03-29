@@ -5,12 +5,9 @@ import { useGetMarketData } from 'libs/hooks/useGetMarketData';
 import { PaginateComponent } from 'components/pagination';
 import { transformData } from 'libs/helpers/transformData';
 import { TrendingList } from 'components/trending-list';
-import { useGlobalTrend } from 'libs/context/global-trend';
 
 export const CoinMarketList = () => {
   const [currentPage, setCurrentPage] = useState(1);
-
-  const { marketTrend } = useGlobalTrend();
 
   const { coinsList, pageTotal } = useGetMarketData(currentPage);
 
@@ -38,7 +35,7 @@ export const CoinMarketList = () => {
         </p>
       </div>
       <div className={styles?.['trendingList']}>
-        <TrendingList globalTrend={marketTrend} />
+        <TrendingList />
       </div>
       <MarketDataTable data={coinsListTableData} />
       <div className={styles?.['paginationWrapper']}>

@@ -2,10 +2,10 @@
 
 .trendPriceWrapper {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
-.marketCap {
+.priceTrend {
   display: flex;
   gap: $space_10;
   

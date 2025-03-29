@@ -10,15 +10,19 @@ import { GlobalMarketTrend } from "libs/types/trending-list";
 
 const GlobalTrendContext = createContext<{
   marketTrend: GlobalMarketTrend;
+  marketTrendLoading: boolean;
 }>({
   marketTrend: {} as GlobalMarketTrend,
+  marketTrendLoading: true,
 });
 
 export const GlobalTrendProvider = ({ children }: { children: ReactNode }) => {
   const [marketTrend, setMarketTrend] = useState<GlobalMarketTrend>({} as GlobalMarketTrend);
+  const [marketTrendLoading, setMarketTrendLoading] = useState(true);
 
   const updateMarketTrend = useCallback((newMarketTrend: GlobalMarketTrend) => {
     setMarketTrend(newMarketTrend);
+    setMarketTrendLoading(false);
   }, []);
 
   useEffect(() => {
@@ -35,7 +39,7 @@ export const GlobalTrendProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <GlobalTrendContext.Provider value={{ marketTrend }}>
+    <GlobalTrendContext.Provider value={{ marketTrend, marketTrendLoading }}>
       {children}
     </GlobalTrendContext.Provider>
   );
