@@ -1,5 +1,4 @@
 import { Layout } from 'components/layout';
-import { observer } from 'mobx-react';
 import { MarketDataTable } from 'components/market-data-table';
 import useTrendingList from 'libs/hooks/useTrendingList';
 import { transformData } from 'libs/helpers/transformData';
@@ -46,4 +45,4 @@ function parseStringNumber(input: string) {
   return parseFloat(numericString);
 }
 
-export default observer(TrendingPage);
+export default TrendingPage;
