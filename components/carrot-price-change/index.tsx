@@ -20,7 +20,7 @@ export const CarrotPriceChange = ({
   };
 
   const renderPriceContent = () => {
-    if (value === null) {
+    if (!value) {
       return (
         <div
           className={cn(styles?.['price'], className)}
@@ -31,6 +31,7 @@ export const CarrotPriceChange = ({
         </div>
       );
     }
+
     const isPositive = value > 0;
     const priceClassName = isPositive ? styles?.price_green : styles?.price_red;
     const CaretIcon = isPositive ? IconCaretUpFilled : IconCaretDownFilled;

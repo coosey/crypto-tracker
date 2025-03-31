@@ -1,0 +1,48 @@
+@import '/styles/design.scss';
+
+.wrapper {
+  display: flex;
+
+  @include mobileMaxWidth() {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.priceTrend {
+  display: flex;
+  gap: $space_10;
+  font-size: 0.875rem;
+  flex-wrap: wrap;
+  align-items: center;
+
+  @include mobileMaxWidth() {
+    align-items: flex-start;
+  }
+  
+  &--title {
+    padding-right: $space_5;
+    font-weight: 400;
+    color: $text-secondary;
+  }
+
+  &--price {
+    padding-right: $space_5;
+    color: $text-primary;
+  }
+
+  &--priceChange {
+    font-size: 0.875rem;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &--priceChange,
+  &--price {
+    font-weight: 800;
+  }
+}
+
+.skeleton-price {
+  display: inline-flex;
+}

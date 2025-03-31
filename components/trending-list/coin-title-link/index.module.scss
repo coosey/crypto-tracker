@@ -1,7 +1,9 @@
+@import '/styles/design.scss';
+
 .cardAnchor {
   display: flex;
   align-items: center;
-  padding-right: 15px;
+  padding-right: $space_10;
   line-height: 1;
 
   svg {

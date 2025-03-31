@@ -5,8 +5,8 @@ import React from 'react';
 
 interface TrendingCardChildren {
   titleLink?: React.ReactNode;
-  list?: React.ReactNode;
-};
+  body?: React.ReactNode;
+}
 
 interface Props {
   className?: string;
@@ -23,10 +23,8 @@ export const TrendingCard = React.memo(({ className, children, onClick }: Props)
       radius="md"
       onClick={onClick}
     >
-      <Card.Section>
-        {children?.titleLink}
-      </Card.Section>
-      <>{children?.list}</>
+      <>{children?.titleLink}</>
+      <>{children?.body}</>
     </Card>
   );
 });

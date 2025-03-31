@@ -29,7 +29,8 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
     market_cap_rank: coin?.market_cap_rank || 0,
   }));
 
-  const { sortField, sortDirection, handleSortChange, sortedData } = useSortTable(coinsListTableData);
+  const { sortField, sortDirection, handleSortChange, sortedData } =
+    useSortTable(coinsListTableData);
 
   return (
     <>

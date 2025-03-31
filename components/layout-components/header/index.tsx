@@ -8,16 +8,11 @@ interface Props {
 
 export const HeaderComponent = ({ className }: Props) => {
   return (
-    <>
-      <header className={cn(styles['header'], { className: className })}>
-        <div className={styles?.['sign-in-wrapper']}>
-          <div className="logo">Crypto Tracker</div>
-          <SignInComponent />
-        </div>
-        {/* <nav className={styles['nav-menu']}>
-        </nav> */}
-        {/* <div className={styles['hamburger']}>☰</div> */}
-      </header>
-    </>
+    <div className={cn(styles['header'], { className: className })}>
+      <div className={styles?.['logo']}>Crypto Tracker</div>
+      <div className={styles?.['sign-in-wrapper']}>
+        <SignInComponent />
+      </div>
+    </div>
   );
 };

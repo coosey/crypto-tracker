@@ -1,14 +1,12 @@
-import { TrendingCoinsResponse } from 'libs/types/trending-list';
+import { GlobalMarketTrend } from 'libs/types/trending-list';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<TrendingCoinsResponse[]>
+  res: NextApiResponse<GlobalMarketTrend>
 ) {
-  const { id } = req.query;
-  const URL = `${process.env.NEXT_PRIVATE_COINGECKO_API_URL}/coins/price_percentage_change?ids=${id}&vs_currency=usd`;
   try {
-    const response = await fetch(URL, {
+    const response = await fetch(`${process.env.NEXT_PRIVATE_COINGECKO_API_URL}/global`, {
       headers: {
         'content-type': 'application/json',
         'x-cg-demo-api-key': process.env.NEXT_PRIVATE_COINGECKO_KEY,

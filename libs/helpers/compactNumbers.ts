@@ -11,7 +11,11 @@ export function compactNumbers(inputNum: number, locale = 'en-US') {
       maximumFractionDigits: 2,
   });
 
-  if (inputNum >= 1e6) {
+  if (inputNum >= 1e12) {
+      return formatter.format(inputNum / 1e12) + 'T'; // Trillions
+  } else if (inputNum >= 1e9) {
+      return formatter.format(inputNum / 1e9) + 'B'; // Billions
+  } else if (inputNum >= 1e6) {
       return formatter.format(inputNum / 1e6) + 'M'; // Millions
   } else if (inputNum >= 1e3) {
       return formatter.format(inputNum / 1e3) + 'k'; // Thousands
