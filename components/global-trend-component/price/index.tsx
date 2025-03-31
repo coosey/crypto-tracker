@@ -30,7 +30,7 @@ const renderMarketTrend = (price: number, carrotPrice: number | null, priceTitle
 export const GlobalTrendPrice = () => {
   const { marketTrend } = useGlobalTrend();
   return (
-    <div className={styles?.['globalTrendPrice']}>
+    <div className={styles?.['globalTrendPrice']} data-testid="global-trend-price">
       <TrendingCard>
         {{
           body: renderMarketTrend(

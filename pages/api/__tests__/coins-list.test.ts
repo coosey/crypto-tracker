@@ -20,6 +20,6 @@ describe('coins-list API', () => {
 
     const data = JSON.parse(JSON.stringify(res));
 
-    expect(data.statusCode).toBe(200);
+    expect(data.statusMessage).toBe('OK');
   });
 });

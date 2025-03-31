@@ -32,11 +32,11 @@ export const TrendPriceHeader = ({
   const priceTrendPrice = styles?.['priceTrend--price'];
 
   if (loading) {
-    return <Skeleton height={20} width="50%" />;
+    return <Skeleton height={20} width="50%" data-testid="trend-price-header-loader" />;
   }
 
   return (
-    <div className={styles?.['priceTrend']}>
+    <div className={styles?.['priceTrend']} data-testid="trend-price-header">
       {/** Active Coins */}
       <div className={wrapper}>
         <span className={priceTrendTitle}>Coins:</span>
