@@ -14,7 +14,11 @@
   gap: $space_10;
   font-size: 0.875rem;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
+
+  @include mobileMaxWidth() {
+    align-items: flex-start;
+  }
   
   &--title {
     padding-right: $space_5;

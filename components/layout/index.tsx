@@ -11,8 +11,8 @@ interface LayoutProps {
 export const Layout = ({ children, className }: LayoutProps) => {
   return (
     <div className={cn(styles['layout'], { className: className })}>
-      <GlobalTrendHeader />
       <HeaderComponent className={styles?.['header']} />
+      <GlobalTrendHeader />
       <MainComponent className={styles?.['main']}>{children}</MainComponent>
       <FooterComponent />
     </div>

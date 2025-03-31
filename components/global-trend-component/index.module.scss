@@ -1,4 +1,9 @@
+@import '/styles/design.scss';
 
 .container {
   padding: 1rem;
+
+  @include tabletMinWidth() {
+    padding: 1.5rem;
+  }
 }
