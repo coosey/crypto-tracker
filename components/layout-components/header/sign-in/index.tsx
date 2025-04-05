@@ -10,14 +10,6 @@ export const SignInComponent = () => {
     await logout();
     reset();
   };
-  
-  return (
-    <div>
-      {user ? (
-        <SignedInUser handleLogout={handleLogout} />
-      ) : (
-        <LoginButton />
-      )}
-    </div>
-  );
+
+  return <div>{user ? <SignedInUser handleLogout={handleLogout} /> : <LoginButton />}</div>;
 };

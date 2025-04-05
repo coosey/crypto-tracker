@@ -7,7 +7,7 @@ import {
   PasswordInput,
   Checkbox,
   Anchor,
-  Button
+  Button,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { upperFirst, useToggle } from '@mantine/hooks';
@@ -52,7 +52,8 @@ export default function LoginPage() {
         }
         return null;
       },
-      terms: (val) => (type === LoginType.REGISTER ? (val ? null : 'You must accept terms and conditions') : null),
+      terms: (val) =>
+        type === LoginType.REGISTER ? (val ? null : 'You must accept terms and conditions') : null,
     },
   });
 
@@ -74,16 +75,20 @@ export default function LoginPage() {
         {type === LoginType.LOGIN && (
           <>
             <Group grow mb="md" mt="md">
-              <GoogleButton radius="xl" onClick={googleLogin}>Google</GoogleButton>
+              <GoogleButton radius="xl" onClick={googleLogin}>
+                Google
+              </GoogleButton>
             </Group>
             <Divider label="Or continue with" labelPosition="center" my="lg" />
           </>
         )}
 
-        <form onSubmit={form.onSubmit((values) => {
-          form.validate();
-          handleSubmit(values);
-        })}>
+        <form
+          onSubmit={form.onSubmit((values) => {
+            form.validate();
+            handleSubmit(values);
+          })}
+        >
           <Stack>
             {type === LoginType.REGISTER && (
               <>
@@ -152,5 +157,5 @@ export default function LoginPage() {
         </form>
       </Paper>
     </div>
-  )
-};
+  );
+}
