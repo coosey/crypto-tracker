@@ -17,11 +17,13 @@
   "dependencies": {
     "@mantine/carousel": "^7.17.1",
     "@mantine/core": "^7.17.1",
+    "@mantine/form": "^7.17.3",
     "@mantine/hooks": "^7.17.1",
     "@tabler/icons-react": "^3.19.0",
     "axios": "^1.7.7",
     "classnames": "^2.5.1",
     "embla-carousel-react": "^7.1.0",
+    "firebase": "^11.6.0",
     "graphql": "^16.9.0",
     "jsonwebtoken": "^9.0.2",
     "lightweight-charts": "^5.0.3",
@@ -33,7 +35,8 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sass": "^1.77.8",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",

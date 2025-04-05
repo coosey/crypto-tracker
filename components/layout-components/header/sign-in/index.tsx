@@ -1,37 +1,23 @@
-import { ActionIcon } from '@mantine/core';
-import styles from './index.module.scss';
-import { IconUser } from '@tabler/icons-react';
-import { useAuth } from 'libs/context/sign-in';
+import { useUserStore } from 'stores';
+import { LoginButton } from 'components/buttons/login';
+import { SignedInUser } from 'components/buttons/signed-in-user';
 
 export const SignInComponent = () => {
-  const { isAuthenticated, user, login, logout } = useAuth();
+  const { logout, reset } = useUserStore();
+  const user = useUserStore((state) => state.user);
+
+  const handleLogout = async () => {
+    await logout();
+    reset();
+  };
+  
   return (
     <div>
-      {/** TODO: Currently WIP */}
-      {user && <SignedInUser />}
-      {!user && <LoginButton />}
+      {user ? (
+        <SignedInUser handleLogout={handleLogout} />
+      ) : (
+        <LoginButton />
+      )}
     </div>
-  );
-};
-
-const LoginButton = () => {
-  return (
-    <div>
-      <button className={styles?.['login']}>Login</button>
-    </div>
-  );
-};
-
-const SignedInUser = () => {
-  return (
-    <ActionIcon
-      className={styles?.['sign-in']}
-      variant="default"
-      size="lg"
-      radius="md"
-      aria-label="Sign-in"
-    >
-      <IconUser stroke={1} />
-    </ActionIcon>
   );
 };

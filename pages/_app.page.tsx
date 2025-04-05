@@ -5,19 +5,22 @@ import 'styles/globals.scss';
 import dynamic from 'next/dynamic';
 import Container from 'components/container';
 import { MantineProvider } from '@mantine/core';
+import { HydrateZustand, AuthProvider } from 'stores';
 import { GlobalTrendProvider } from 'libs/context/global-trend';
-
-const isServer = typeof window !== undefined;
 
 const Page = ({ Component, pageProps }) => {
   return (
-    <MantineProvider defaultColorScheme="dark">
-      <GlobalTrendProvider>
-        <Container>
-          <Component {...pageProps} />
-        </Container>
-      </GlobalTrendProvider>
-    </MantineProvider>
+    <HydrateZustand>
+      <AuthProvider>
+        <MantineProvider defaultColorScheme="dark">
+          <GlobalTrendProvider>
+            <Container>
+              <Component {...pageProps} />
+            </Container>
+          </GlobalTrendProvider>
+        </MantineProvider>
+      </AuthProvider>
+    </HydrateZustand>
   );
 };
 
