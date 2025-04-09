@@ -19,6 +19,9 @@ export const TrendingCoins = () => {
       {trendingList?.coins?.map?.((coin) => {
         const item = coin?.item;
         const coinName = item?.id?.toLowerCase?.();
+        // formatting the price to scientific notation with 4 decimal places
+        const numberSubscript = formatNumberWithSubscriptZeros(item?.data?.price?.toString?.());
+        const formattedMarketPrice = Number(numberSubscript)?.toExponential?.(4);
         return (
           <TrendingCard key={item?.coin_id} onClick={() => handleClickTrendinCoin(coinName)}>
             {{
@@ -28,7 +31,7 @@ export const TrendingCoins = () => {
                   imgSrc={item?.thumb}
                   imgAlt={item?.name}
                   name={item?.name}
-                  marketPrice={formatNumberWithSubscriptZeros(item?.data?.price?.toString?.())}
+                  marketPrice={formattedMarketPrice}
                   percentageChange={item?.data?.price_change_percentage_24h?.usd}
                 />
               ),
