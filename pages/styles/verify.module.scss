@@ -1,0 +1,35 @@
+@import '/styles/design.scss';
+
+.verify {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  text-align: center;
+  margin: 3rem auto 0;
+  padding: 0 3rem;
+
+  .container {
+    margin-top: 3rem;
+    width: 30rem;
+
+    @include mobileMaxWidth() {
+      width: 20rem;
+    }
+
+    &--title {
+      font-weight: 300;
+
+      @include mobileMaxWidth() {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  @include mobileMaxWidth() {
+    h1 {
+      font-size: 1.3rem;
+    }
+  }
+}

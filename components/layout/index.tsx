@@ -6,13 +6,16 @@ import { GlobalTrendHeader } from 'components/global-trend-component';
 interface LayoutProps {
   children?: React.ReactNode;
   className?: string;
+  hasGlobalTrend?: boolean;
 }
 
-export const Layout = ({ children, className }: LayoutProps) => {
+export const Layout = ({ children, className, hasGlobalTrend = true }: LayoutProps) => {
   return (
     <div className={cn(styles['layout'], { className: className })}>
       <HeaderComponent className={styles?.['header']} />
-      <GlobalTrendHeader />
+      {hasGlobalTrend && (
+        <GlobalTrendHeader />
+      )}
       <MainComponent className={styles?.['main']}>{children}</MainComponent>
       <FooterComponent />
     </div>

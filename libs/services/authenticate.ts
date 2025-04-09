@@ -1,4 +1,4 @@
-import { 
+import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signOut,
@@ -10,9 +10,16 @@ import {
   User
 } from 'firebase/auth'
 import { auth } from '../firebase';
+import { firebaseErrorHandler } from 'libs/firebase/errors';
 
 export const loginWithEmail = async (email: string, password: string) => {
-  return await signInWithEmailAndPassword(auth, email, password)
+  return await signInWithEmailAndPassword(auth, email, password).then((userCredentials) => {
+    updateCurrentUser(auth, userCredentials.user);
+  }).catch((error) => {
+    const errorCode = error.code;
+    alert(firebaseErrorHandler(errorCode));
+    console.log('Error code: ', errorCode);
+  });
 }
 
 export const registerWithEmail = async (email: string, password: string) => {
@@ -21,9 +28,11 @@ export const registerWithEmail = async (email: string, password: string) => {
       updateCurrentUser(auth, userCredentials.user);
       sendEmailVerification(userCredentials.user);
       console.log('Email verification sent');
-  }).catch((error) => {
-    console.error('Error: ', error);
-  })
+    }).catch((error) => {
+      const errorCode = error.code;
+      firebaseErrorHandler(errorCode);
+      console.error('Error: ', error);
+    })
 }
 
 export const loginWithGoogle = async () => {

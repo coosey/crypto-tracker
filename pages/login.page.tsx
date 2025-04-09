@@ -14,6 +14,8 @@ import { upperFirst, useToggle } from '@mantine/hooks';
 import styles from './styles/login.module.scss';
 import { GoogleButton } from 'components/buttons/google';
 import { useUserStore } from 'stores';
+import { useRouter } from 'next/router';
+import { SignupValidation } from 'libs/types/validation';
 
 interface LoginProps {
   email: string;
@@ -29,7 +31,9 @@ enum LoginType {
 }
 
 export default function LoginPage() {
-  const { login, googleLogin, register } = useUserStore();
+  const router = useRouter();
+
+  const { login, googleLogin, register, isLoading, setIsLoading } = useUserStore();
 
   const [type, toggle] = useToggle<LoginType>([LoginType.LOGIN, LoginType.REGISTER]);
 
@@ -42,27 +46,37 @@ export default function LoginPage() {
       terms: false,
     },
     validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : 'Invalid email'),
+      email: (val) => (/^\S+@\S+$/.test(val) ? null : SignupValidation.EMAIL),
       password: (val) => {
-        if (val.length <= 6) {
-          return 'Password should include at least 6 characters';
-        }
-        if (!/[^A-Za-z0-9]/.test(val)) {
-          return 'Password should include at least one special character';
-        }
+        // users must pass password validation for the following rules:
+        // at least 6 characters
+        if (val.length <= 6) return SignupValidation.MIN_LENGTH;
+        // at least one number
+        if (!/[^A-Za-z0-9]/.test(val)) return SignupValidation.SPECIAL_CHARACTER;
+        // at least one uppercase letter
+        if (!/[A-Z]/.test(val)) return SignupValidation.UPPERCASE;
+        // at least one lowercase letter
+        if (!/[a-z]/.test(val)) return SignupValidation.LOWERCASE;
+        // at least one number
+        if (!/\d/.test(val)) return SignupValidation.NUMBER;
         return null;
       },
       terms: (val) =>
-        type === LoginType.REGISTER ? (val ? null : 'You must accept terms and conditions') : null,
+        type === LoginType.REGISTER ? (val ? null : SignupValidation.TERMS) : null,
     },
   });
 
   const handleSubmit = async (values: LoginProps) => {
+    setIsLoading(true);
     if (type === LoginType.LOGIN) {
       await login(values.email, values.password);
     } else if (type === LoginType.REGISTER) {
       await register(values.email, values.password);
+      if (!isLoading) {
+        router.push('/verify');
+      }
     }
+    setIsLoading(false);
   };
 
   return (
@@ -71,7 +85,6 @@ export default function LoginPage() {
         <h2 className={styles?.['loginPage_header']}>
           {`Welcome to Crypto Screener${type === LoginType.LOGIN ? ', login with' : ''}`}
         </h2>
-
         {type === LoginType.LOGIN && (
           <>
             <Group grow mb="md" mt="md">
@@ -110,7 +123,6 @@ export default function LoginPage() {
                 />
               </>
             )}
-
             <TextInput
               required
               label="Email"
@@ -121,7 +133,6 @@ export default function LoginPage() {
               radius="md"
               {...form.getInputProps('email')}
             />
-
             <PasswordInput
               required
               label="Password"
@@ -132,7 +143,6 @@ export default function LoginPage() {
               radius="md"
               {...form.getInputProps('password')}
             />
-
             {type === LoginType.REGISTER && (
               <Checkbox
                 label="I accept terms and conditions"
@@ -143,14 +153,13 @@ export default function LoginPage() {
               />
             )}
           </Stack>
-
           <Group justify="space-between" mt="xl" className={styles?.['loginPage_footer']}>
             <Anchor component="button" type="button" c="dimmed" onClick={() => toggle()} size="xs">
               {type === LoginType.REGISTER
                 ? 'Already have an account? Login'
                 : "Don't have an account? Register"}
             </Anchor>
-            <Button type="submit" radius="xl">
+            <Button type="submit" radius="xl" loading={isLoading}>
               {upperFirst(type)}
             </Button>
           </Group>

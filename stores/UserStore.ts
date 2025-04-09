@@ -14,6 +14,7 @@ interface UserStore {
   user: User | null;
   isAuthenticated: boolean;
   isLoading?: boolean;
+  setIsLoading?: (loadingState: boolean) => void;
   error?: any;
   login?: (email: string, password: string) => Promise<void>;
   logout?: () => Promise<void>;
@@ -41,6 +42,7 @@ export const useUserStore = create(
       error: null,
       isAuthenticated: false,
       isLoading: false,
+      setIsLoading: (loadingState) => set({ isLoading: loadingState }),
       setUser: (user: User) => set({ user, isAuthenticated: true }),
       clearError: () => set({ error: null }),
       initialize: async () => {
