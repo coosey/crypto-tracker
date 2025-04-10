@@ -13,9 +13,7 @@ export const Layout = ({ children, className, hasGlobalTrend = true }: LayoutPro
   return (
     <div className={cn(styles['layout'], { className: className })}>
       <HeaderComponent className={styles?.['header']} />
-      {hasGlobalTrend && (
-        <GlobalTrendHeader />
-      )}
+      {hasGlobalTrend && <GlobalTrendHeader />}
       <MainComponent className={styles?.['main']}>{children}</MainComponent>
       <FooterComponent />
     </div>

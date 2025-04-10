@@ -6,7 +6,8 @@ import dynamic from 'next/dynamic';
 import Container from 'components/container';
 import { MantineProvider } from '@mantine/core';
 import { HydrateZustand, AuthProvider } from 'stores';
-import { GlobalTrendProvider } from 'libs/context/global-trend';
+import { GlobalTrendProvider } from 'libs/context/globalTrend.context';
+import { AlertProvider } from 'libs/context/alert.context';
 
 const Page = ({ Component, pageProps }) => {
   return (
@@ -14,9 +15,11 @@ const Page = ({ Component, pageProps }) => {
       <AuthProvider>
         <MantineProvider defaultColorScheme="dark">
           <GlobalTrendProvider>
-            <Container>
-              <Component {...pageProps} />
-            </Container>
+            <AlertProvider>
+              <Container>
+                <Component {...pageProps} />
+              </Container>
+            </AlertProvider>
           </GlobalTrendProvider>
         </MantineProvider>
       </AuthProvider>

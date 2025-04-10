@@ -1,4 +1,4 @@
-import { Alert, AlertVariant, MantineColor, MantineRadius } from '@mantine/core';
+import { Alert, AlertVariant, MantineRadius } from '@mantine/core';
 import {
   IconHelp,
   IconExclamationCircle,
@@ -6,21 +6,26 @@ import {
   IconCircleCheck,
   IconInfoHexagon,
 } from '@tabler/icons-react';
-import styles from './index.module.css';
+import styles from './index.module.scss';
 import cn from 'classnames';
+import { useAlertMessage } from 'libs/context/alert.context';
 
 const alertIcons = {
-  custom: <IconHelp size={2} />,
-  error: <IconExclamationCircle size={2} />,
-  warning: <IconAlertTriangle size={2} />,
-  info: <IconInfoHexagon size={2} />,
-  success: <IconCircleCheck size={2} />,
+  custom: <IconHelp size={32} />,
+  error: <IconExclamationCircle size={32} />,
+  warning: <IconAlertTriangle size={32} />,
+  info: <IconInfoHexagon size={32} />,
+  success: <IconCircleCheck size={32} />,
 };
 
-interface Props {
+export type AlertType = 'custom' | 'error' | 'warning' | 'info' | 'success';
+
+export type AlertColor = 'red' | 'yellow' | 'green';
+
+export interface AlertMessageProps {
   variant?: AlertVariant;
-  color?: MantineColor;
-  type?: 'custom' | 'error' | 'warning' | 'info' | 'success' | 'alert';
+  color?: AlertColor;
+  type?: AlertType;
   title?: string;
   messageBody?: string;
   withCloseButton?: boolean;
@@ -29,28 +34,31 @@ interface Props {
   className?: string;
 }
 
-export const AlertMessage = ({
-  variant = 'light',
-  color,
-  type = 'custom',
-  title,
-  messageBody,
-  onClose,
-  withCloseButton = false,
-  className,
-}: Props) => {
-  const Icon = alertIcons[type];
+export const AlertMessage = ({ className }: AlertMessageProps) => {
+  const { alerts, removeAlert } = useAlertMessage();
   return (
-    <Alert
-      className={cn(styles?.['alert'], className)}
-      variant={variant}
-      color={color}
-      title={title}
-      icon={Icon}
-      onClose={onClose}
-      withCloseButton={withCloseButton}
-    >
-      {messageBody}
-    </Alert>
+    <>
+      {alerts?.map?.((alert) => {
+        const alertIndex = Number(alert?.id);
+        console.log(alertIndex);
+        return (
+          <div key={alert?.id}>
+            <Alert
+              style={{ marginTop: `${alertIndex > 1 ? alertIndex + 2 : 0}rem` }} // Adjust margin based on alert ID
+              key={alert?.id}
+              className={cn(styles?.['alert'], className)}
+              variant={alert?.variant}
+              color={alert?.color}
+              title={alert?.title}
+              icon={alertIcons[alert?.type]}
+              onClose={() => removeAlert(alert.id)}
+              withCloseButton
+            >
+              {alert?.messageBody}
+            </Alert>
+          </div>
+        );
+      })}
+    </>
   );
 };

@@ -16,6 +16,7 @@ import { GoogleButton } from 'components/buttons/google';
 import { useUserStore } from 'stores';
 import { useRouter } from 'next/router';
 import { SignupValidation } from 'libs/types/validation';
+import { useAlertMessage } from 'libs/context/alert.context';
 
 interface LoginProps {
   email: string;
@@ -33,7 +34,9 @@ enum LoginType {
 export default function LoginPage() {
   const router = useRouter();
 
-  const { login, googleLogin, register, isLoading, setIsLoading } = useUserStore();
+  const { addAlert } = useAlertMessage();
+
+  const { login, googleLogin, register, isLoading } = useUserStore();
 
   const [type, toggle] = useToggle<LoginType>([LoginType.LOGIN, LoginType.REGISTER]);
 
@@ -47,36 +50,71 @@ export default function LoginPage() {
     },
     validate: {
       email: (val) => (/^\S+@\S+$/.test(val) ? null : SignupValidation.EMAIL),
-      password: (val) => {
-        // users must pass password validation for the following rules:
-        // at least 6 characters
-        if (val.length <= 6) return SignupValidation.MIN_LENGTH;
-        // at least one number
-        if (!/[^A-Za-z0-9]/.test(val)) return SignupValidation.SPECIAL_CHARACTER;
-        // at least one uppercase letter
-        if (!/[A-Z]/.test(val)) return SignupValidation.UPPERCASE;
-        // at least one lowercase letter
-        if (!/[a-z]/.test(val)) return SignupValidation.LOWERCASE;
-        // at least one number
-        if (!/\d/.test(val)) return SignupValidation.NUMBER;
-        return null;
-      },
-      terms: (val) =>
-        type === LoginType.REGISTER ? (val ? null : SignupValidation.TERMS) : null,
+      password: (val) => (type === LoginType.LOGIN ? null : validateForm(val)),
+      terms: (val) => (type === LoginType.REGISTER ? (val ? null : SignupValidation.TERMS) : null),
     },
   });
 
   const handleSubmit = async (values: LoginProps) => {
-    setIsLoading(true);
-    if (type === LoginType.LOGIN) {
-      await login(values.email, values.password);
-    } else if (type === LoginType.REGISTER) {
-      await register(values.email, values.password);
-      if (!isLoading) {
+    try {
+      // Login
+      if (type === LoginType.LOGIN) {
+        const response = await login(values.email, values.password);
+        if (response?.error) {
+          // Login error
+          addAlert({
+            type: 'error',
+            color: 'red',
+            variant: 'light',
+            messageBody: response?.error,
+            timeout: 5000,
+          });
+          return;
+        }
+        // If login was successful, navigate and show success message
+        addAlert({
+          type: 'success',
+          color: 'green',
+          variant: 'filled',
+          messageBody: 'Login successful!',
+          timeout: 5000,
+        });
+        router.push('/');
+        // Registration
+      } else if (type === LoginType.REGISTER) {
+        const response = await register(values.email, values.password);
+        // Handle registration errors similarly to login
+        if (response?.error) {
+          addAlert({
+            type: 'error',
+            color: 'red',
+            variant: 'light',
+            messageBody: response.error,
+            timeout: 5000,
+          });
+          return;
+        }
+        // If registration was successful, navigate and show success message
+        addAlert({
+          type: 'success',
+          color: 'green',
+          variant: 'filled',
+          messageBody: 'Registration successful!',
+          timeout: 5000,
+        });
         router.push('/verify');
       }
+    } catch (error) {
+      // Catch any unexpected errors
+      console.error('Authentication error:', error);
+      addAlert({
+        type: 'error',
+        color: 'red',
+        variant: 'light',
+        messageBody: 'An unexpected error occurred. Please try again.',
+        timeout: 5000,
+      });
     }
-    setIsLoading(false);
   };
 
   return (
@@ -97,7 +135,8 @@ export default function LoginPage() {
         )}
 
         <form
-          onSubmit={form.onSubmit((values) => {
+          onSubmit={form.onSubmit((values, e) => {
+            e.preventDefault();
             form.validate();
             handleSubmit(values);
           })}
@@ -167,4 +206,24 @@ export default function LoginPage() {
       </Paper>
     </div>
   );
+}
+
+/**
+ * Form validation for password
+ * @param formValue password
+ * @returns null, unless validation fails then returns error message
+ */
+function validateForm(formValue: string) {
+  // users must pass password validation for the following rules:
+  // at least 6 characters
+  if (formValue.length <= 6) return SignupValidation.MIN_LENGTH;
+  // at least one number
+  if (!/[^A-Za-z0-9]/.test(formValue)) return SignupValidation.SPECIAL_CHARACTER;
+  // at least one uppercase letter
+  if (!/[A-Z]/.test(formValue)) return SignupValidation.UPPERCASE;
+  // at least one lowercase letter
+  if (!/[a-z]/.test(formValue)) return SignupValidation.LOWERCASE;
+  // at least one number
+  if (!/\d/.test(formValue)) return SignupValidation.NUMBER;
+  return null;
 }

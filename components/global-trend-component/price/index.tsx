@@ -3,7 +3,7 @@ import { FormattedNumber } from 'components/formatted-number';
 import styles from './index.module.scss';
 import { CarrotPriceChange } from 'components/carrot-price-change';
 import { Skeleton } from '@mantine/core';
-import { useGlobalTrend } from 'libs/context/global-trend';
+import { useGlobalTrend } from 'libs/context/globalTrend.context';
 
 const renderMarketTrend = (price: number, carrotPrice: number | null, priceTitle: string) => {
   return (

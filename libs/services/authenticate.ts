@@ -10,29 +10,23 @@ import {
   User
 } from 'firebase/auth'
 import { auth } from '../firebase';
-import { firebaseErrorHandler } from 'libs/firebase/errors';
 
 export const loginWithEmail = async (email: string, password: string) => {
-  return await signInWithEmailAndPassword(auth, email, password).then((userCredentials) => {
+  await signInWithEmailAndPassword(auth, email, password).then((userCredentials) => {
     updateCurrentUser(auth, userCredentials.user);
   }).catch((error) => {
-    const errorCode = error.code;
-    alert(firebaseErrorHandler(errorCode));
-    console.log('Error code: ', errorCode);
+    throw error;
   });
 }
 
 export const registerWithEmail = async (email: string, password: string) => {
-  await createUserWithEmailAndPassword(auth, email, password).then(
-    (userCredentials) => {
-      updateCurrentUser(auth, userCredentials.user);
-      sendEmailVerification(userCredentials.user);
-      console.log('Email verification sent');
-    }).catch((error) => {
-      const errorCode = error.code;
-      firebaseErrorHandler(errorCode);
-      console.error('Error: ', error);
-    })
+  await createUserWithEmailAndPassword(auth, email, password).then((userCredentials) => {
+    updateCurrentUser(auth, userCredentials.user);
+    sendEmailVerification(userCredentials.user);
+    console.log('Email verification sent');
+  }).catch((error) => {
+    throw error;
+  });
 }
 
 export const loginWithGoogle = async () => {

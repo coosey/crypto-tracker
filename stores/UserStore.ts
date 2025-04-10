@@ -8,21 +8,27 @@ import {
   loginWithGoogle
 } from 'libs/services/authenticate';
 import { Unsubscribe, User } from 'firebase/auth';
+import { firebaseErrorHandler } from 'libs/firebase/errors';
+
+interface AuthResponse {
+  error: string | null;
+  success: boolean;
+}
 
 interface UserStore {
   initialize?: () => Promise<Unsubscribe>;
   user: User | null;
   isAuthenticated: boolean;
   isLoading?: boolean;
+  error?: string | null;
+  isHydrated?: boolean;
   setIsLoading?: (loadingState: boolean) => void;
-  error?: any;
-  login?: (email: string, password: string) => Promise<void>;
+  login?: (email: string, password: string) => Promise<AuthResponse>;
   logout?: () => Promise<void>;
   setUser?: (user: User) => void;
   clearError?: () => void;
-  isHydrated?: boolean;
   googleLogin?: () => Promise<void>;
-  register?: (email: string, password: string) => Promise<void>;
+  register?: (email: string, password: string) => Promise<AuthResponse>;
   emailVerification?: () => Promise<void>;
   reset?: () => void;
 }
@@ -31,7 +37,7 @@ const initialState: UserStore = {
   user: null,
   isAuthenticated: false,
   isLoading: false,
-  error: null,
+  error: '',
   isHydrated: false,
 };
 
@@ -39,10 +45,10 @@ export const useUserStore = create(
   persist<UserStore>(
     (set, get) => ({
       user: null,
-      error: null,
+      error: '',
       isAuthenticated: false,
       isLoading: false,
-      setIsLoading: (loadingState) => set({ isLoading: loadingState }),
+      setError: (error) => set({ error: error }),
       setUser: (user: User) => set({ user, isAuthenticated: true }),
       clearError: () => set({ error: null }),
       initialize: async () => {
@@ -61,30 +67,54 @@ export const useUserStore = create(
       },
       // LOGIN HANDLER
       login: async (email, password) => {
-        set({ isLoading: true, error: null, isHydrated: true });
+        set((state) => ({ ...state, isLoading: true, error: null, isHydrated: true }));
         try {
           await loginWithEmail(email, password);
+          set((state) => ({ ...state, isLoading: false, error: null }));
         } catch (error) {
-          set({ error: error, isLoading: false, isHydrated: true });
+          console.error('Login error: ', error.code);
+          const errorMessage = firebaseErrorHandler(error.code);
+          set((state) => ({
+            ...state,
+            error: errorMessage,
+            isLoading: false
+          }));
+          return { error: errorMessage, success: false };
         }
+        return { error: null, success: true };
       },
       // REGISTER HANDLER
       register: async (email, password) => {
         set({ isLoading: true, error: null, isHydrated: true });
         try {
           await registerWithEmail(email, password);
+          set((state) => ({ ...state, isLoading: false, error: null }));
         } catch (error) {
-          set({ error: error, isLoading: false, isHydrated: true });
-          console.error('Error: ', error);
+          console.error('Registration error: ', error.code);
+          const errorMessage = firebaseErrorHandler(error.code);
+          set((state) => ({
+            ...state,
+            error: errorMessage,
+            isLoading: false
+          }));
+          return { error: errorMessage, success: false };
         }
+        return { error: null, success: true };
       },
       // GOOGLE LOGIN HANDLER
       googleLogin: async () => {
         set({ isLoading: true, error: null, isHydrated: true });
         try {
           await loginWithGoogle();
+          set((state) => ({ ...state, isLoading: false, error: null }));
         } catch (error) {
-          set({ error: (error as Error).message, isLoading: false, isHydrated: true });
+          console.error('Google Login error: ', error);
+          const errorMessage = firebaseErrorHandler(error.code);
+          set((state) => ({
+            ...state,
+            error: errorMessage,
+            isLoading: false
+          }));
         }
       },
       // LOGOUT HANDLER
@@ -92,9 +122,14 @@ export const useUserStore = create(
         set({ isLoading: true });
         try {
           await firebaseLogout();
-          // set({ user: null, isAuthenticated: false, isHydrated: true });
+          set((state) => ({ ...state, user: null, isAuthenticated: false, isHydrated: true }));
         } catch (error) {
-          set({ error: (error as Error).message });
+          const errorMessage = firebaseErrorHandler(error.code);
+          set((state) => ({
+            ...state,
+            error: errorMessage,
+            isLoading: false
+          }));
         } finally {
           set({ isLoading: false, isHydrated: true });
         }
@@ -108,8 +143,8 @@ export const useUserStore = create(
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,
-        isLoading: state.isLoading,
-        error: state.error,
+        // error: state.error,
+        // isLoading: state.isLoading,
       })
     },
   )

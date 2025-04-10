@@ -5,7 +5,7 @@ import {
   useEffect,
   useState
 } from "react";
-import { handleUseContext } from "./generic-context";
+import { handleUseContext } from "./generic.context";
 import { GlobalMarketTrend } from "libs/types/trending-list";
 
 const GlobalTrendContext = createContext<{

@@ -1,5 +1,5 @@
 import { TrendPriceHeader } from './trend-price-header';
-import { useGlobalTrend } from 'libs/context/global-trend';
+import { useGlobalTrend } from 'libs/context/globalTrend.context';
 import styles from './index.module.scss';
 
 export const GlobalTrendHeader = () => {
