@@ -12,7 +12,7 @@ export const SignInComponent = () => {
 
   const handleProfileClick = () => {
     if (!isUserEmailVerified) router.push('/verify');
-    else alert('Email verified, profile clicked'); // TODO: replace with actual profile page navigation
+    else router.push('/account');
   };
 
   const handleLogoutClick = async () => {
