@@ -2,6 +2,7 @@ import React, {
   createContext,
   ReactNode,
   useCallback,
+  useRef,
   useState
 } from 'react';
 import { handleUseContext } from './generic.context';
@@ -22,9 +23,10 @@ const AlertContext = createContext<AlertContextType | null>(null);
 
 export const AlertProvider = ({ children }: { children: ReactNode }) => {
   const [alerts, setAlerts] = useState<Alert[]>([]);
+  const counterRef = useRef(0);
 
   const addAlert = useCallback((alert: Omit<Alert, 'id'>) => {
-    const id = alerts.length.toString();
+    const id = (counterRef.current++)?.toString?.();
     setAlerts((prev) => {
       const existingAlert = prev?.some?.((a) => a?.messageBody === alert?.messageBody);
       if (existingAlert) {
@@ -39,7 +41,14 @@ export const AlertProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const removeAlert = (id: string) => {
-    setAlerts((prev) => prev?.filter?.((alert) => alert?.id !== id));
+    setAlerts(prev => {
+      const newAlerts = prev.filter(alert => alert.id !== id);
+      // Reset counter if no alerts left
+      if (newAlerts.length === 0) {
+        counterRef.current = 0;
+      }
+      return newAlerts;
+    });
   };
 
   return (

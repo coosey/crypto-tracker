@@ -65,7 +65,7 @@ export default function LoginPage() {
           addAlert({
             type: 'error',
             color: 'red',
-            variant: 'light',
+            variant: 'filled',
             messageBody: response?.error,
             timeout: 5000,
           });
@@ -82,14 +82,14 @@ export default function LoginPage() {
         router.push('/');
         // Registration
       } else if (type === LoginType.REGISTER) {
-        const response = await register(values.email, values.password);
+        const response = await register(values?.email, values?.password);
         // Handle registration errors similarly to login
         if (response?.error) {
           addAlert({
             type: 'error',
             color: 'red',
-            variant: 'light',
-            messageBody: response.error,
+            variant: 'filled',
+            messageBody: response?.error,
             timeout: 5000,
           });
           return;
@@ -110,7 +110,7 @@ export default function LoginPage() {
       addAlert({
         type: 'error',
         color: 'red',
-        variant: 'light',
+        variant: 'filled',
         messageBody: 'An unexpected error occurred. Please try again.',
         timeout: 5000,
       });
@@ -135,9 +135,9 @@ export default function LoginPage() {
         )}
 
         <form
-          onSubmit={form.onSubmit((values, e) => {
-            e.preventDefault();
-            form.validate();
+          onSubmit={form?.onSubmit?.((values, e) => {
+            e?.preventDefault?.();
+            form?.validate?.();
             handleSubmit(values);
           })}
         >
@@ -148,16 +148,20 @@ export default function LoginPage() {
                   required
                   label="First Name"
                   placeholder="Satoshi"
-                  value={form.values.firstName}
-                  onChange={(event) => form.setFieldValue('firstName', event.currentTarget.value)}
+                  value={form?.values?.firstName}
+                  onChange={(event) =>
+                    form?.setFieldValue?.('firstName', event?.currentTarget?.value)
+                  }
                   radius="md"
                 />
                 <TextInput
                   required
                   label="Last Name"
                   placeholder="Nakamoto"
-                  value={form.values.lastName}
-                  onChange={(event) => form.setFieldValue('lastName', event.currentTarget.value)}
+                  value={form?.values?.lastName}
+                  onChange={(event) =>
+                    form?.setFieldValue?.('lastName', event?.currentTarget?.value)
+                  }
                   radius="md"
                 />
               </>
@@ -166,29 +170,29 @@ export default function LoginPage() {
               required
               label="Email"
               placeholder="hello@gmail.com"
-              value={form.values.email}
-              onChange={(event) => form.setFieldValue('email', event.currentTarget.value)}
-              error={form.errors.email && 'Invalid email'}
+              value={form?.values?.email}
+              onChange={(event) => form?.setFieldValue?.('email', event?.currentTarget?.value)}
+              error={form?.errors?.email && 'Invalid email'}
               radius="md"
-              {...form.getInputProps('email')}
+              {...form?.getInputProps?.('email')}
             />
             <PasswordInput
               required
               label="Password"
               placeholder="Your password"
-              value={form.values.password}
-              onChange={(event) => form.setFieldValue('password', event.currentTarget.value)}
-              error={form.errors.password}
+              value={form?.values?.password}
+              onChange={(event) => form?.setFieldValue?.('password', event?.currentTarget?.value)}
+              error={form?.errors?.password}
               radius="md"
-              {...form.getInputProps('password')}
+              {...form?.getInputProps?.('password')}
             />
             {type === LoginType.REGISTER && (
               <Checkbox
                 label="I accept terms and conditions"
-                checked={form.values.terms}
-                onChange={(event) => form.setFieldValue('terms', event.currentTarget.checked)}
-                {...form.getInputProps('terms')}
-                error={form.errors.terms}
+                checked={form?.values?.terms}
+                onChange={(event) => form?.setFieldValue?.('terms', event?.currentTarget?.checked)}
+                {...form?.getInputProps?.('terms')}
+                error={form?.errors?.terms}
               />
             )}
           </Stack>
@@ -216,7 +220,7 @@ export default function LoginPage() {
 function validateForm(formValue: string) {
   // users must pass password validation for the following rules:
   // at least 6 characters
-  if (formValue.length <= 6) return SignupValidation.MIN_LENGTH;
+  if (formValue?.length <= 6) return SignupValidation.MIN_LENGTH;
   // at least one number
   if (!/[^A-Za-z0-9]/.test(formValue)) return SignupValidation.SPECIAL_CHARACTER;
   // at least one uppercase letter

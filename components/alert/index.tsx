@@ -38,20 +38,20 @@ export const AlertMessage = ({ className }: AlertMessageProps) => {
   const { alerts, removeAlert } = useAlertMessage();
   return (
     <>
-      {alerts?.map?.((alert) => {
+      {alerts?.map?.((alert, idx) => {
         const alertIndex = Number(alert?.id);
-        console.log(alertIndex);
         return (
-          <div key={alert?.id}>
+          <div key={alert?.id} data-testid="alert-message">
             <Alert
-              style={{ marginTop: `${alertIndex > 1 ? alertIndex + 2 : 0}rem` }} // Adjust margin based on alert ID
-              key={alert?.id}
+              data-testid="alert-message-body"
+              style={{ marginTop: `${alertIndex > 0 ? alertIndex + 3 : 0}rem` }} // Adjust margin based on alert ID
+              key={`${alert?.id}-${idx}`}
               className={cn(styles?.['alert'], className)}
               variant={alert?.variant}
               color={alert?.color}
               title={alert?.title}
               icon={alertIcons[alert?.type]}
-              onClose={() => removeAlert(alert.id)}
+              onClose={() => removeAlert(alert?.id)}
               withCloseButton
             >
               {alert?.messageBody}
