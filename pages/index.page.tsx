@@ -1,5 +1,4 @@
 import { Layout } from 'components/layout';
-import { observer } from 'mobx-react';
 import { CoinMarketList } from 'components/coin-market-list';
 
 const Home = () => {
@@ -10,4 +9,4 @@ const Home = () => {
   );
 };
 
-export default observer(Home);
+export default Home;
