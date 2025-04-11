@@ -6,27 +6,28 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   sendEmailVerification,
-  updateCurrentUser,
-  User
+  User,
 } from 'firebase/auth'
-import { auth } from '../firebase';
+import { auth } from "libs/firebase";
 
 export const loginWithEmail = async (email: string, password: string) => {
-  await signInWithEmailAndPassword(auth, email, password).then((userCredentials) => {
-    updateCurrentUser(auth, userCredentials.user);
-  }).catch((error) => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
     throw error;
-  });
+  }
 }
 
 export const registerWithEmail = async (email: string, password: string) => {
-  await createUserWithEmailAndPassword(auth, email, password).then((userCredentials) => {
-    updateCurrentUser(auth, userCredentials.user);
-    sendEmailVerification(userCredentials.user);
-    console.log('Email verification sent');
-  }).catch((error) => {
+  try {
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredentials) => {
+        sendEmailVerification(userCredentials.user);
+      });
+  } catch (error) {
+    console.error('Error registering user:', error);
     throw error;
-  });
+  }
 }
 
 export const loginWithGoogle = async () => {

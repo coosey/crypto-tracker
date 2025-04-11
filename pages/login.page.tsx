@@ -17,6 +17,7 @@ import { useUserStore } from 'stores';
 import { useRouter } from 'next/router';
 import { SignupValidation } from 'libs/types/validation';
 import { useAlertMessage } from 'libs/context/alert.context';
+import { updateDisplayName } from 'libs/services/user';
 
 interface LoginProps {
   email: string;
@@ -59,7 +60,7 @@ export default function LoginPage() {
     try {
       // Login
       if (type === LoginType.LOGIN) {
-        const response = await login(values.email, values.password);
+        const response = await login(values?.email, values?.password);
         if (response?.error) {
           // Login error
           addAlert({
@@ -94,6 +95,9 @@ export default function LoginPage() {
           });
           return;
         }
+        // Update display name after successful registration
+        const displayName = `${values?.firstName} ${values?.lastName}`;
+        await updateDisplayName(displayName);
         // If registration was successful, navigate and show success message
         addAlert({
           type: 'success',

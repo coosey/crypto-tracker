@@ -128,7 +128,6 @@ export const useUserStore = create(
           set((state) => ({
             ...state,
             error: errorMessage,
-            isLoading: false
           }));
         } finally {
           set({ isLoading: false, isHydrated: true });
