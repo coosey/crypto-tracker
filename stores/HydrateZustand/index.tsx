@@ -1,33 +1,26 @@
-// components/StoreHydration.tsx
 'use client'
 
 import { useEffect, useState } from 'react';
-import { useAuthStore } from 'stores';
+import { useAuthStore, useUserStore } from 'stores';
 
 export function HydrateZustand({ children }: { children: React.ReactNode }) {
   const [isHydrated, setIsHydrated] = useState(false)
-  const initializeUser = useAuthStore((state) => state.initialize)
-  // EXAMPLES
-  // const loadCart = useCartStore((state) => state.load)
-  // const loadSettings = useSettingsStore((state) => state.load)
+  const initializeAuth = useAuthStore((state) => state.initialize)
+  const initializeUser = useUserStore((state) => state.initialize);
 
   useEffect(() => {
     async function hydrateStores() {
-      // Hydrate in sequence if there are dependencies
-      await initializeUser()
-      
-      // Hydrate other stores in parallel if no dependencies
-      // await Promise.all([
-        // loadCart(),
-        // loadSettings()
-      // ])
-      
+      await Promise.all([
+        initializeAuth(),
+        initializeUser(),
+      ])
       setIsHydrated(true)
     }
     
     hydrateStores()
   }, [
-    initializeUser,
+    initializeAuth,
+    initializeUser
   ])
 
   return isHydrated ? children : null

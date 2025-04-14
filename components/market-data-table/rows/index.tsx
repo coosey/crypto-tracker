@@ -13,21 +13,23 @@ interface Props {
   rows: CoinsListResponse[];
   handleRowClick?: (coinId: string) => void;
   favoriteSelected?: boolean;
+  openInfoModal?: () => void;
 }
 
 export const DataTableRows = memo(function DataTableRows({
   rows,
   handleRowClick,
+  openInfoModal
 }: Props) {
   const [favoriteSelected, setFavoriteSelected] = useState(false);
   const { user, isAuthenticated } = useUserStore();
 
   const handleFavoriteClick = (coinId: string) => {
-    console.log('id clicked >>>', coinId);
+    // console.log('id clicked >>>', coinId);
     console.log('user: ', user);
     console.log('isAuthenticated? ', isAuthenticated);
     if (!isAuthenticated) {
-      alert('User is not authenticated, popup modal shown');
+      openInfoModal && openInfoModal?.();
       return;
     }
   };
