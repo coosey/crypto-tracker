@@ -1,0 +1,32 @@
+.loginModal {
+  text-align: center;
+
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  p {
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin: 1rem 0;
+
+    &--link {
+      font-weight: 500;
+      padding-top: 1rem;
+      margin-top: 16px;
+      font-size: 0.875rem;
+    }
+
+    .sign-in-button {
+      width: 100%;
+    }
+  }
+}

@@ -1,140 +1,47 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-import {
-  loginWithEmail,
-  registerWithEmail,
-  logout as firebaseLogout,
-  onAuthChange,
-  loginWithGoogle
-} from 'libs/services/authenticate';
-import { Unsubscribe, User } from 'firebase/auth';
-import { firebaseErrorHandler } from 'libs/firebase/errors';
+import { create } from 'zustand';
+import { Unsubscribe, User } from "firebase/auth";
+import { persist } from "zustand/middleware";
+import { onAuthChange } from 'libs/services/authenticate';
 
-interface AuthResponse {
-  error: string | null;
-  success: boolean;
-}
-
-interface UserStore {
-  initialize?: () => Promise<Unsubscribe>;
+type UserStoreState = {
   user: User | null;
-  isAuthenticated: boolean;
-  isLoading?: boolean;
-  error?: string | null;
+  isAuthenticated?: boolean;
   isHydrated?: boolean;
-  setIsLoading?: (loadingState: boolean) => void;
-  login?: (email: string, password: string) => Promise<AuthResponse>;
-  logout?: () => Promise<void>;
-  setUser?: (user: User) => void;
-  clearError?: () => void;
-  googleLogin?: () => Promise<void>;
-  register?: (email: string, password: string) => Promise<AuthResponse>;
-  emailVerification?: () => Promise<void>;
-  reset?: () => void;
-}
+};
 
-const initialState: UserStore = {
+type UserStoreActions = {
+  initialize?: () => Promise<Unsubscribe>;
+  setUser?: (user: User) => void;
+  clearUser?: () => void;
+};
+
+const initialUserState: UserStoreState = {
   user: null,
   isAuthenticated: false,
-  isLoading: false,
-  error: '',
   isHydrated: false,
 };
 
 export const useUserStore = create(
-  persist<UserStore>(
+  persist<UserStoreState & UserStoreActions>(
     (set, get) => ({
       user: null,
-      error: '',
       isAuthenticated: false,
-      isLoading: false,
-      setError: (error) => set({ error: error }),
-      setUser: (user: User) => set({ user, isAuthenticated: true }),
-      clearError: () => set({ error: null }),
       initialize: async () => {
         if (get().isHydrated) return;
 
-        set({ isLoading: true });
-
         const unsubscribe = onAuthChange((firebaseUser) => {
           if (firebaseUser) {
-            set({ user: firebaseUser, isAuthenticated: true, isLoading: false, isHydrated: true });
+            set({ user: firebaseUser, isAuthenticated: true, isHydrated: true });
           } else {
-            set({ user: null, isAuthenticated: false, isLoading: false, isHydrated: true });
+            set({ user: null, isAuthenticated: false, isHydrated: true });
           }
         })
         return unsubscribe;
       },
-      // LOGIN HANDLER
-      login: async (email, password) => {
-        set((state) => ({ ...state, isLoading: true, error: null, isHydrated: true }));
-        try {
-          await loginWithEmail(email, password);
-          set((state) => ({ ...state, isLoading: false, error: null }));
-        } catch (error) {
-          console.error('Login error: ', error.code);
-          const errorMessage = firebaseErrorHandler(error.code);
-          set((state) => ({
-            ...state,
-            error: errorMessage,
-            isLoading: false
-          }));
-          return { error: errorMessage, success: false };
-        }
-        return { error: null, success: true };
-      },
-      // REGISTER HANDLER
-      register: async (email, password) => {
-        set({ isLoading: true, error: null, isHydrated: true });
-        try {
-          await registerWithEmail(email, password);
-          set((state) => ({ ...state, isLoading: false, error: null }));
-        } catch (error) {
-          console.error('Registration error: ', error.code);
-          const errorMessage = firebaseErrorHandler(error.code);
-          set((state) => ({
-            ...state,
-            error: errorMessage,
-            isLoading: false
-          }));
-          return { error: errorMessage, success: false };
-        }
-        return { error: null, success: true };
-      },
-      // GOOGLE LOGIN HANDLER
-      googleLogin: async () => {
-        set({ isLoading: true, error: null, isHydrated: true });
-        try {
-          await loginWithGoogle();
-          set((state) => ({ ...state, isLoading: false, error: null }));
-        } catch (error) {
-          console.error('Google Login error: ', error);
-          const errorMessage = firebaseErrorHandler(error.code);
-          set((state) => ({
-            ...state,
-            error: errorMessage,
-            isLoading: false
-          }));
-        }
-      },
-      // LOGOUT HANDLER
-      logout: async () => {
-        set({ isLoading: true });
-        try {
-          await firebaseLogout();
-          set((state) => ({ ...state, user: null, isAuthenticated: false, isHydrated: true }));
-        } catch (error) {
-          const errorMessage = firebaseErrorHandler(error.code);
-          set((state) => ({
-            ...state,
-            error: errorMessage,
-          }));
-        } finally {
-          set({ isLoading: false, isHydrated: true });
-        }
-      },
+      setUser: (user: User) => set({ user: user, isAuthenticated: true, isHydrated: true }),
+      clearUser: () => set({ user: null, isAuthenticated: false, isHydrated: true }),
       reset: () => {
-        set(initialState)
+        set(initialUserState)
       },
     }),
     {
@@ -142,8 +49,7 @@ export const useUserStore = create(
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,
-        // error: state.error,
-        // isLoading: state.isLoading,
+        isHydrated: state.isHydrated,
       })
     },
   )

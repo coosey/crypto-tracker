@@ -1,4 +1,5 @@
 import '@mantine/core/styles/Table.css';
+
 import { MarketDataTableProps } from 'libs/types/market-data-table';
 import { DataTableHeaders } from './headers';
 import { DataTableRows } from './rows';
@@ -7,6 +8,9 @@ import { useRouter } from 'next/router';
 import { useSortTable } from 'libs/hooks/useSortTable';
 import { DataTable } from '../data-table';
 import { transformData } from 'libs/helpers/transformData';
+import { useDisclosure } from '@mantine/hooks';
+import { useCallback } from 'react';
+import { LoginModal } from 'components/modals/login';
 
 export const MarketDataTable = ({ data }: MarketDataTableProps) => {
   const router = useRouter();
@@ -32,8 +36,15 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
   const { sortField, sortDirection, handleSortChange, sortedData } =
     useSortTable(coinsListTableData);
 
+  const [opened, { open, close }] = useDisclosure(false);
+
+  const handleOpenInfoModal = useCallback(() => {
+    open();
+  }, []);
+
   return (
     <>
+      <LoginModal opened={opened} onClose={close} withCloseButton />
       <DataTable verticalSpacing="md" highlightOnHover>
         {{
           header: (
@@ -44,7 +55,13 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
               dataTableHeaders={DataTableHeaders}
             />
           ),
-          body: <DataTableRows rows={sortedData} handleRowClick={handleRowClick} />,
+          body: (
+            <DataTableRows
+              rows={sortedData}
+              handleRowClick={handleRowClick}
+              openInfoModal={handleOpenInfoModal}
+            />
+          ),
         }}
       </DataTable>
     </>

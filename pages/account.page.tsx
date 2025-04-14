@@ -1,4 +1,4 @@
-import { Layout } from "components/layout";
+import { Layout } from 'components/layout';
 
 export default function AccountPage() {
   return (
@@ -8,5 +8,5 @@ export default function AccountPage() {
         <p>This is the account page.</p>
       </div>
     </Layout>
-  )
+  );
 }

@@ -10,14 +10,16 @@ import {
   Button,
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { upperFirst, useToggle } from '@mantine/hooks';
+import { upperFirst } from '@mantine/hooks';
 import styles from './styles/login.module.scss';
 import { GoogleButton } from 'components/buttons/google';
-import { useUserStore } from 'stores';
+import { useAuthStore } from 'stores';
 import { useRouter } from 'next/router';
 import { SignupValidation } from 'libs/types/validation';
 import { useAlertMessage } from 'libs/context/alert.context';
 import { updateDisplayName } from 'libs/services/user';
+import { usePathname, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
 interface LoginProps {
   email: string;
@@ -28,18 +30,31 @@ interface LoginProps {
 }
 
 enum LoginType {
-  LOGIN = 'LOGIN',
-  REGISTER = 'REGISTER',
+  LOGIN = 'login',
+  REGISTER = 'register',
 }
 
 export default function LoginPage() {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   const { addAlert } = useAlertMessage();
+  const { login, googleLogin, register, isLoading } = useAuthStore();
 
-  const { login, googleLogin, register, isLoading } = useUserStore();
+  const [isLoginForm, setIsLoginForm] = useState(true);
 
-  const [type, toggle] = useToggle<LoginType>([LoginType.LOGIN, LoginType.REGISTER]);
+  useEffect(() => {
+    const action = searchParams.get('action');
+    setIsLoginForm(action !== 'register');
+  }, [searchParams]);
+
+  const toggleForm = () => {
+    const loginFormCheck = !isLoginForm;
+    setIsLoginForm(loginFormCheck);
+    // Update URL without page reload
+    router.replace(`${pathname}?action=${loginFormCheck ? 'login' : 'register'}`);
+  };
 
   const form = useForm({
     initialValues: {
@@ -51,15 +66,15 @@ export default function LoginPage() {
     },
     validate: {
       email: (val) => (/^\S+@\S+$/.test(val) ? null : SignupValidation.EMAIL),
-      password: (val) => (type === LoginType.LOGIN ? null : validateForm(val)),
-      terms: (val) => (type === LoginType.REGISTER ? (val ? null : SignupValidation.TERMS) : null),
+      password: (val) => (isLoginForm ? null : validateForm(val)),
+      terms: (val) => (!isLoginForm ? (val ? null : SignupValidation.TERMS) : null),
     },
   });
 
   const handleSubmit = async (values: LoginProps) => {
     try {
       // Login
-      if (type === LoginType.LOGIN) {
+      if (isLoginForm) {
         const response = await login(values?.email, values?.password);
         if (response?.error) {
           // Login error
@@ -82,7 +97,7 @@ export default function LoginPage() {
         });
         router.push('/');
         // Registration
-      } else if (type === LoginType.REGISTER) {
+      } else if (!isLoginForm) {
         const response = await register(values?.email, values?.password);
         // Handle registration errors similarly to login
         if (response?.error) {
@@ -125,9 +140,9 @@ export default function LoginPage() {
     <div className={styles?.['loginPage']}>
       <Paper radius="md" p="xl" withBorder className={styles?.['container']}>
         <h2 className={styles?.['loginPage_header']}>
-          {`Welcome to Crypto Screener${type === LoginType.LOGIN ? ', login with' : ''}`}
+          {`Welcome to Crypto Screener${isLoginForm ? ', login with' : ''}`}
         </h2>
-        {type === LoginType.LOGIN && (
+        {isLoginForm && (
           <>
             <Group grow mb="md" mt="md">
               <GoogleButton radius="xl" onClick={googleLogin}>
@@ -146,7 +161,7 @@ export default function LoginPage() {
           })}
         >
           <Stack>
-            {type === LoginType.REGISTER && (
+            {!isLoginForm && (
               <>
                 <TextInput
                   required
@@ -190,7 +205,7 @@ export default function LoginPage() {
               radius="md"
               {...form?.getInputProps?.('password')}
             />
-            {type === LoginType.REGISTER && (
+            {!isLoginForm && (
               <Checkbox
                 label="I accept terms and conditions"
                 checked={form?.values?.terms}
@@ -201,13 +216,17 @@ export default function LoginPage() {
             )}
           </Stack>
           <Group justify="space-between" mt="xl" className={styles?.['loginPage_footer']}>
-            <Anchor component="button" type="button" c="dimmed" onClick={() => toggle()} size="xs">
-              {type === LoginType.REGISTER
-                ? 'Already have an account? Login'
-                : "Don't have an account? Register"}
+            <Anchor
+              component="button"
+              type="button"
+              c="dimmed"
+              onClick={() => toggleForm()}
+              size="xs"
+            >
+              {!isLoginForm ? 'Already have an account? Login' : "Don't have an account? Register"}
             </Anchor>
             <Button type="submit" radius="xl" loading={isLoading}>
-              {upperFirst(type)}
+              {upperFirst(isLoginForm ? LoginType.LOGIN : LoginType.REGISTER)}
             </Button>
           </Group>
         </form>
