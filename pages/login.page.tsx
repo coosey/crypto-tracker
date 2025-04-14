@@ -216,10 +216,14 @@ export default function LoginPage() {
             )}
           </Stack>
           <Group justify="space-between" mt="xl" className={styles?.['loginPage_footer']}>
-            <Anchor component="button" type="button" c="dimmed" onClick={() => toggleForm()} size="xs">
-              {!isLoginForm
-                ? 'Already have an account? Login'
-                : "Don't have an account? Register"}
+            <Anchor
+              component="button"
+              type="button"
+              c="dimmed"
+              onClick={() => toggleForm()}
+              size="xs"
+            >
+              {!isLoginForm ? 'Already have an account? Login' : "Don't have an account? Register"}
             </Anchor>
             <Button type="submit" radius="xl" loading={isLoading}>
               {upperFirst(isLoginForm ? LoginType.LOGIN : LoginType.REGISTER)}

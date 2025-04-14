@@ -19,7 +19,7 @@ interface Props {
 export const DataTableRows = memo(function DataTableRows({
   rows,
   handleRowClick,
-  openInfoModal
+  openInfoModal,
 }: Props) {
   const [favoriteSelected, setFavoriteSelected] = useState(false);
   const { user, isAuthenticated } = useUserStore();

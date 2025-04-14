@@ -55,11 +55,7 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
 
   return (
     <>
-      <LoginModal 
-        opened={opened}
-        onClose={close}
-        withCloseButton
-      />
+      <LoginModal opened={opened} onClose={close} withCloseButton />
       <DataTable verticalSpacing="md" highlightOnHover>
         {{
           header: (
