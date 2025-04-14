@@ -22,12 +22,9 @@ export const DataTableRows = memo(function DataTableRows({
   openInfoModal,
 }: Props) {
   const [favoriteSelected, setFavoriteSelected] = useState(false);
-  const { user, isAuthenticated } = useUserStore();
+  const { isAuthenticated } = useUserStore();
 
   const handleFavoriteClick = (coinId: string) => {
-    // console.log('id clicked >>>', coinId);
-    console.log('user: ', user);
-    console.log('isAuthenticated? ', isAuthenticated);
     if (!isAuthenticated) {
       openInfoModal && openInfoModal?.();
       return;

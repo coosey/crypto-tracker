@@ -1,4 +1,5 @@
 import '@mantine/core/styles/Table.css';
+
 import { MarketDataTableProps } from 'libs/types/market-data-table';
 import { DataTableHeaders } from './headers';
 import { DataTableRows } from './rows';
@@ -10,25 +11,13 @@ import { transformData } from 'libs/helpers/transformData';
 import { useDisclosure } from '@mantine/hooks';
 import { useCallback } from 'react';
 import { LoginModal } from 'components/modals/login';
-// import { useAuthStore } from 'stores';
 
 export const MarketDataTable = ({ data }: MarketDataTableProps) => {
   const router = useRouter();
-  // const { user, isAuthenticated } = useAuthStore();
 
   const handleRowClick = (coinId: string) => {
     router.push(`/coin/${coinId}`);
   };
-
-  // const handleFavoriteClick = (coinId: string) => {
-  //   console.log('id clicked >>>', coinId);
-  //   console.log('user: ', user);
-  //   console.log('isAuthenticated? ', isAuthenticated);
-  //   if (!isAuthenticated) {
-  //     console.log('User is not authenticated');
-  //     return;
-  //   }
-  // };
 
   const coinsListTableData = transformData(data, (coin) => ({
     id: coin?.id || '',
@@ -71,7 +60,6 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
               rows={sortedData}
               handleRowClick={handleRowClick}
               openInfoModal={handleOpenInfoModal}
-              // handleFavoriteClick={handleFavoriteClick}
             />
           ),
         }}
