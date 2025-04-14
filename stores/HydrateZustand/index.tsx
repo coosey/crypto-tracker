@@ -2,11 +2,11 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import { useUserStore } from '../UserStore';
+import { useAuthStore } from 'stores';
 
 export function HydrateZustand({ children }: { children: React.ReactNode }) {
   const [isHydrated, setIsHydrated] = useState(false)
-  const initializeUser = useUserStore((state) => state.initialize)
+  const initializeUser = useAuthStore((state) => state.initialize)
   // EXAMPLES
   // const loadCart = useCartStore((state) => state.load)
   // const loadSettings = useSettingsStore((state) => state.load)

@@ -1,10 +1,10 @@
 'use client'
 
-import { useEffect } from 'react'
-import { useUserStore } from 'stores';
+import { useEffect } from 'react';
+import { useAuthStore } from 'stores';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const initialize = useUserStore((state) => state.initialize);
+  const initialize = useAuthStore((state) => state.initialize);
 
   useEffect(() => {
     let unsubscribe: (() => void) | undefined;

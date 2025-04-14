@@ -1,19 +1,37 @@
 import { Table } from '@mantine/core';
 import { CoinsListResponse } from 'libs/types/coins-list';
 import styles from './index.module.scss';
-import { FavoriteButton } from '../../favorite-button';
+import { FavoriteButton } from 'components/buttons/favorite';
 import { CarrotPriceChange } from '../../carrot-price-change';
 import { formatNumberWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
 import { DataTableSkeleton } from '../skeleton';
 import { FormattedNumber } from 'components/formatted-number';
-import { memo } from 'react';
+import { memo, useState } from 'react';
+import { useUserStore } from 'stores';
 
 interface Props {
   rows: CoinsListResponse[];
   handleRowClick?: (coinId: string) => void;
+  favoriteSelected?: boolean;
 }
 
-export const DataTableRows = memo(function DataTableRows({ rows, handleRowClick }: Props) {
+export const DataTableRows = memo(function DataTableRows({
+  rows,
+  handleRowClick,
+}: Props) {
+  const [favoriteSelected, setFavoriteSelected] = useState(false);
+  const { user, isAuthenticated } = useUserStore();
+
+  const handleFavoriteClick = (coinId: string) => {
+    console.log('id clicked >>>', coinId);
+    console.log('user: ', user);
+    console.log('isAuthenticated? ', isAuthenticated);
+    if (!isAuthenticated) {
+      alert('User is not authenticated, popup modal shown');
+      return;
+    }
+  };
+
   return (
     <>
       {/** Skeleton */}
@@ -30,7 +48,10 @@ export const DataTableRows = memo(function DataTableRows({ rows, handleRowClick 
         return (
           <Table.Tr key={row?.name}>
             <Table.Td>
-              <FavoriteButton />
+              <FavoriteButton
+                handleFavoriteClick={() => handleFavoriteClick && handleFavoriteClick?.(row?.id)}
+                selected={favoriteSelected}
+              />
             </Table.Td>
             <Table.Td>{row?.market_cap_rank}</Table.Td>
             <Table.Td className={styles?.['table']}>

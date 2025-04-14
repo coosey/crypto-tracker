@@ -13,7 +13,7 @@ import { useForm } from '@mantine/form';
 import { upperFirst, useToggle } from '@mantine/hooks';
 import styles from './styles/login.module.scss';
 import { GoogleButton } from 'components/buttons/google';
-import { useUserStore } from 'stores';
+import { useAuthStore } from 'stores';
 import { useRouter } from 'next/router';
 import { SignupValidation } from 'libs/types/validation';
 import { useAlertMessage } from 'libs/context/alert.context';
@@ -37,7 +37,7 @@ export default function LoginPage() {
 
   const { addAlert } = useAlertMessage();
 
-  const { login, googleLogin, register, isLoading } = useUserStore();
+  const { login, googleLogin, register, isLoading } = useAuthStore();
 
   const [type, toggle] = useToggle<LoginType>([LoginType.LOGIN, LoginType.REGISTER]);
 

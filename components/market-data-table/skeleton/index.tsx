@@ -1,5 +1,5 @@
 import { Table, Skeleton } from '@mantine/core';
-import { FavoriteButton } from '../../favorite-button';
+import { FavoriteButton } from 'components/buttons/favorite';
 import styles from './index.module.scss';
 
 export const DataTableSkeleton = () => {

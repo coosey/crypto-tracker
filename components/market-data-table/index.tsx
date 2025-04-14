@@ -7,13 +7,25 @@ import { useRouter } from 'next/router';
 import { useSortTable } from 'libs/hooks/useSortTable';
 import { DataTable } from '../data-table';
 import { transformData } from 'libs/helpers/transformData';
+// import { useAuthStore } from 'stores';
 
 export const MarketDataTable = ({ data }: MarketDataTableProps) => {
   const router = useRouter();
+  // const { user, isAuthenticated } = useAuthStore();
 
   const handleRowClick = (coinId: string) => {
     router.push(`/coin/${coinId}`);
   };
+
+  // const handleFavoriteClick = (coinId: string) => {
+  //   console.log('id clicked >>>', coinId);
+  //   console.log('user: ', user);
+  //   console.log('isAuthenticated? ', isAuthenticated);
+  //   if (!isAuthenticated) {
+  //     console.log('User is not authenticated');
+  //     return;
+  //   }
+  // };
 
   const coinsListTableData = transformData(data, (coin) => ({
     id: coin?.id || '',
@@ -44,7 +56,13 @@ export const MarketDataTable = ({ data }: MarketDataTableProps) => {
               dataTableHeaders={DataTableHeaders}
             />
           ),
-          body: <DataTableRows rows={sortedData} handleRowClick={handleRowClick} />,
+          body: (
+            <DataTableRows
+              rows={sortedData}
+              handleRowClick={handleRowClick}
+              // handleFavoriteClick={handleFavoriteClick}
+            />
+          ),
         }}
       </DataTable>
     </>
