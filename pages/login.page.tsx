@@ -140,7 +140,7 @@ export default function LoginPage() {
     <div className={styles?.['loginPage']}>
       <Paper radius="md" p="xl" withBorder className={styles?.['container']}>
         <h2 className={styles?.['loginPage_header']}>
-          {`Welcome to Crypto Screener${isLoginForm ? ', login with' : ''}`}
+          {`Welcome to CryptOwl${isLoginForm ? ', login with' : ''}`}
         </h2>
         {isLoginForm && (
           <>
