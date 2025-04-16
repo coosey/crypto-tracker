@@ -12,7 +12,7 @@ import { auth } from "libs/firebase";
 
 export const loginWithEmail = async (email: string, password: string) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password)
   } catch (error) {
     throw error;
   }
@@ -41,4 +41,8 @@ export const logout = async () => {
 
 export const onAuthChange = (callback: (user: User | null) => void) => {
   return onAuthStateChanged(auth, callback)
+}
+
+export const getCurrentUser = () => {
+  return auth.currentUser;
 }

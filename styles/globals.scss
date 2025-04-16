@@ -74,8 +74,8 @@ input:focus, textarea:focus {
 // -----------------------------
 // -------- Button -------------
 button {
-  background-color: $accent-color1;
-  color: $text-primary;
+  background-color: $btn-primary;
+  color: $bg-secondary;
   border: $border-accent;
   padding: $space_10 $space_2;
   cursor: pointer;

@@ -35,4 +35,9 @@
       justify-content: center;
     }
   }
+
+  .btn {
+    background-color: $btn-primary;
+    color: $bg-secondary;
+  }
 }
