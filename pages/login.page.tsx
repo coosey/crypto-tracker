@@ -225,7 +225,7 @@ export default function LoginPage() {
             >
               {!isLoginForm ? 'Already have an account? Login' : "Don't have an account? Register"}
             </Anchor>
-            <Button type="submit" radius="xl" loading={isLoading}>
+            <Button type="submit" radius="xl" loading={isLoading} className={styles?.['btn']}>
               {upperFirst(isLoginForm ? LoginType.LOGIN : LoginType.REGISTER)}
             </Button>
           </Group>

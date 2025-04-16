@@ -1,6 +1,6 @@
+@import '/styles/design.scss';
 
 .account {
-
   .imageContainer {
     display: flex;
     align-items: center;
@@ -30,6 +30,18 @@
 
     p {
       font-size: 1rem;
+    }
+  }
+
+  .btnContainer {
+    padding-top: 2rem;
+
+    button {
+      width: 100%;
+      max-width: 20rem;
+
+      background-color: $btn-primary;
+      color: $bg-secondary;
     }
   }
 }
