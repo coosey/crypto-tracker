@@ -11,7 +11,7 @@ const LogoComponent = () => {
   return (
     <Link href="/" className={styles?.['logo-wrapper']}>
       <div className={styles?.['banner']}>
-        <img className={styles?.['banner-image']} src="/images/cryptowl.png" alt="cryptowl" />
+        <img className={styles?.['banner-image']} src="/images/owl-logo.png" alt="cryptowl" height="50" width="150"/>
       </div>
     </Link>
   )
