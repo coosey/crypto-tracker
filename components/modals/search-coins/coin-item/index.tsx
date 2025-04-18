@@ -6,12 +6,13 @@ interface Props {
   thumb: string;
   name: string;
   symbol: string;
+  handleClick?: (id: string) => void;
 }
 
-export const CoinItem = ({ id, thumb, name, symbol }: Props) => {
+export const CoinItem = ({ id, thumb, name, symbol, handleClick }: Props) => {
   return (
     <div key={id} className={styles?.['coinItemWrapper']}>
-      <div className={styles?.['coinItem']}>
+      <div className={styles?.['coinItem']} onClick={() => handleClick && handleClick?.(id)}>
         <img className={styles?.['coinItem--image']} src={thumb} alt={name} />
         <div className={styles?.['coinItem--name']}>{name}</div>
         <div className={styles?.['coinItem--symbol']}>{symbol}</div>

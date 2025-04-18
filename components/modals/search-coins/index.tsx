@@ -9,16 +9,19 @@ import { SearchQuery } from 'libs/types/searched-coins';
 import styles from './index.module.scss';
 import { CoinItem } from './coin-item';
 import useTrendingList from 'libs/hooks/useTrendingList';
+import { useRouter } from 'next/router';
 
 export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: ModalProps) => {
+  const router = useRouter();
   const [searchInput, setSearchInput] = useState('');
   const [searchedCoins, setSearchedCoins] = useState({} as SearchQuery);
 
   const { trendingList } = useTrendingList();
 
-  const trendingCoins = useMemo(() => (
-    trendingList?.coins?.map(({ item }) => ({ ...item }))
-  ), [trendingList]);
+  const trendingCoins = useMemo(
+    () => trendingList?.coins?.map(({ item }) => ({ ...item })),
+    [trendingList]
+  );
 
   const debouncedSearch = useDebounce(searchInput);
 
@@ -29,6 +32,10 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
   const handleClose = () => {
     setSearchInput('');
     onClose();
+  };
+
+  const handleCoinClick = (coinId: string) => {
+    router.push(`/coin/${coinId}`);
   };
 
   useEffect(() => {
@@ -73,7 +80,12 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
             <div className={styles?.['listWrapper']}>
               {isEmpty(debouncedSearch) && (
                 <>
-                  <Divider className={styles?.['listWrapper_divider']} my="xs" label="Trending Coins" labelPosition="left" />
+                  <Divider
+                    className={styles?.['listWrapper_divider']}
+                    my="xs"
+                    label="Trending Coins"
+                    labelPosition="left"
+                  />
                   {trendingCoins?.map?.((coin) => (
                     <CoinItem
                       key={coin?.id}
@@ -81,6 +93,7 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
                       thumb={coin?.thumb}
                       name={coin?.name}
                       symbol={coin?.symbol}
+                      handleClick={handleCoinClick}
                     />
                   ))}
                 </>
@@ -92,6 +105,7 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
                   thumb={coin?.thumb}
                   name={coin?.name}
                   symbol={coin?.symbol}
+                  handleClick={handleCoinClick}
                 />
               ))}
             </div>
