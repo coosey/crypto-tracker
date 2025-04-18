@@ -1,12 +1,8 @@
-import { TrendingCoinsResponse } from 'libs/types/trending-list';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<TrendingCoinsResponse[]>
-) {
-  const { id } = req.query;
-  const URL = `${process.env.NEXT_PUBLIC_COINGECKO_API_URL}/coins/price_percentage_change?ids=${id}&vs_currency=usd`;
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { query: searchQuery } = req.query;
+  const URL = `${process.env.NEXT_PUBLIC_COINGECKO_API_URL}/search?query=${searchQuery}`;
   try {
     const response = await fetch(URL, {
       headers: {
