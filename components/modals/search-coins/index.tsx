@@ -9,6 +9,7 @@ import { SearchQuery } from 'libs/types/searched-coins';
 import styles from './index.module.scss';
 import { CoinItem } from './coin-item';
 import useTrendingList from 'libs/hooks/useTrendingList';
+import { RecentSearches } from 'libs/services/recentSearches';
 
 export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: ModalProps) => {
   const [searchInput, setSearchInput] = useState('');
@@ -39,6 +40,7 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
             params: { query: searchQuery },
           });
           setSearchedCoins(response?.data);
+          RecentSearches.addRecentSearch(searchQuery);
         } catch (error) {
           console.error('Error fetching search results: ', error);
         }
@@ -48,6 +50,8 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
       setSearchedCoins({} as SearchQuery);
     }
   }, [debouncedSearch]);
+
+  console.log('recent searches', RecentSearches.getRecentSearches());
 
   return (
     <ModalComponent
@@ -73,6 +77,9 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
             <div className={styles?.['listWrapper']}>
               {isEmpty(debouncedSearch) && (
                 <>
+                  {/** Recent Searches */}
+                  {/* <Divider className={styles?.['listWrapper_divider']} my="xs" label="Recent Searches" labelPosition="left" /> */}
+                  {/** Trending Coins */}
                   <Divider className={styles?.['listWrapper_divider']} my="xs" label="Trending Coins" labelPosition="left" />
                   {trendingCoins?.map?.((coin) => (
                     <CoinItem
@@ -85,6 +92,7 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
                   ))}
                 </>
               )}
+              {/** User Queries */}
               {searchedCoins?.coins?.map?.((coin) => (
                 <CoinItem
                   key={coin?.id}
