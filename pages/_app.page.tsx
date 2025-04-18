@@ -8,6 +8,7 @@ import { MantineProvider } from '@mantine/core';
 import { HydrateZustand, AuthProvider } from 'stores';
 import { GlobalTrendProvider } from 'libs/context/globalTrend.context';
 import { AlertProvider } from 'libs/context/alert.context';
+import LoadingComponent from './loadingComponent';
 
 const Page = ({ Component, pageProps }) => {
   return (
@@ -17,6 +18,7 @@ const Page = ({ Component, pageProps }) => {
           <GlobalTrendProvider>
             <AlertProvider>
               <Container>
+                <LoadingComponent />
                 <Component {...pageProps} />
               </Container>
             </AlertProvider>

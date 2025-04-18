@@ -1,6 +1,7 @@
 import { Anchor, Breadcrumbs } from '@mantine/core';
 import cn from 'classnames';
 import styles from './index.module.scss';
+import Link from 'next/link';
 
 interface Props {
   name: string;
@@ -14,9 +15,9 @@ export const BreadCrumbItems = ({ name, className }: Props) => {
   ].map((item, index) => {
     if (item?.href) {
       return (
-        <Anchor className={styles?.['breadcrumb_link']} href={item?.href} key={index}>
+        <Link className={styles?.['breadcrumb_link']} href={item?.href} key={index}>
           {item?.title}
-        </Anchor>
+        </Link>
       );
     } else {
       return (
