@@ -1,10 +1,19 @@
 import { Layout } from 'components/layout';
 import styles from './styles/account.module.scss';
 import { Button } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { SearchCoinsModal } from 'components/modals/search-coins';
 
 export default function AccountPage() {
+  const [opened, { open, close }] = useDisclosure(false);
+
+  const handleOpenSearchModal = () => {
+    open();
+  };
+
   return (
     <Layout>
+      <SearchCoinsModal opened={opened} onClose={close} withCloseButton />
       <div className={styles?.['account']}>
         <div>
           <h2>My Favorites</h2>
@@ -15,7 +24,7 @@ export default function AccountPage() {
             <h4>Stay Ahead in Crypto with Smart Tracking</h4>
             <p>Never miss a major price movement. Your ultimate crypto research hub starts here!</p>
             <div className={styles?.['btnContainer']}>
-              <Button>Add Coin</Button>
+              <Button onClick={handleOpenSearchModal}>Add Coin</Button>
             </div>
           </div>
         </div>
