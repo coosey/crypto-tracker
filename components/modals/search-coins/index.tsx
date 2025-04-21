@@ -1,4 +1,4 @@
-import { Divider, Modal, TextInput } from '@mantine/core';
+import { Divider, LoadingOverlay, Modal, TextInput } from '@mantine/core';
 import { ModalComponent, ModalProps } from '..';
 import { IconSearch } from '@tabler/icons-react';
 import { useEffect, useMemo, useState } from 'react';
@@ -11,7 +11,11 @@ import { CoinItem } from './coin-item';
 import useTrendingList from 'libs/hooks/useTrendingList';
 import { useRouter } from 'next/router';
 
-export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: ModalProps) => {
+export const SearchCoinsModal = ({ 
+  opened, 
+  onClose, 
+  withCloseButton = true 
+}: ModalProps) => {
   const router = useRouter();
   const [searchInput, setSearchInput] = useState('');
   const [searchedCoins, setSearchedCoins] = useState({} as SearchQuery);
@@ -19,7 +23,7 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
   const { trendingList } = useTrendingList();
 
   const trendingCoins = useMemo(
-    () => trendingList?.coins?.map(({ item }) => ({ ...item })),
+    () => trendingList?.coins?.map?.(({ item }) => ({ ...item })),
     [trendingList]
   );
 
@@ -36,6 +40,10 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
 
   const handleCoinClick = (coinId: string) => {
     router.push(`/coin/${coinId}`);
+  };
+
+  const handleFavoriteClick = (coinId: string) => {
+    console.log('coinId >>>', coinId)
   };
 
   useEffect(() => {
@@ -78,6 +86,11 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
               leftSection={<IconSearch size={18} stroke={1.5} />}
             />
             <div className={styles?.['listWrapper']}>
+              <LoadingOverlay 
+                visible={debouncedSearch?.length > 0 && isEmpty(searchedCoins)} 
+                zIndex={1000} 
+                overlayProps={{ radius: 'sm', blur: 2 }} 
+              />
               {isEmpty(debouncedSearch) && (
                 <>
                   <Divider
@@ -94,6 +107,7 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
                       name={coin?.name}
                       symbol={coin?.symbol}
                       handleClick={handleCoinClick}
+                      handleFavoriteClick={handleFavoriteClick}
                     />
                   ))}
                 </>
@@ -106,6 +120,7 @@ export const SearchCoinsModal = ({ opened, onClose, withCloseButton = true }: Mo
                   name={coin?.name}
                   symbol={coin?.symbol}
                   handleClick={handleCoinClick}
+                  handleFavoriteClick={handleFavoriteClick}
                 />
               ))}
             </div>
