@@ -7,9 +7,17 @@ interface Props {
   name: string;
   symbol: string;
   handleClick?: (id: string) => void;
+  handleFavoriteClick?: (id: string) => void;
 }
 
-export const CoinItem = ({ id, thumb, name, symbol, handleClick }: Props) => {
+export const CoinItem = ({ 
+  id,
+  thumb,
+  name,
+  symbol,
+  handleClick,
+  handleFavoriteClick,
+}: Props) => {
   return (
     <div key={id} className={styles?.['coinItemWrapper']}>
       <div className={styles?.['coinItem']} onClick={() => handleClick && handleClick?.(id)}>
@@ -19,7 +27,10 @@ export const CoinItem = ({ id, thumb, name, symbol, handleClick }: Props) => {
       </div>
       <div>
         {/** TODO: implement favorite click */}
-        <FavoriteButton selected={false} />
+        <FavoriteButton 
+          selected={false} 
+          handleFavoriteClick={() => handleFavoriteClick && handleFavoriteClick?.(id)} 
+        />
       </div>
     </div>
   );
