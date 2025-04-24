@@ -3,13 +3,26 @@ import styles from './styles/account.module.scss';
 import { Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { SearchCoinsModal } from 'components/modals/search-coins';
+import { useEffect } from 'react';
+import { RedisApi } from 'libs/redis/controllers';
+import { useUserStore } from 'stores';
 
 export default function AccountPage() {
   const [opened, { open, close }] = useDisclosure(false);
+  const userStore = useUserStore();
 
   const handleOpenSearchModal = () => {
     open();
   };
+
+  // useEffect(() => {
+    
+  //   async function fetchData() {
+  //     const response = await RedisApi.getUserData(userStore.user?.uid);
+  //     console.log(response);
+  //   }
+  //   fetchData();
+  // }, []);
 
   return (
     <Layout>

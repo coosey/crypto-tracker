@@ -1,6 +1,7 @@
 import { LoadingOverlay } from '@mantine/core';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
+import styles from './styles/loading.module.scss';
 import { useEffect, useState } from 'react';
 
 export default function LoadingComponent() {
@@ -43,7 +44,8 @@ export default function LoadingComponent() {
 
   return (
     <LoadingOverlay
-      visible={loading}
+      className={styles?.['overlay']}
+      visible={true}
       zIndex={1000}
       overlayProps={{ radius: 'sm', blur: 1 }}
       loaderProps={{ type: 'dots', color: '#FFC107' }}

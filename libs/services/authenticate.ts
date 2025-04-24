@@ -9,10 +9,15 @@ import {
   User,
 } from 'firebase/auth'
 import { auth } from "libs/firebase";
+import { fetchUser, registerUser } from './user';
 
 export const loginWithEmail = async (email: string, password: string) => {
   try {
     await signInWithEmailAndPassword(auth, email, password)
+    // TODO: update call to fetch user during login
+    // .then(
+    //   (userCredential) => fetchUser(userCredential.user.uid)
+    // );
   } catch (error) {
     throw error;
   }
@@ -22,8 +27,10 @@ export const registerWithEmail = async (email: string, password: string) => {
   try {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
-        sendEmailVerification(userCredentials.user);
-      });
+        registerUser(userCredentials.user.uid)
+        return userCredentials.user;
+      })
+      .then((user) => sendEmailVerification(user))
   } catch (error) {
     console.error('Error registering user:', error);
     throw error;

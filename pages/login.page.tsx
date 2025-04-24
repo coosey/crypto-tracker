@@ -18,7 +18,7 @@ import { useRouter } from 'next/router';
 import { SignupValidation } from 'libs/types/validation';
 import { useAlertMessage } from 'libs/context/alert.context';
 import { updateDisplayName } from 'libs/services/user';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { redirect, usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 interface LoginProps {
@@ -95,7 +95,7 @@ export default function LoginPage() {
           messageBody: 'Login successful!',
           timeout: 5000,
         });
-        router.push('/');
+        redirect('/');
         // Registration
       } else if (!isLoginForm) {
         const response = await register(values?.email, values?.password);
@@ -110,6 +110,13 @@ export default function LoginPage() {
           });
           return;
         }
+
+        // await RedisApi.setUserData(user?.uid, {
+        //   email: user?.email,
+        //   emailVerified: user?.emailVerified,
+        //   favorites: [],
+        // });
+
         // Update display name after successful registration
         const displayName = `${values?.firstName} ${values?.lastName}`;
         await updateDisplayName(displayName);
@@ -121,7 +128,7 @@ export default function LoginPage() {
           messageBody: 'Registration successful!',
           timeout: 5000,
         });
-        router.push('/verify');
+        redirect('/verify');
       }
     } catch (error) {
       // Catch any unexpected errors

@@ -55,7 +55,7 @@ export const useAuthStore = create(
       clearError: () => set({ error: null }),
 
       handleAuthError(error) {
-        console.error('Auth error:', error.code);
+        console.error('Auth error:', error);
         const errorMessage = firebaseErrorHandler(error.code);
         set({ error: errorMessage, isLoading: false });
         return { error: errorMessage, success: false };
@@ -70,21 +70,6 @@ export const useAuthStore = create(
           });
         });
       },
-      // initialize: async () => {
-      //   if (get().isHydrated) return;
-      //   set({ isLoading: true });
-
-      //   const unsubscribe = onAuthChange((firebaseUser) => {
-      //     if (firebaseUser) {
-      //       useUserStore.getState().setUser(firebaseUser);
-      //       set({ isLoading: false, isHydrated: true });
-      //     } else {
-      //       useUserStore.getState().clearUser();
-      //       set({ isLoading: false, isHydrated: true });
-      //     }
-      //   })
-      //   return unsubscribe;
-      // },
 
       // LOGIN HANDLER
       login: async (email, password) => {
@@ -93,9 +78,7 @@ export const useAuthStore = create(
         try {
           await loginWithEmail(email, password);
           const user = getCurrentUser();
-          if (user) {
-            userStore.setUser(user);
-          }
+          if (user) userStore.setUser(user);
           set((state) => ({ ...state, isLoading: false, error: null }));
         } catch (error) {
           userStore.clearUser();
