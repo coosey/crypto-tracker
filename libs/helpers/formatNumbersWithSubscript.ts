@@ -4,7 +4,11 @@ export function formatWithSubscriptZeros(num: number, trailingLimit = 3, signifi
     const [integerPart, decimalPart = ''] = numStr?.split?.('.');
     // Early return if numbers >= 0.001 (no subscript)
     if (num >= 0.001) {
-        return `$${num?.toFixed?.(trailingLimit)?.replace?.(/(\.0+|0+)$/, '')}`; // Trims trailing zeros
+        const formattedNum = num?.toLocaleString?.('en-US', {
+            maximumFractionDigits: trailingLimit,
+            useGrouping: true
+        })?.replace(/(\.0+|0+)$/, '');
+        return `$${formattedNum}`;
     }
     // Count leading zeros in the decimal part
     let leadingZeros = 0;
