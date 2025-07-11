@@ -1,7 +1,7 @@
 import { Table, Anchor } from '@mantine/core';
 import { IconExternalLink } from '@tabler/icons-react';
-import { FormattedNumber } from 'components/formatted-number';
 import { TickersMarketObject } from 'libs/types/tickers';
+import { formatWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
 import styles from './index.module.scss';
 
 interface Props {
@@ -49,11 +49,11 @@ export const CoinIdTableRows = ({ tickers, symbol }: Props) => {
             </Table.Td>
             <Table.Td>{renderTradeUrl(ticker?.trade_url, symbol, ticker)}</Table.Td>
             <Table.Td data-price-target="price">
-              {renderCoinIdRow(ticker?.converted_last?.usd, FormattedNumber)}
+              {formatWithSubscriptZeros(ticker?.converted_last?.usd)}
             </Table.Td>
             <Table.Td>{renderCoinIdRow(ticker?.bid_ask_spread_percentage?.toFixed?.(2))}</Table.Td>
             <Table.Td data-price-target="price">
-              {renderCoinIdRow(ticker?.converted_volume?.usd, FormattedNumber)}
+              {formatWithSubscriptZeros(ticker?.converted_volume?.usd)}
             </Table.Td>
             <Table.Td className={styles?.['table-body']}>
               {renderTrustScore(ticker?.trust_score)}

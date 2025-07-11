@@ -1,27 +1,26 @@
-/**
- * CREDITS TO HAQQ
- * 
- * GITHUB REPO: https://github.com/haqq-network/format-number-with-subscript-zeros/blob/master/src/formatNumberWithSubscriptZeros.ts
- */
-export function formatNumberWithSubscriptZeros(numberStr: string, presiction = 3, min = 0.001): string {
-  if (!numberStr?.length) return;
-  const number = parseFloat(numberStr);
-  if (number >= min) {
-      const [part0, part1] = numberStr.split('.')
-      if(part1) {
-          const leadingZeros = part1?.match?.(/^0+/)?.[0] || '';
-          return `${part0}.${leadingZeros}${part1.replace(leadingZeros, '').slice(0, presiction)}`
-      }
-      return part1 ? [part0, part1.slice(0, presiction)].join('.') : part0;
-  }
+export function formatWithSubscriptZeros(num: number, trailingLimit = 3, significantDigitsLimit = 4) {
+    // Convert scientific notation (e.g., 5.303e-7) to decimal string
+    const numStr = num < 0.0001 ? num?.toFixed?.(20) : num?.toString?.();
+    const [integerPart, decimalPart = ''] = numStr?.split?.('.');
+    // Early return if numbers >= 0.001 (no subscript)
+    if (num >= 0.001) {
+        return `$${num?.toFixed?.(trailingLimit)?.replace?.(/(\.0+|0+)$/, '')}`; // Trims trailing zeros
+    }
+    // Count leading zeros in the decimal part
+    let leadingZeros = 0;
+    for (const char of decimalPart) {
+        if (char === '0') leadingZeros++;
+        else break;
+    }
+    const subscriptMap = {
+        '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄',
+        '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉',
+        '10': '₁₀', '11': '₁₁', '12': '₁₂', '13': '₁₃', '14': '₁₄',
+    };
+    const subscriptZeros = String(leadingZeros)?.split?.('')
+        ?.map?.(digit => subscriptMap[digit])?.join?.('');
+    // Extract significant digits (skip leading zeros)
+    const significantDigits = decimalPart?.slice?.(leadingZeros)?.slice?.(0, significantDigitsLimit); // Limit to 4 digits
 
-  const leadingZerosMatch = numberStr.match(/^0\.(0+)/);
-  if (!leadingZerosMatch) return numberStr;
-
-  const leadingZerosCount = leadingZerosMatch[1].length;
-  const remainingDigits = numberStr.slice(leadingZerosMatch[0].length);
-
-  const smallCount = String(leadingZerosCount).split('').map(digit => String.fromCharCode(8320 + parseInt(digit))).join('');
-
-  return `0.0${smallCount}${remainingDigits.slice(0, presiction)}`;
-};
+    return `$0.0${subscriptZeros}${significantDigits}`;
+}
