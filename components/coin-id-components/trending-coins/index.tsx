@@ -2,7 +2,7 @@ import styles from './index.module.scss';
 import { TrendingCard } from 'components/trending-list/card';
 import useTrendingList from 'libs/hooks/useTrendingList';
 import { TrendingCardItem } from 'components/trending-list/card-item';
-import { formatNumberWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
+import { formatWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 
@@ -20,8 +20,7 @@ export const TrendingCoins = () => {
         const item = coin?.item;
         const coinName = item?.id?.toLowerCase?.();
         // formatting the price to scientific notation with 4 decimal places
-        const numberSubscript = formatNumberWithSubscriptZeros(item?.data?.price?.toString?.());
-        const formattedMarketPrice = Number(numberSubscript)?.toExponential?.(4);
+        const numberSubscript = formatWithSubscriptZeros(item?.data?.price);
         return (
           <TrendingCard key={item?.coin_id} onClick={() => handleClickTrendinCoin(coinName)}>
             {{
@@ -31,7 +30,7 @@ export const TrendingCoins = () => {
                   imgSrc={item?.thumb}
                   imgAlt={item?.name}
                   name={item?.name}
-                  marketPrice={formattedMarketPrice}
+                  marketPrice={numberSubscript}
                   percentageChange={item?.data?.price_change_percentage_24h?.usd}
                 />
               ),

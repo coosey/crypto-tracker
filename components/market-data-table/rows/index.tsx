@@ -3,7 +3,7 @@ import { CoinsListResponse } from 'libs/types/coins-list';
 import styles from './index.module.scss';
 import { FavoriteButton } from 'components/buttons/favorite';
 import { CarrotPriceChange } from '../../carrot-price-change';
-import { formatNumberWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
+import { formatWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
 import { DataTableSkeleton } from '../skeleton';
 import { FormattedNumber } from 'components/formatted-number';
 import { memo, useState } from 'react';
@@ -40,10 +40,8 @@ export const DataTableRows = memo(function DataTableRows({
           .map((_, idx) => <DataTableSkeleton key={idx} />)}
       {/** Data Table rows */}
       {rows?.map?.((row) => {
-        const numberedCoinPrice = Number(
-          formatNumberWithSubscriptZeros(row?.current_price?.toString?.())
-        );
-        const formattedSubscript = formatNumberWithSubscriptZeros(row?.current_price?.toString?.());
+        const currentPrice = row?.current_price || 0;
+        const formattedSubscript = formatWithSubscriptZeros(currentPrice);
         return (
           <Table.Tr key={row?.name}>
             <Table.Td>
@@ -72,11 +70,7 @@ export const DataTableRows = memo(function DataTableRows({
               </div>
             </Table.Td>
             <Table.Td className={styles?.['coin_price']} data-price-target="price">
-              {row?.current_price > 1 ? (
-                <FormattedNumber value={numberedCoinPrice} />
-              ) : (
-                `$${formattedSubscript}`
-              )}
+              {formattedSubscript}
             </Table.Td>
             {/** 1H */}
             <Table.Td>

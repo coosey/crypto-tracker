@@ -1,6 +1,6 @@
 import { TrendingCardSkeleton } from '../card-skeleton';
 import { TrendingCardItem } from '../card-item';
-import { formatNumberWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
+import { formatWithSubscriptZeros } from 'libs/helpers/formatNumbersWithSubscript';
 import { NormalizedTrendList } from 'libs/types/trending-list';
 import { useRouter } from 'next/router';
 
@@ -29,7 +29,7 @@ export const TrendingCardList = ({ limit, loading, trendingList }: Props) => {
             name={item?.name}
             imgAlt={item?.imgAlt}
             imgSrc={item?.imgSrc}
-            marketPrice={formatNumberWithSubscriptZeros?.(item?.marketPrice)}
+            marketPrice={formatWithSubscriptZeros?.(Number(item?.marketPrice))}
             percentageChange={item?.percentageChange}
           />
         );
