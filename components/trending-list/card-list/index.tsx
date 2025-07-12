@@ -21,6 +21,9 @@ export const TrendingCardList = ({ limit, loading, trendingList }: Props) => {
   return (
     <>
       {parsedTrendList?.map?.((item) => {
+        const marketPrice = item?.marketPrice ? 
+          formatWithSubscriptZeros?.(Number(item?.marketPrice)) : 
+          '';
         return (
           <TrendingCardItem
             hasHover={!!item?.id}
@@ -29,7 +32,7 @@ export const TrendingCardList = ({ limit, loading, trendingList }: Props) => {
             name={item?.name}
             imgAlt={item?.imgAlt}
             imgSrc={item?.imgSrc}
-            marketPrice={formatWithSubscriptZeros?.(Number(item?.marketPrice))}
+            marketPrice={marketPrice}
             percentageChange={item?.percentageChange}
           />
         );
