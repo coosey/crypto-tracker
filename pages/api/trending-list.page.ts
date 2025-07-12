@@ -5,7 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<TrendingListResponse>
 ) {
-  const URL = `${process.env.NEXT_PUBLIC_COINGECKO_API_URL}/search/trending`;
+  const URL = `${process.env.NEXT_PRIVATE_COINGECKO_API_URL}/search/trending`;
   try {
     const response = await fetch(URL, {
       headers: {

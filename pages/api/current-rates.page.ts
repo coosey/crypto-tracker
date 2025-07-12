@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse<TrendingCoinsResponse[]>
 ) {
   const { id } = req.query;
-  const URL = `${process.env.NEXT_PUBLIC_COINGECKO_API_URL}/coins/price_percentage_change?ids=${id}&vs_currency=usd`;
+  const URL = `${process.env.NEXT_PRIVATE_COINGECKO_API_URL}/coins/price_percentage_change?ids=${id}&vs_currency=usd`;
   try {
     const response = await fetch(URL, {
       headers: {

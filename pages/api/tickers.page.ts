@@ -8,7 +8,7 @@ export default async function handler(
   const { query } = req;
   const { page = 1, id } = query;
 
-  const URL = `${process.env.NEXT_PUBLIC_COINGECKO_API_URL}/coins/${id}/tickers?include_exchange_logo=true&page=${page}&order=volume_desc&depth=true`;
+  const URL = `${process.env.NEXT_PRIVATE_COINGECKO_API_URL}/coins/${id}/tickers?include_exchange_logo=true&page=${page}&order=volume_desc&depth=true`;
   try {
     const response = await fetch(URL, {
       headers: {

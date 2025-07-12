@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse<GlobalMarketTrend>
 ) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_COINGECKO_API_URL}/global`, {
+    const response = await fetch(`${process.env.NEXT_PRIVATE_COINGECKO_API_URL}/global`, {
       headers: {
         'content-type': 'application/json',
         'x-cg-demo-api-key': process.env.NEXT_PRIVATE_COINGECKO_KEY,
