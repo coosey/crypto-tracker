@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { query: searchQuery } = req.query;
-  const URL = `${process.env.NEXT_PUBLIC_COINGECKO_API_URL}/search?query=${searchQuery}`;
+  const URL = `${process.env.NEXT_PRIVATE_COINGECKO_API_URL}/search?query=${searchQuery}`;
   try {
     const response = await fetch(URL, {
       headers: {
