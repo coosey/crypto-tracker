@@ -20,6 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
   const URL = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&from=${formattedDate}&sortBy=publishedAt&language=en&apiKey=${process.env.NEXT_PRIVATE_NEWS_API_KEY}`;
   try {
+    res.setHeader('Cache-Control', 'public, s-maxage=1800, stale-while-revalidate=3600');
     const response = await fetch(URL, {
       headers: {
         'content-type': 'application/json',
