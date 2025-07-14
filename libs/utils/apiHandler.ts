@@ -13,17 +13,17 @@ interface ApiHandlerConfig {
   requiredParams?: string[];
 };
 
-function urlQueryBuilder(req: NextApiRequest, urlBuilder: string) {
-  if (Object.keys(req.query).length === 0) return;
+function urlQueryBuilder(query: Record<string, any>, urlBuilder: string) {
+  if (Object.keys(query).length === 0) return urlBuilder;
   const queryParams = new URLSearchParams();
-  for (const [key, value] of Object.entries(req.query)) {
+  for (const [key, value] of Object.entries(query)) {
     if (Array.isArray(value)) {
       value.forEach(v => queryParams.append(key, v));
     } else if (value) {
       queryParams.append(key, value as string);
     }
   }
-  urlBuilder += `?${queryParams.toString()}`;
+  return `${urlBuilder}?${queryParams.toString()}`;
 };
 
 export function createApiHandler<T>(config: ApiHandlerConfig) {
@@ -41,8 +41,8 @@ export function createApiHandler<T>(config: ApiHandlerConfig) {
 
       // Handle query parameters with defaults
       const query = {
-        ...config.queryDefaults,
-        ...req.query,
+        ...config?.queryDefaults,
+        ...req?.query,
       };
 
       // Validate required parameters
@@ -56,21 +56,23 @@ export function createApiHandler<T>(config: ApiHandlerConfig) {
           });
         }
       }
+      // Create a copy of the request query to avoid mutation
+      let queryCopy = { ...req.query };
 
       // Build final URL
       let finalUrl = config?.url;
       // Replace path parameters if they exist in the URL i.e. /coins/{id}/market_chart
-      if (config?.url?.includes?.('{') && req?.query) {
-        for (const [key, value] of Object.entries(req?.query)) {
+      if (config?.url?.includes?.('{')) {
+        for (const [key, value] of Object.entries(queryCopy)) {
           if (config?.url?.includes?.(`{${key}}`)) {
             finalUrl = finalUrl?.replace?.(`{${key}}`, value as string);
-            delete req?.query?.[key];
+            delete queryCopy[key];
           }
         }
       }
       // Then append query parameters
-      if (Object.keys(req?.query).length > 0) {
-        urlQueryBuilder(req, finalUrl);
+      if (Object.keys(queryCopy)?.length > 0) {
+        finalUrl = urlQueryBuilder(queryCopy, finalUrl);
       }
 
       const response = await fetch(finalUrl, {
