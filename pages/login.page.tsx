@@ -93,7 +93,7 @@ export default function LoginPage() {
           color: 'green',
           variant: 'filled',
           messageBody: 'Login successful!',
-          timeout: 5000,
+          timeout: 3000,
         });
         router.push('/');
         // Registration
@@ -119,7 +119,7 @@ export default function LoginPage() {
           color: 'green',
           variant: 'filled',
           messageBody: 'Registration successful!',
-          timeout: 5000,
+          timeout: 3000,
         });
         router.push('/verify');
       }
