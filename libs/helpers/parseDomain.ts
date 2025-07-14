@@ -1,4 +1,5 @@
 export function parseDomain(url: string) {
+  if (!url) return '';
   // Create a new URL object
   const parsedUrl = new URL(url);
   // Extract the hostname
