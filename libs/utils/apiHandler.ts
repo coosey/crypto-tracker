@@ -32,10 +32,10 @@ export function createApiHandler<T>(config: ApiHandlerConfig) {
     res: NextApiResponse<T | { error: string }>
   ) {
     try {
-      if (config.cacheConfig?.enabled !== false) {
+      if (config?.cacheConfig?.enabled !== false) {
         res.setHeader(
           'Cache-Control',
-          `public, s-maxage=${config.cacheConfig?.sMaxAge ?? 1800}, stale-while-revalidate=${config.cacheConfig?.staleWhileRevalidate ?? 3600}`
+          `public, s-maxage=${config?.cacheConfig?.sMaxAge ?? 1800}, stale-while-revalidate=${config?.cacheConfig?.staleWhileRevalidate ?? 3600}`
         );
       }
 
@@ -50,41 +50,41 @@ export function createApiHandler<T>(config: ApiHandlerConfig) {
         const missingParams = config?.requiredParams?.filter?.(
           param => !query?.[param]
         );
-        if (missingParams.length > 0) {
+        if (missingParams?.length > 0) {
           return res.status(400).json({
-            error: `Missing required parameters: ${missingParams.join(', ')}`,
+            error: `Missing required parameters: ${missingParams?.join(', ')}`,
           });
         }
       }
 
       // Build final URL
-      let finalUrl = config.url;
+      let finalUrl = config?.url;
       // Replace path parameters if they exist in the URL i.e. /coins/{id}/market_chart
-      if (config.url.includes('{') && req.query) {
-        for (const [key, value] of Object.entries(req.query)) {
-          if (config.url.includes(`{${key}}`)) {
-            finalUrl = finalUrl.replace(`{${key}}`, value as string);
-            delete req.query[key];
+      if (config?.url?.includes?.('{') && req?.query) {
+        for (const [key, value] of Object.entries(req?.query)) {
+          if (config?.url?.includes?.(`{${key}}`)) {
+            finalUrl = finalUrl?.replace?.(`{${key}}`, value as string);
+            delete req?.query?.[key];
           }
         }
       }
       // Then append query parameters
-      if (Object.keys(req.query).length > 0) {
+      if (Object.keys(req?.query).length > 0) {
         urlQueryBuilder(req, finalUrl);
       }
 
       const response = await fetch(finalUrl, {
-        method: config.method || 'GET',
+        method: config?.method || 'GET',
         headers: {
           'content-type': 'application/json',
-          ...config.headers,
+          ...config?.headers,
         },
       });
 
-      if (!response.ok) {
+      if (!response?.ok) {
         throw {
-          status: response.status,
-          message: `API request failed with status ${response.status}`,
+          status: response?.status,
+          message: `API request failed with status ${response?.status}`,
         };
       }
       let data = await response.json();
