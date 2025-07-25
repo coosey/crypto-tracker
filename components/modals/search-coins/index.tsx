@@ -89,7 +89,13 @@ export const SearchCoinsModal = ({
               <LoadingOverlay 
                 visible={debouncedSearch?.length > 0 && isEmpty(searchedCoins)} 
                 zIndex={1000} 
-                overlayProps={{ radius: 'sm', blur: 2 }} 
+                overlayProps={{ 
+                  radius: 'sm', 
+                  blur: 1, 
+                  pos: 'fixed',
+                  top: 0,
+                  left: 0,
+                }} 
               />
               {isEmpty(debouncedSearch) && (
                 <>

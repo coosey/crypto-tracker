@@ -21,7 +21,17 @@ export const CoinIdMarket = ({ name, tickers, symbol, loading }: Props) => {
     <div className={styles?.['coin-market']}>
       <h2>{name} Markets</h2>
       <Box pos="relative">
-        <LoadingOverlay visible={loading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
+        <LoadingOverlay 
+          visible={loading} 
+          zIndex={1000} 
+          overlayProps={{ 
+            radius: 'sm', 
+            blur: 1, 
+            pos: 'fixed',
+            top: 0,
+            left: 0,
+          }} 
+        />
         <DataTable>
           {{
             header: (

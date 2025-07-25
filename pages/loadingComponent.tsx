@@ -45,7 +45,13 @@ export default function LoadingComponent() {
     <LoadingOverlay
       visible={loading}
       zIndex={1000}
-      overlayProps={{ radius: 'sm', blur: 1 }}
+      overlayProps={{ 
+        radius: 'sm',
+        blur: 1,
+        pos: 'fixed',
+        top: 0,
+        left: 0,
+      }}
       loaderProps={{ type: 'dots', color: '#FFC107' }}
     />
   );
