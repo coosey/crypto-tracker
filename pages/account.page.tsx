@@ -3,8 +3,9 @@ import styles from './styles/account.module.scss';
 import { Button } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { SearchCoinsModal } from 'components/modals/search-coins';
+import { withAuth } from 'components/with-auth';
 
-export default function AccountPage() {
+export default withAuth(function AccountPage() {
   const [opened, { open, close }] = useDisclosure(false);
 
   const handleOpenSearchModal = () => {
@@ -31,4 +32,4 @@ export default function AccountPage() {
       </div>
     </Layout>
   );
-}
+});
