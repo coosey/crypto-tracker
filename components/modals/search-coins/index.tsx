@@ -126,7 +126,7 @@ export const SearchCoinsModal = ({
             />
             <div className={styles?.['listWrapper']}>
               <LoadingOverlay 
-                visible={coinsToRender.showLoading} 
+                visible={coinsToRender?.showLoading} 
                 zIndex={1000} 
                 overlayProps={{ 
                   radius: 'sm', 
@@ -136,16 +136,14 @@ export const SearchCoinsModal = ({
                   left: 0,
                 }} 
               />
-              
               {/* Error State */}
               {searchError && (
                 <div className={styles?.['errorMessage']}>
                   {searchError}
                 </div>
               )}
-              
               {/* Trending Coins Section */}
-              {coinsToRender.type === 'trending' && (
+              {coinsToRender?.type === 'trending' && (
                 <>
                   <Divider
                     className={styles?.['listWrapper_divider']}
@@ -153,7 +151,7 @@ export const SearchCoinsModal = ({
                     label="Trending Coins"
                     labelPosition="left"
                   />
-                  {coinsToRender.coins.map((coin) => (
+                  {coinsToRender?.coins?.map?.((coin) => (
                     <CoinItem
                       key={coin?.id}
                       id={coin?.id}
@@ -166,16 +164,15 @@ export const SearchCoinsModal = ({
                   ))}
                 </>
               )}
-              
               {/* Search Results Section */}
-              {coinsToRender.type === 'search' && (
+              {coinsToRender?.type === 'search' && (
                 <>
-                  {coinsToRender.showEmpty && !searchError && (
+                  {coinsToRender?.showEmpty && !searchError && (
                     <div className={styles?.['emptyMessage']}>
                       No coins found for "{debouncedSearch}"
                     </div>
                   )}
-                  {coinsToRender.coins.map((coin) => (
+                  {coinsToRender?.coins?.map?.((coin) => (
                     <CoinItem
                       key={coin?.id}
                       id={coin?.id}
