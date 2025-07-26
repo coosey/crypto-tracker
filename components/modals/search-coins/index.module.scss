@@ -18,3 +18,19 @@
     }
   }
 }
+
+.errorMessage {
+  padding: 1rem;
+  color: red;
+  text-align: center;
+  background-color: rgba(255, 0, 0, 0.1);
+  border-radius: 4px;
+  margin: 0.5rem 0;
+}
+
+.emptyMessage {
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}

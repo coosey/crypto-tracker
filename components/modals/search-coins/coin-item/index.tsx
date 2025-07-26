@@ -1,5 +1,6 @@
 import { FavoriteButton } from 'components/buttons/favorite';
 import styles from './index.module.scss';
+import { memo } from 'react';
 
 interface Props {
   id: string;
@@ -10,7 +11,7 @@ interface Props {
   handleFavoriteClick?: (id: string) => void;
 }
 
-export const CoinItem = ({ 
+export const CoinItem = memo(({ 
   id,
   thumb,
   name,
@@ -21,9 +22,9 @@ export const CoinItem = ({
   return (
     <div key={id} className={styles?.['coinItemWrapper']}>
       <div className={styles?.['coinItem']} onClick={() => handleClick && handleClick?.(id)}>
-        <img className={styles?.['coinItem--image']} src={thumb} alt={name} />
-        <div className={styles?.['coinItem--name']}>{name}</div>
-        <div className={styles?.['coinItem--symbol']}>{symbol}</div>
+        <img className={styles?.['coinItem_image']} src={thumb} alt={name} />
+        <div className={styles?.['coinItem_name']}>{name}</div>
+        <div className={styles?.['coinItem_symbol']}>{symbol}</div>
       </div>
       <div>
         {/** TODO: implement favorite click */}
@@ -34,4 +35,4 @@ export const CoinItem = ({
       </div>
     </div>
   );
-};
+});

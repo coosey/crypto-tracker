@@ -1,9 +1,8 @@
 import { Divider, LoadingOverlay, Modal, TextInput } from '@mantine/core';
 import { ModalComponent, ModalProps } from '..';
 import { IconSearch } from '@tabler/icons-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDebounce } from 'libs/hooks/useDebounce';
-import axios from 'axios';
 import { isEmpty } from 'lodash';
 import { SearchQuery } from 'libs/types/searched-coins';
 import styles from './index.module.scss';
@@ -19,6 +18,8 @@ export const SearchCoinsModal = ({
   const router = useRouter();
   const [searchInput, setSearchInput] = useState('');
   const [searchedCoins, setSearchedCoins] = useState({} as SearchQuery);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
 
   const { trendingList } = useTrendingList();
 
@@ -29,38 +30,76 @@ export const SearchCoinsModal = ({
 
   const debouncedSearch = useDebounce(searchInput);
 
+  // Memoized coin lists
+  const coinsToRender = useMemo(() => {
+    const hasSearchQuery = !isEmpty(debouncedSearch);
+    const hasSearchResults = !isEmpty(searchedCoins?.coins);
+    
+    if (hasSearchQuery) {
+      return {
+        type: 'search' as const,
+        coins: searchedCoins?.coins || [],
+        showEmpty: !isSearching && !hasSearchResults,
+        showLoading: isSearching
+      };
+    }
+    
+    return {
+      type: 'trending' as const,
+      coins: trendingCoins || [],
+      showEmpty: false,
+      showLoading: false
+    };
+  }, [debouncedSearch, searchedCoins, trendingCoins, isSearching]);
+
   const handleSearch = (searchInput: string) => {
     setSearchInput(searchInput);
+    setSearchError(null);
   };
 
   const handleClose = () => {
     setSearchInput('');
+    setSearchedCoins({} as SearchQuery);
+    setSearchError(null);
     onClose();
   };
 
-  const handleCoinClick = (coinId: string) => {
+  const handleCoinClick = useCallback((coinId: string) => {
     router.push(`/coin/${coinId}`);
-  };
+  }, [router]);
 
-  const handleFavoriteClick = (coinId: string) => {
-    console.log('coinId >>>', coinId)
-  };
+  const handleFavoriteClick = useCallback((coinId: string) => {
+    console.log('clicked coin id is: ', coinId)
+  }, []);
 
   useEffect(() => {
     if (!isEmpty(debouncedSearch)) {
       const fetchSearchQuery = async (searchQuery: string) => {
+        setIsSearching(true);
+        setSearchError(null);
         try {
-          const response = await axios.get('/api/search', {
-            params: { query: searchQuery },
-          });
-          setSearchedCoins(response?.data);
+          const response = await (await fetch(
+            `/api/search?query=${encodeURIComponent(searchQuery)}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            }
+          )).json();
+          setSearchedCoins(response);
         } catch (error) {
           console.error('Error fetching search results: ', error);
+          setSearchError('Failed to search coins. Please try again.');
+          setSearchedCoins({} as SearchQuery);
+        } finally {
+          setIsSearching(false);
         }
       };
       fetchSearchQuery(debouncedSearch);
     } else {
       setSearchedCoins({} as SearchQuery);
+      setSearchError(null);
+      setIsSearching(false);
     }
   }, [debouncedSearch]);
 
@@ -87,7 +126,7 @@ export const SearchCoinsModal = ({
             />
             <div className={styles?.['listWrapper']}>
               <LoadingOverlay 
-                visible={debouncedSearch?.length > 0 && isEmpty(searchedCoins)} 
+                visible={coinsToRender.showLoading} 
                 zIndex={1000} 
                 overlayProps={{ 
                   radius: 'sm', 
@@ -97,7 +136,16 @@ export const SearchCoinsModal = ({
                   left: 0,
                 }} 
               />
-              {isEmpty(debouncedSearch) && (
+              
+              {/* Error State */}
+              {searchError && (
+                <div className={styles?.['errorMessage']}>
+                  {searchError}
+                </div>
+              )}
+              
+              {/* Trending Coins Section */}
+              {coinsToRender.type === 'trending' && (
                 <>
                   <Divider
                     className={styles?.['listWrapper_divider']}
@@ -105,7 +153,7 @@ export const SearchCoinsModal = ({
                     label="Trending Coins"
                     labelPosition="left"
                   />
-                  {trendingCoins?.map?.((coin) => (
+                  {coinsToRender.coins.map((coin) => (
                     <CoinItem
                       key={coin?.id}
                       id={coin?.id}
@@ -118,17 +166,28 @@ export const SearchCoinsModal = ({
                   ))}
                 </>
               )}
-              {searchedCoins?.coins?.map?.((coin) => (
-                <CoinItem
-                  key={coin?.id}
-                  id={coin?.id}
-                  thumb={coin?.thumb}
-                  name={coin?.name}
-                  symbol={coin?.symbol}
-                  handleClick={handleCoinClick}
-                  handleFavoriteClick={handleFavoriteClick}
-                />
-              ))}
+              
+              {/* Search Results Section */}
+              {coinsToRender.type === 'search' && (
+                <>
+                  {coinsToRender.showEmpty && !searchError && (
+                    <div className={styles?.['emptyMessage']}>
+                      No coins found for "{debouncedSearch}"
+                    </div>
+                  )}
+                  {coinsToRender.coins.map((coin) => (
+                    <CoinItem
+                      key={coin?.id}
+                      id={coin?.id}
+                      thumb={coin?.thumb}
+                      name={coin?.name}
+                      symbol={coin?.symbol}
+                      handleClick={handleCoinClick}
+                      handleFavoriteClick={handleFavoriteClick}
+                    />
+                  ))}
+                </>
+              )}
             </div>
           </Modal.Body>
         ),
